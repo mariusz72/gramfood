@@ -1,0 +1,11 @@
+gramfood_magazyn_homepage:
+    path:     /index
+    defaults: { _controller: GramfoodMagazynBundle:Default:index }
+    
+gramfood_magazyn_homepage2:
+    path:     /index2
+    defaults: { _controller: GramfoodMagazynBundle:Default:index2 }    
+
+gramfood_magazyn_homepage3:
+    path:     /form
+    defaults: { _controller: GramfoodMagazynBundle:Default:form }    

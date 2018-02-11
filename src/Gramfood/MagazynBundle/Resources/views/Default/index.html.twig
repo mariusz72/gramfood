@@ -1,0 +1,91 @@
+{% extends 'gramfood/base.html.twig' %}
+
+{% block page_title %}Test Page{% endblock %}
+
+{% block stylesheets %}	
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+{#{ dump(product) }#}
+
+<div class="x_panel">
+                  <div class="x_title">
+                    <h2>Table design <small>Custom design</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                  <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                      <h1>WMS App</h1>
+                      <p>Przykładowy komunikat systemowy.</p>
+                    </div>
+                  </div>
+				  
+				  <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Hello!</strong> If you're looking too good.
+                  </div>
+				  
+				  </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+  
+  {{ parent() }}
+  
+    <!-- morris.js -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/morris.js/morris.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('bundles/gentelella-master/js/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/js/datepicker/daterangepicker.js') }}"></script>
+    
+    <!-- Custom Theme Scripts -->
+    <script src="{{ asset('bundles/gentelella-master/js/custom.min.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/jszip/dist/jszip.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+
+{% endblock %}
