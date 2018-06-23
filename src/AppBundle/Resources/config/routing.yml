@@ -1,0 +1,8 @@
+app_komp:
+    resource: "@AppBundle/Resources/config/routing/gramfoodklembowdok.yml"
+    prefix:   /komp
+
+app_table:
+    resource: "@AppBundle/Resources/config/routing/extgramfoodkompow.yml"
+    prefix:   /table
+

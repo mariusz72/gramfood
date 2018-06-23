@@ -1,0 +1,160 @@
+    <table class="table table-condensed">
+         <thead>
+             <tr>
+                 <th>Kod</th>
+                 <th>idPZ</th>
+                 <th>snPZ</th>
+                 <th>Ilość</th>
+                 <th>JM</th>
+                 <th  style="text-align: center;">Akcja</th>
+             </tr>
+         </thead>
+         <tbody>  
+         
+{% if entities|length > 0 %}
+
+                 {% for entity in entities %}    
+             <tr>
+                 <td width="20px">{{ entity.kod }}</td>
+                 <td >
+                     <button name="idpz_button" onClick="location.href='{{ path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) }}'" type="button" class="btn btn-default btn-xs">{{ entity.idpz }}</button>
+                 </td>
+                 <td >{{ entity.snpz }}</td>
+                 <td width="20px">{{ entity.il }}</td>
+                 <td width="20px">{{ entity.jm }}</td>   
+                 <td width="200px"  style="text-align: right;">
+                        
+                <form action="{{ path('gramfood_magazyn_kompletacje_ExtPowdelete', { 'id': entity.id }) }}" id="formDEL{{ entity.id }}" method="post">
+                    <input name="_method" type="hidden" value="DELETE">
+                    <div id="form">
+                    <div>
+                            <a href="#" onClick="show_PZ('{{ entity.idpz }}')" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+{#                             <a href="#" onClick="location.href='{{ path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) }}'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> #}
+                            <a href="#" id="{{ entity.id }}" onClick="edytuj_extpow('{{ entity.id }}', '{{ id }}', '{{ nazwa }}')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                                                
+{#                         <button name="form[submit]" id="form_submit" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>#}
+                        <button name="form_button" id="{{ entity.id }}" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+                    </div>
+                        <input name="form[_token]" id="form__token" type="hidden" value="c2ccc82cd293610b035a6c8f2069e5fe8387b86f">
+                        <input name="form[name]" id="form__name" type="hidden" value="{{ entity.id }}">
+                    </div>
+                </form>
+
+                  </td>
+                               
+             </tr>
+            {% endfor %}
+
+
+{% else %}
+
+                                <div class="alert alert-warning alert-dismissible fade in"
+                                    role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>Brak powiazań dla wskazanego RW.</strong> Musisz dodać nr Partii.
+                                </div>
+
+{% endif %}
+
+
+            
+         </tbody>
+     </table>
+
+     
+<script language="javascript">
+
+
+$(document).ready(function() {
+    
+    var frm2 = $('#formDEL');
+   
+
+    $("button[name='form_button']").click(function(a) {        
+    	//alert(JSON.stringify(a.val()));
+      //  var x = document.getElementById("form_button").tagName; 
+        var y = a['target']['id'];
+      //  alert(JSON.stringify(a['target']['id']));
+    	//alert($('#form_button').name());
+    	//alert(x);
+    	
+//     	 for(var key in a['target']) {
+//            alert(key);
+//          }
+    	
+
+    	var frm2 = $('#formDEL'+y);
+    	closeModal('#Modal1');
+    	$("#loading-div-background").show();
+
+        $.ajax({
+            type: frm2.attr('method'),
+            url: frm2.attr('action'),
+            data: frm2.serialize(),
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+                
+                //closeModal('#Modal1');
+                $("#loading-div-background").hide();
+               // wyswietl_nrpartii('RW.171129.114311.34D94E', 'oo');
+                wyswietl_nrpartii('{{ id }}', '{{ nazwa }}');
+                //a['target'].removeData('bs.modal')
+                
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+    	//alert(frm2.attr('action'));
+    	
+    });
+    
+//     frm2.submit(function (e) {
+//         e.preventDefault();
+
+//         alert('hh');
+
+//         closeModal('#Modal1');
+        
+//         $.ajax({
+//             type: frm2.attr('method'),
+//             url: frm2.attr('action'),
+//             data: frm2.serialize(),
+//             success: function (data) {
+//                 console.log('Submission was successful.');
+//                 console.log(data);
+
+//                 wyswietl_nrpartii('RW.171129.114311.34D94E', 'oo');
+  
+                
+//             },
+//             error: function (data) {
+//                 console.log('An error occurred.');
+//                 console.log(data);
+//             },
+//         });
+        
+//     });
+
+} );
+
+</script>
+     
+
+
+     
+   
+     
+
+           
+ 
+
+
+   
+
+

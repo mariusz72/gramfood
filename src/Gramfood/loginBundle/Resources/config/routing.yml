@@ -1,0 +1,11 @@
+gramfoodlogin_homepage:
+    path:     /login
+    defaults: { _controller: GramfoodloginBundle:Security:login }
+
+gramfoodlogin_logout:
+    path:     /logout
+
+gramfoodlogin_check:
+    path:     /login_check
+
+    

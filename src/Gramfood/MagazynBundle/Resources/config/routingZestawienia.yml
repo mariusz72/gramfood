@@ -1,0 +1,7 @@
+gramfood_zestawienia_listaWZ:
+    path:     /zestawienia/listaWZ
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaWZ } 
+
+gramfood_zestawienia_listaTowary:
+    path:     /zestawienia/listaTowary
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaTowary } 

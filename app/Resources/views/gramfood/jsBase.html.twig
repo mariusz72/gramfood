@@ -1,0 +1,320 @@
+function setURL(path,id)
+{
+    return path.replace("%3Cpath%3E", id);  
+}  
+
+function setURL2(path,id,id2)
+{
+           path = path.replace("%3Cpath%3E", id);
+    return path.replace("%3Cpath2%3E", id2);
+      
+}  
+
+/*
+ * funkcja 
+ * Ustawia parametry okien modalnych
+ * 
+ * @param string title
+ * @param string content
+ * @param string footer
+ * @param string(standart|large|small) size
+ * @param string name  
+ * 
+ * @author Mariusz Ludwikowski
+ */ 
+function setModalBox(title, content, footer, $size, name)
+    {
+
+    /*
+     * name podawane jest do funkcji bez znaku '#' 
+     */
+    
+    if (name === undefined) {
+            name = 'Modal1';
+            nameModal = '#'+name;
+        }else{ nameModal = '#'+name; }
+// alert(name+'|'+ nameModal);   
+        document.getElementById(name + '-bodyku').innerHTML=content;
+        document.getElementById(name + '-Label').innerHTML=title;
+        document.getElementById(name + '-footerq').innerHTML=footer;            
+        if($size == 'large')
+        {
+            $(nameModal).attr('class', 'modal fade bs-example-modal-lg')
+                         .attr('aria-labelledby','myLargeModalLabel');
+            $(nameModal + '-dialog').attr('class','modal-dialog modal-lg');
+        }
+        if($size == 'standart')
+        {
+            $(nameModal).attr('class', 'modal fade')
+                         .attr('aria-labelledby','myModalLabel');
+            $(nameModal + '-dialog').attr('class','modal-dialog');
+        }
+        if($size == 'small')
+        {
+            $(nameModal).attr('class', 'modal fade bs-example-modal-sm')
+                         .attr('aria-labelledby','mySmallModalLabel');
+            $(nameModal + '-dialog').attr('class','modal-dialog modal-sm');
+        }
+    }  
+
+function closeModal(name){
+    $(name).modal("hide"); 
+}
+
+
+/*
+ * funkcja 
+ * 
+ * @author Mariusz Ludwikowski
+ */ 
+function ustawNazweModal()
+{
+    for (i = 1; i < 4; i++) {
+        if(!$('#Modal'+ i).is(':visible')){
+            return 'Modal' + i;
+        }   
+    }
+    alert('ERROR: problem z ustawieniem nazwy okna modalnego fun(ustawNazweModal)');
+}
+
+
+// ==================================================================
+
+
+
+/*
+ * funkcja wyswietla listę partii w oknie modalnym
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function wyswietl_nrpartii($id, $nazwa)
+{
+
+	var path = "{{ path('gramfood_magazyn_kompletacje_ExtPowShow') }}" ;
+{# 	var pathAdd = setURL("{{ path('gramfood_magazyn_kompletacje_ExtPowAdd', { 'id': '<path>' }) }}",$id) ;#}
+	
+    var size='large';
+
+	var name = ustawNazweModal();
+	
+	var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+	
+	var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+	var title = ' <i class="fa fa-bars"></i> Nr Partii: <b>'+$id+'</b> (<code>'+$nazwa+'</code>)' ;
+	var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>'+
+	             '<button type="button" class="btn btn-primary" onClick="dodaj_extpow(\''+$id+'\', \''+$nazwa+'\')" style="width: 150px;" > Dodaj </button>' ;
+{# 	             '<button type="button" class="btn btn-primary" onClick="location.href=\''+pathAdd+'\'" style="width: 150px;" > Dodaj </button>' ;#}
+	
+	setModalBox(title,content,footer,size,name);
+
+	$('#'+ name).modal('show'); 
+	
+    var modal = $('#'+ name).each(function(e) {
+	var request = $.ajax({
+				        cache:  false,
+				        url:    path,
+				        data:   'id='+$id+'&modal='+name+'&nazwa='+$nazwa,
+				        success: function(result){
+				        	$('#'+ name).find('.modal-body').html(result);
+				        }
+				   });
+	 });		
+
+}
+
+
+/*
+ * funkcja wyswietla listę partii zakupów
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function wyszukaj_PZ($kod, $nazwa)
+{
+
+    var path = "{{ path('gramfood_magazyn_kompletacje_searchPZ') }}" ;
+    
+    var size='large';
+
+    var name = ustawNazweModal();
+    
+    var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+    
+    var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+    var title = ' <i class="fa fa-bars"></i> Nr Produktu: <b>'+$kod+'</b> (<code>'+$nazwa+'</code>)' ;
+    var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>';
+{#                  '<button type="button" class="btn btn-primary" style="width: 150px;" > Dodaj </button>' ;#}
+    
+    setModalBox(title,content,footer,size,name);
+
+    $('#'+ name).modal('show'); 
+    
+    var modal = $('#'+ name).each(function(e) {
+    var request = $.ajax({
+                        cache:  false,
+                        url:    path,
+                        data:   'kod='+$kod+'&modal='+name,
+                        success: function(result){
+                            $('#'+ name).find('.modal-body').html(result);
+                        }
+                   });
+     });        
+
+}
+
+/*
+ * funkcja dodaje nowa pozycję partii w oknie modalnym
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function dodaj_extpow($id, $nazwa)
+{
+
+{#     var path = setURL("{{ path('gramfood_magazyn_kompletacje_ExtPowAdd', { 'id': '<path>' }) }}",$id) ;#}
+    var path = "{{ path('gramfood_magazyn_kompletacje_ExtPowAdd') }}" ;
+    
+    var size='large';
+
+    var name = ustawNazweModal();
+    
+    var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+    
+    var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+    var title = ' <i class="fa fa-bars"></i> Dodajesz nr Partii dla: <b>'+$id+'</b> (<code>'+$nazwa+'</code>)' ;
+    var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>';
+    
+    setModalBox(title,content,footer,size,name);
+
+    $('#'+ name).modal('show'); 
+    
+    var modal = $('#'+ name).each(function(e) {
+    var request = $.ajax({
+                        cache:  false,
+                        url:    path,
+                        data:   'id='+$id+'&modal='+name,
+                        success: function(result){
+                            $('#'+ name).find('.modal-body').html(result);
+                        }
+                   });
+     });        
+
+}
+
+/*
+ * funkcja dodaje nowa pozycję partii w oknie modalnym
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function edytuj_extpow($id, $idrw, $nazwa)
+{
+
+{#     var path = setURL("{{ path('gramfood_magazyn_kompletacje_ExtPowAdd', { 'id': '<path>' }) }}",$id) ;#}
+    var path = "{{ path('gramfood_magazyn_kompletacje_ExtPowEdit') }}" ;
+    
+    var size='large';
+
+    var name = ustawNazweModal();
+    
+    var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+    
+    var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+    var title = ' <i class="fa fa-bars"></i> Edytujesz nr Partii dla: <b>'+$idrw+'</b> (<code>'+$nazwa+'</code>)' ;
+    var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>';
+    
+    setModalBox(title,content,footer,size,name);
+
+    $('#'+ name).modal('show'); 
+    
+    var modal = $('#'+ name).each(function(e) {
+    var request = $.ajax({
+                        cache:  false,
+                        url:    path,
+                        data:   'id='+$id+'&modal='+name+'&idrw='+$idrw,
+                        success: function(result){
+                            $('#'+ name).find('.modal-body').html(result);
+                        }
+                   });
+     });        
+
+}
+
+/*
+ * funkcja wyswietla produkt PW w oknie modalnym
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function show_PW($idf)
+{
+
+    var path = setURL("{{ path('gramfood_magazyn_kompletacje_showPW', { 'id': '<path>' }) }}",$idf) ;
+{#     var path = "{{ path('gramfood_magazyn_kompletacje_ExtPowAdd') }}" ;#}
+    
+    var size='large';
+
+    var name = ustawNazweModal();
+    
+    var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+    
+    var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+    var title = ' <i class="fa fa-bars"></i> <b>'+$idf+'</b>' ;
+    var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>';
+    
+    setModalBox(title,content,footer,size,name);
+
+    $('#'+ name).modal('show'); 
+    
+    var modal = $('#'+ name).each(function(e) {
+    var request = $.ajax({
+                        cache:  false,
+                        url:    path,
+                        data:   'idf='+$idf+'&modal='+name,
+                        success: function(result){
+                            $('#'+ name).find('.modal-body').html(result);
+                        }
+                   });
+     });        
+
+}
+
+/*
+ * funkcja wyswietla produkt PW w oknie modalnym
+ * 
+ * @author Mariusz Ludwikowski
+ */
+ function show_PZ($id)
+{
+
+    var path = setURL("{{ path('gramfood_magazyn_kompletacje_showPZ', { 'id': '<path>' }) }}",$id) ;
+    
+    var size='large';
+
+    var name = ustawNazweModal();
+    
+    var img = "{{ asset('bundles/gramfood/images/loading.gif') }}";
+    
+    var content ='<p style="text-align: center;"><img src="'+ img +'"></p>';
+
+    var title = ' <i class="fa fa-bars"></i> <b>'+$id+'</b>' ;
+    var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>';
+    
+    setModalBox(title,content,footer,size,name);
+
+    $('#'+ name).modal('show'); 
+    
+    var modal = $('#'+ name).each(function(e) {
+    var request = $.ajax({
+                        cache:  false,
+                        url:    path,
+                        data:   'id='+$id+'&modal=1',
+                        success: function(result){
+                            $('#'+ name).find('.modal-body').html(result);
+                        }
+                   });
+     });        
+
+}
+

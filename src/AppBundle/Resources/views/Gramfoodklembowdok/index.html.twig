@@ -1,0 +1,335 @@
+{% extends 'gramfood/base.html.twig' %}
+
+{% block page_title %}
+Profile 44
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+	rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+
+<div class="x_panel">
+	<div class="x_title">
+		<h2>
+			Table design <small>Custom design</small>
+		</h2>
+		<ul class="nav navbar-right panel_toolbox">
+			<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+			</li>
+			<li class="dropdown"><a class="dropdown-toggle" role="button"
+				aria-expanded="false" href="#" data-toggle="dropdown"><i
+					class="fa fa-wrench"></i></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Settings 1</a></li>
+					<li><a href="#">Settings 2</a></li>
+				</ul></li>
+			<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="x_content">
+
+		{% block body -%}
+		<h1>Gramfoodklembowdok list</h1>
+
+		<table id="datatable"
+			class="table table-striped jambo_table bulk_action table-bordered">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Typ</th>
+					<th>Idk</th>
+					<th>Rejpar</th>
+					<th>Rejwz</th>
+					<th>Rejbok</th>
+					<th>Rejof</th>
+					<th>Rejzs</th>
+					<th>Rejpro</th>
+					<th>Alias</th>
+					<th>Alodb</th>
+					<th>Odb</th>
+					<th>Os</th>
+					<th>Gr</th>
+					<th>Nr</th>
+					<th>Rej</th>
+					<th>Rok</th>
+					<th>Mc</th>
+					<th>Nrr</th>
+					<th>Dwy</th>
+					<th>Dsp</th>
+					<th>Fp</th>
+					<th>Dni</th>
+					<th>Tpl</th>
+					<th>Dpl</th>
+					<th>N0</th>
+					<th>N1</th>
+					<th>N2</th>
+					<th>N3</th>
+					<th>N4</th>
+					<th>V1</th>
+					<th>V2</th>
+					<th>V4</th>
+					<th>Wart</th>
+					<th>Zap</th>
+					<th>Przedp</th>
+					<th>Koszt</th>
+					<th>Nb</th>
+					<th>Rab</th>
+					<th>Prrab</th>
+					<th>Status</th>
+					<th>Bank</th>
+					<th>Bankn</th>
+					<th>Banks</th>
+					<th>Nrk</th>
+					<th>Dwyk</th>
+					<th>Wsk</th>
+					<th>Wwart</th>
+					<th>Wal</th>
+					<th>Kurs</th>
+					<th>Przel</th>
+					<th>Nipx</th>
+					<th>Nip</th>
+					<th>Reg</th>
+					<th>Nazw</th>
+					<th>Nazw2</th>
+					<th>Kodp</th>
+					<th>Mias</th>
+					<th>Ulic</th>
+					<th>Adrk</th>
+					<th>Dnext</th>
+					<th>Cen</th>
+					<th>Wardo</th>
+					<th>Adrdo</th>
+					<th>Defn</th>
+					<th>Defni</th>
+					<th>Drozl</th>
+					<th>Zasob</th>
+					<th>Kwzat</th>
+					<th>Inf</th>
+					<th>Notk</th>
+					<th>Oswy</th>
+					<th>Osod</th>
+					<th>Ow</th>
+					<th>Uz</th>
+					<th>Te</th>
+					<th>Lat</th>
+					<th>Lon</th>
+					<th>Lok</th>
+					<th>Akt</th>
+					<th>Anul</th>
+					<th>Wers</th>
+					<th>Tem</th>
+					<th>Rejvko</th>
+					<th>Koszvm</th>
+					<th>Idno</th>
+					<th>Mail</th>
+					<th>Kraj</th>
+					<th>Zid</th>
+					<th>Dj</th>
+					<th>Ddn</th>
+					<th>Ow2</th>
+					<th>Ow3</th>
+					<th>T1</th>
+					<th>Nr2</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for entity in entities %}
+				<tr>
+					<td><a href="{{ path('komp_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+					<td>{{ entity.typ }}</td>
+					<td>{{ entity.idk }}</td>
+					<td>{{ entity.rejpar }}</td>
+					<td>{{ entity.rejwz }}</td>
+					<td>{{ entity.rejbok }}</td>
+					<td>{{ entity.rejof }}</td>
+					<td>{{ entity.rejzs }}</td>
+					<td>{{ entity.rejpro }}</td>
+					<td>{{ entity.alias }}</td>
+					<td>{{ entity.alodb }}</td>
+					<td>{{ entity.odb }}</td>
+					<td>{{ entity.os }}</td>
+					<td>{{ entity.gr }}</td>
+					<td>{{ entity.nr }}</td>
+					<td>{{ entity.rej }}</td>
+					<td>{{ entity.rok }}</td>
+					<td>{{ entity.mc }}</td>
+					<td>{{ entity.nrr }}</td>
+					<td>{{ entity.dwy }}</td>
+					<td>{{ entity.dsp }}</td>
+					<td>{{ entity.fp }}</td>
+					<td>{{ entity.dni }}</td>
+					<td>{{ entity.tpl }}</td>
+					<td>{{ entity.dpl }}</td>
+					<td>{{ entity.n0 }}</td>
+					<td>{{ entity.n1 }}</td>
+					<td>{{ entity.n2 }}</td>
+					<td>{{ entity.n3 }}</td>
+					<td>{{ entity.n4 }}</td>
+					<td>{{ entity.v1 }}</td>
+					<td>{{ entity.v2 }}</td>
+					<td>{{ entity.v4 }}</td>
+					<td>{{ entity.wart }}</td>
+					<td>{{ entity.zap }}</td>
+					<td>{{ entity.przedp }}</td>
+					<td>{{ entity.koszt }}</td>
+					<td>{{ entity.nb }}</td>
+					<td>{{ entity.rab }}</td>
+					<td>{{ entity.prrab }}</td>
+					<td>{{ entity.status }}</td>
+					<td>{{ entity.bank }}</td>
+					<td>{{ entity.bankn }}</td>
+					<td>{{ entity.banks }}</td>
+					<td>{{ entity.nrk }}</td>
+					<td>{{ entity.dwyk }}</td>
+					<td>{{ entity.wsk }}</td>
+					<td>{{ entity.wwart }}</td>
+					<td>{{ entity.wal }}</td>
+					<td>{{ entity.kurs }}</td>
+					<td>{{ entity.przel }}</td>
+					<td>{{ entity.nipx }}</td>
+					<td>{{ entity.nip }}</td>
+					<td>{{ entity.reg }}</td>
+					<td>{{ entity.nazw }}</td>
+					<td>{{ entity.nazw2 }}</td>
+					<td>{{ entity.kodp }}</td>
+					<td>{{ entity.mias }}</td>
+					<td>{{ entity.ulic }}</td>
+					<td>{{ entity.adrk }}</td>
+					<td>{{ entity.dnext }}</td>
+					<td>{{ entity.cen }}</td>
+					<td>{{ entity.wardo }}</td>
+					<td>{{ entity.adrdo }}</td>
+					<td>{{ entity.defn }}</td>
+					<td>{{ entity.defni }}</td>
+					<td>{{ entity.drozl }}</td>
+					<td>{{ entity.zasob }}</td>
+					<td>{{ entity.kwzat }}</td>
+					<td>{{ entity.inf }}</td>
+					<td>{{ entity.notk }}</td>
+					<td>{{ entity.oswy }}</td>
+					<td>{{ entity.osod }}</td>
+					<td>{{ entity.ow }}</td>
+					<td>{{ entity.uz }}</td>
+					<td>{{ entity.te }}</td>
+					<td>{{ entity.lat }}</td>
+					<td>{{ entity.lon }}</td>
+					<td>{{ entity.lok }}</td>
+					<td>{{ entity.akt }}</td>
+					<td>{{ entity.anul }}</td>
+					<td>{{ entity.wers }}</td>
+					<td>{{ entity.tem }}</td>
+					<td>{{ entity.rejvko }}</td>
+					<td>{{ entity.koszvm }}</td>
+					<td>{{ entity.idno }}</td>
+					<td>{{ entity.mail }}</td>
+					<td>{{ entity.kraj }}</td>
+					<td>{{ entity.zid }}</td>
+					<td>{{ entity.dj }}</td>
+					<td>{{ entity.ddn }}</td>
+					<td>{{ entity.ow2 }}</td>
+					<td>{{ entity.ow3 }}</td>
+					<td>{{ entity.t1 }}</td>
+					<td>{{ entity.nr2 }}</td>
+					<td>
+						<ul>
+							<li><a href="{{ path('komp_show', { 'id': entity.id }) }}">show</a>
+							</li>
+							<li><a href="{{ path('komp_edit', { 'id': entity.id }) }}">edit</a>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<ul>
+			<li><a href="{{ path('komp_new') }}"> Create a new entry </a></li>
+		</ul>
+		{% endblock %}
+
+	</div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<!-- morris.js -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/raphael/raphael.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/morris.js/morris.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- bootstrap-daterangepicker -->
+<script
+	src="{{ asset('bundles/gentelella-master/js/moment/moment.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/js/datepicker/daterangepicker.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('bundles/gentelella-master/js/custom.min.js') }}"></script>
+
+<!-- Datatables -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+
+<style>
+th {
+    background-color: rgba(246, 246, 246, 1) !important;
+}
+
+.btn2{
+    margin-left: 60px;
+    margin-bottom: 20px !important;
+}
+
+</style>   
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>
+            <small>produkt:</small> <b>{{ entity.nazw }}</b>
+        </h2>
+        
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" role="button"
+                aria-expanded="false" href="#" data-toggle="dropdown"><i
+                    class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a></li>
+                    <li><a href="#">Settings 2</a></li>
+                </ul></li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+<div class="x_content">
+
+    {% if  page1 is defined %}
+<button name="form_button" onclick="parent.history.back();" type="button" class="btn btn-default btn-sm"  style="width: 150px;" ><i class="fa fa-backward"></i> &nbsp;&nbsp; Powrót</button>
+       
+    {% endif %}
+
+<table class="table table-condensed" ">
+	<tbody>
+        <tr>
+        <th>ID</th>
+            <td><code>{{ entity.id }}</code></td>
+        </tr>	
+		<tr>
+			<th>Typ</th>
+			<td>{{ entity.typ }}</td>
+		</tr>
+		<tr>
+			<th>NrR</th>
+			<td>{{ entity.nrr }}</td>
+		</tr>
+		<tr>
+			<th>IDf</th>
+			<td>{{ entity.idf }}</td>
+		</tr>
+		<tr>
+			<th>Data</th>
+			<td>{{ entity.data }}</td>
+		</tr>
+        <tr>
+            <th>Data wazn.</th>
+            <td>{{ entity.dwaz }}</td>
+        </tr>		
+		<tr>
+			<th>Kod</th>
+			<td>{{ entity.kod }}</td>
+		</tr>
+		<tr>
+			<th>Nazwa</th>
+			<td>{{ entity.nazw }}</td>
+		</tr>
+        <tr>
+            <th>JM</th>
+            <td>{{ entity.jm }}</td>
+        </tr>		
+        <tr>
+            <th>Il</th>
+            <td>{{ entity.il }}</td>
+        </tr>    
+        <tr>
+            <th>SN</th>
+            <td>{{ entity.sn }}</td>
+        </tr>    
+        <tr>
+            <th>User</th>
+            <td>{{ entity.uz }}</td>
+        </tr> 
+	</tbody>
+</table>
+

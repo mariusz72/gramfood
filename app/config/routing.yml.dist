@@ -1,0 +1,23 @@
+gramfoodlogin:
+    resource: "@GramfoodloginBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gramfood_zaplecze:
+    resource: "@GramfoodZapleczeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gramfood_magazyn:
+    resource: "@GramfoodMagazynBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gramfood_zestawienia:
+    resource: "@GramfoodMagazynBundle/Resources/config/routingZestawienia.yml"
+    prefix:   /
+    
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+gramfood_ext:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /	

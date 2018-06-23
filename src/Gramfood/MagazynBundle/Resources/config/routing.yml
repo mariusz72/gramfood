@@ -1,11 +1,66 @@
 gramfood_magazyn_homepage:
-    path:     /index
+    path:     /
     defaults: { _controller: GramfoodMagazynBundle:Default:index }
     
-gramfood_magazyn_homepage2:
-    path:     /index2
+gramfood_magazyn_users:
+    path:     /users
     defaults: { _controller: GramfoodMagazynBundle:Default:index2 }    
 
-gramfood_magazyn_homepage3:
+gramfood_magazyn_kompletacje_lista:
+    path:     /kompletacje
+    defaults: { _controller: GramfoodMagazynBundle:Kompletacje:lista } 
+    
+gramfood_magazyn_kompletacje_listaProdukt:
+    path:     /kompletacjeProdukt/{kod}/{sn}
+    defaults: { _controller: GramfoodMagazynBundle:Kompletacje:listaProdukt }     
+    
+gramfood_magazyn_kompletacje_show:
+    path:     /kompletacje/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:show" }  
+    
+gramfood_magazyn_kompletacje_showPW:
+    path:     /kompletacje/PW/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:showPW" }   
+    
+gramfood_magazyn_kompletacje_showPZ:
+    path:     /kompletacje/PZ/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:showPZ" }             
+    
+gramfood_magazyn_kompletacje_RwId:
+    path:     /kompletacjeRwId
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:rwId" }  
+        
+gramfood_magazyn_kompletacje_ExtPowShow:
+    path:     /kompletacjeExtPowShow
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:ExtPowShow" }  
+    
+gramfood_magazyn_kompletacje_ExtPowAdd:
+    path:     /kompletacjeExtPowAdd
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:ExtPowAdd" } 
+    
+gramfood_magazyn_kompletacje_ExtPowEdit:
+    path:     /kompletacje_ExtPowEdit
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:ExtPowEdit" } 
+    
+gramfood_magazyn_kompletacje_ExtPowCreate:
+    path:     /kompletacjeExtPowCreate
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:create" }
+    requirements: { _method: post }
+    
+gramfood_magazyn_kompletacje_ExtPowUpdate:
+    path:     /kompletacje_ExtPowUpdate/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:update" }
+    requirements: { _method: post|put }    
+    
+gramfood_magazyn_kompletacje_searchPZ:
+    path:     /kompletacjesearchPZ
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:searchPZ" }   
+    
+gramfood_magazyn_kompletacje_ExtPowdelete:
+    path:     /kompletacjeExtPowDelete/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:delete" }
+    requirements: { _method: post|delete }         
+            
+gramfood_magazyn_homepage4:
     path:     /form
     defaults: { _controller: GramfoodMagazynBundle:Default:form }    

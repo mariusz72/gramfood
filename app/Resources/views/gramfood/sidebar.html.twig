@@ -1,8 +1,10 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="" class="site_title">
-			<i class="fa fa-at"></i> <span style="color:#0aadac;">WMS App
+            <a href="{{ path('gramfood_magazyn_homepage') }}" class="site_title">
+{# 			<i class="fa fa-at"></i>#}
+			<img src="{{ asset('bundles/gramfood/images/cube.png') }}" style="width: 30px;" >
+			 <span style="color:#0aadac;">WMS App
 			<div style="color: rgb(115, 135, 156); font-size: 10px; margin-top: -40px; margin-left: 74px; position: absolute;">for GramFood</div>
 			</span>
 			</a>
@@ -24,23 +26,33 @@
               <div class="menu_section">
                 <h3>Magazyn</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-table"></i> Zestawienia <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-puzzle-piece"></i> Kompletacje<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Stan magazynu</a></li>
-                      <li><a href="#">Dodaj</a></li>
+                      <li><a href="{{ path('gramfood_magazyn_kompletacje_lista') }}">Lista</a></li>
+{#                       <li><a href="{{ path('komp') }}">Lista_old</a></li>#}
+                      <li><a href="#">Wyszukaj</a></li>
                     </ul>
                   </li>
-
-				  <li><a href="javascript:void(0)"><i class="fa fa-leaf"></i> Produkty </a></li>
+                  
+{#                   <li><a href="{{ path('table') }}"><i class="fa fa-cubes"></i>Zestawienia</a>#}
+				  
+				  <li><a><i class="fa fa-cubes"></i>Zestawienia<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ path('gramfood_zestawienia_listaWZ') }}">WZ (Sprzedaż)</a></li>
+                      <li><a href="{{ path('gramfood_zestawienia_listaTowary') }}">Stan magazynu</a></li>
+                    </ul>				  
+				  
+				  </li>
 
                 </ul>
               </div>
+              
               <div class="menu_section">
                 <h3>Zaplecze</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-user"></i> Użytkownicy <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="#">Lista</a></li>
+                      <li><a href="{{ path('gramfood_zaplecze_listaUzytkownikow') }}">Lista</a></li>
                       <li><a href="#">Add</a></li>
                     </ul>
                   </li>
@@ -62,7 +74,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ path('gramfoodlogin_logout') }}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

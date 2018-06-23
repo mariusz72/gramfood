@@ -1,0 +1,30 @@
+komp:
+    path:     /
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:index" }
+
+komp_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:show" }
+
+komp_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:new" }
+
+komp_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:create" }
+    requirements: { _method: post }
+
+komp_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:edit" }
+
+komp_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:update" }
+    requirements: { _method: post|put }
+
+komp_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Gramfoodklembowdok:delete" }
+    requirements: { _method: post|delete }

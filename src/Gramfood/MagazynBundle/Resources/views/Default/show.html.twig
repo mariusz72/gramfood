@@ -1,0 +1,527 @@
+{% extends 'gramfood/base.html.twig' %}
+
+{% block page_title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+    rel="stylesheet">
+
+<style>
+th {
+    background-color: rgba(246, 246, 246, 1) !important;
+}
+
+.btn2{
+    margin-left: 60px;
+    margin-bottom: 20px !important;
+}
+
+</style>    
+
+    
+    
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>
+            Kompletacje <small>TABELA: Gramfoodklembowdok</small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" role="button"
+                aria-expanded="false" href="#" data-toggle="dropdown"><i
+                    class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a></li>
+                    <li><a href="#">Settings 2</a></li>
+                </ul></li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+
+{% block body -%}
+
+
+<button type="button" class="btn btn-default btn-sm btn2" onclick="location.href='{{ path('gramfood_magazyn_kompletacje_lista') }}'">Powrót do listy</button>
+
+
+<table class="table" style="width:420px;">
+	<tbody>
+		<tr>
+			<th width="40px">Id</th>
+			<td><code>{{ entity.id }}</code></td>
+		</tr>
+		<tr>
+			<th>Typ</th>
+			<td>{{ entity.typ }}</td>
+		</tr>
+		<tr>
+			<th>Idk</th>
+			<td>{{ entity.idk }}</td>
+		</tr>
+		<tr>
+			<th>Rejpar</th>
+			<td>{{ entity.rejpar }}</td>
+		</tr>
+		<tr>
+			<th>Rejwz</th>
+			<td>{{ entity.rejwz }}</td>
+		</tr>
+		<tr>
+			<th>Rejbok</th>
+			<td>{{ entity.rejbok }}</td>
+		</tr>
+		<tr>
+			<th>Rejof</th>
+			<td>{{ entity.rejof }}</td>
+		</tr>
+		<tr>
+			<th>Rejzs</th>
+			<td>{{ entity.rejzs }}</td>
+		</tr>
+		<tr>
+			<th>Rejpro</th>
+			<td>{{ entity.rejpro }}</td>
+		</tr>
+		<tr>
+			<th>Alias</th>
+			<td>{{ entity.alias }}</td>
+		</tr>
+		<tr>
+			<th>Alodb</th>
+			<td>{{ entity.alodb }}</td>
+		</tr>
+		<tr>
+			<th>Odb</th>
+			<td>{{ entity.odb }}</td>
+		</tr>
+		<tr>
+			<th>Os</th>
+			<td>{{ entity.os }}</td>
+		</tr>
+		<tr>
+			<th>Gr</th>
+			<td>{{ entity.gr }}</td>
+		</tr>
+		<tr>
+			<th>Nr</th>
+			<td>{{ entity.nr }}</td>
+		</tr>
+		<tr>
+			<th>Rej</th>
+			<td>{{ entity.rej }}</td>
+		</tr>
+		<tr>
+			<th>Rok</th>
+			<td>{{ entity.rok }}</td>
+		</tr>
+		<tr>
+			<th>Mc</th>
+			<td>{{ entity.mc }}</td>
+		</tr>
+		<tr>
+			<th>Nrr</th>
+			<td>{{ entity.nrr }}</td>
+		</tr>
+		<tr>
+			<th>Dwy</th>
+			<td>{{ entity.dwy }}</td>
+		</tr>
+		<tr>
+			<th>Dsp</th>
+			<td>{{ entity.dsp }}</td>
+		</tr>
+		<tr>
+			<th>Fp</th>
+			<td>{{ entity.fp }}</td>
+		</tr>
+		<tr>
+			<th>Dni</th>
+			<td>{{ entity.dni }}</td>
+		</tr>
+		<tr>
+			<th>Tpl</th>
+			<td>{{ entity.tpl }}</td>
+		</tr>
+		<tr>
+			<th>Dpl</th>
+			<td>{{ entity.dpl }}</td>
+		</tr>
+		<tr>
+			<th>N0</th>
+			<td>{{ entity.n0 }}</td>
+		</tr>
+		<tr>
+			<th>N1</th>
+			<td>{{ entity.n1 }}</td>
+		</tr>
+		<tr>
+			<th>N2</th>
+			<td>{{ entity.n2 }}</td>
+		</tr>
+		<tr>
+			<th>N3</th>
+			<td>{{ entity.n3 }}</td>
+		</tr>
+		<tr>
+			<th>N4</th>
+			<td>{{ entity.n4 }}</td>
+		</tr>
+		<tr>
+			<th>V1</th>
+			<td>{{ entity.v1 }}</td>
+		</tr>
+		<tr>
+			<th>V2</th>
+			<td>{{ entity.v2 }}</td>
+		</tr>
+		<tr>
+			<th>V4</th>
+			<td>{{ entity.v4 }}</td>
+		</tr>
+		<tr>
+			<th>Wart</th>
+			<td>{{ entity.wart }}</td>
+		</tr>
+		<tr>
+			<th>Zap</th>
+			<td>{{ entity.zap }}</td>
+		</tr>
+		<tr>
+			<th>Przedp</th>
+			<td>{{ entity.przedp }}</td>
+		</tr>
+		<tr>
+			<th>Koszt</th>
+			<td>{{ entity.koszt }}</td>
+		</tr>
+		<tr>
+			<th>Nb</th>
+			<td>{{ entity.nb }}</td>
+		</tr>
+		<tr>
+			<th>Rab</th>
+			<td>{{ entity.rab }}</td>
+		</tr>
+		<tr>
+			<th>Prrab</th>
+			<td>{{ entity.prrab }}</td>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<td>{{ entity.status }}</td>
+		</tr>
+		<tr>
+			<th>Bank</th>
+			<td>{{ entity.bank }}</td>
+		</tr>
+		<tr>
+			<th>Bankn</th>
+			<td>{{ entity.bankn }}</td>
+		</tr>
+		<tr>
+			<th>Banks</th>
+			<td>{{ entity.banks }}</td>
+		</tr>
+		<tr>
+			<th>Nrk</th>
+			<td>{{ entity.nrk }}</td>
+		</tr>
+		<tr>
+			<th>Dwyk</th>
+			<td>{{ entity.dwyk }}</td>
+		</tr>
+		<tr>
+			<th>Wsk</th>
+			<td>{{ entity.wsk }}</td>
+		</tr>
+		<tr>
+			<th>Wwart</th>
+			<td>{{ entity.wwart }}</td>
+		</tr>
+		<tr>
+			<th>Wal</th>
+			<td>{{ entity.wal }}</td>
+		</tr>
+		<tr>
+			<th>Kurs</th>
+			<td>{{ entity.kurs }}</td>
+		</tr>
+		<tr>
+			<th>Przel</th>
+			<td>{{ entity.przel }}</td>
+		</tr>
+		<tr>
+			<th>Nipx</th>
+			<td>{{ entity.nipx }}</td>
+		</tr>
+		<tr>
+			<th>Nip</th>
+			<td>{{ entity.nip }}</td>
+		</tr>
+		<tr>
+			<th>Reg</th>
+			<td>{{ entity.reg }}</td>
+		</tr>
+		<tr>
+			<th>Nazw</th>
+			<td>{{ entity.nazw }}</td>
+		</tr>
+		<tr>
+			<th>Nazw2</th>
+			<td>{{ entity.nazw2 }}</td>
+		</tr>
+		<tr>
+			<th>Kodp</th>
+			<td>{{ entity.kodp }}</td>
+		</tr>
+		<tr>
+			<th>Mias</th>
+			<td>{{ entity.mias }}</td>
+		</tr>
+		<tr>
+			<th>Ulic</th>
+			<td>{{ entity.ulic }}</td>
+		</tr>
+		<tr>
+			<th>Adrk</th>
+			<td>{{ entity.adrk }}</td>
+		</tr>
+		<tr>
+			<th>Dnext</th>
+			<td>{{ entity.dnext }}</td>
+		</tr>
+		<tr>
+			<th>Cen</th>
+			<td>{{ entity.cen }}</td>
+		</tr>
+		<tr>
+			<th>Wardo</th>
+			<td>{{ entity.wardo }}</td>
+		</tr>
+		<tr>
+			<th>Adrdo</th>
+			<td>{{ entity.adrdo }}</td>
+		</tr>
+		<tr>
+			<th>Defn</th>
+			<td>{{ entity.defn }}</td>
+		</tr>
+		<tr>
+			<th>Defni</th>
+			<td>{{ entity.defni }}</td>
+		</tr>
+		<tr>
+			<th>Drozl</th>
+			<td>{{ entity.drozl }}</td>
+		</tr>
+		<tr>
+			<th>Zasob</th>
+			<td>{{ entity.zasob }}</td>
+		</tr>
+		<tr>
+			<th>Kwzat</th>
+			<td>{{ entity.kwzat }}</td>
+		</tr>
+		<tr>
+			<th>Inf</th>
+			<td>{{ entity.inf }}</td>
+		</tr>
+		<tr>
+			<th>Notk</th>
+			<td>{{ entity.notk }}</td>
+		</tr>
+		<tr>
+			<th>Oswy</th>
+			<td>{{ entity.oswy }}</td>
+		</tr>
+		<tr>
+			<th>Osod</th>
+			<td>{{ entity.osod }}</td>
+		</tr>
+		<tr>
+			<th>Ow</th>
+			<td>{{ entity.ow }}</td>
+		</tr>
+		<tr>
+			<th>Uz</th>
+			<td>{{ entity.uz }}</td>
+		</tr>
+		<tr>
+			<th>Te</th>
+			<td>{{ entity.te }}</td>
+		</tr>
+		<tr>
+			<th>Lat</th>
+			<td>{{ entity.lat }}</td>
+		</tr>
+		<tr>
+			<th>Lon</th>
+			<td>{{ entity.lon }}</td>
+		</tr>
+		<tr>
+			<th>Lok</th>
+			<td>{{ entity.lok }}</td>
+		</tr>
+		<tr>
+			<th>Akt</th>
+			<td>{{ entity.akt }}</td>
+		</tr>
+		<tr>
+			<th>Anul</th>
+			<td>{{ entity.anul }}</td>
+		</tr>
+		<tr>
+			<th>Wers</th>
+			<td>{{ entity.wers }}</td>
+		</tr>
+		<tr>
+			<th>Tem</th>
+			<td>{{ entity.tem }}</td>
+		</tr>
+		<tr>
+			<th>Rejvko</th>
+			<td>{{ entity.rejvko }}</td>
+		</tr>
+		<tr>
+			<th>Koszvm</th>
+			<td>{{ entity.koszvm }}</td>
+		</tr>
+		<tr>
+			<th>Idno</th>
+			<td>{{ entity.idno }}</td>
+		</tr>
+		<tr>
+			<th>Mail</th>
+			<td>{{ entity.mail }}</td>
+		</tr>
+		<tr>
+			<th>Kraj</th>
+			<td>{{ entity.kraj }}</td>
+		</tr>
+		<tr>
+			<th>Zid</th>
+			<td>{{ entity.zid }}</td>
+		</tr>
+		<tr>
+			<th>Dj</th>
+			<td>{{ entity.dj }}</td>
+		</tr>
+		<tr>
+			<th>Ddn</th>
+			<td>{{ entity.ddn }}</td>
+		</tr>
+		<tr>
+			<th>Ow2</th>
+			<td>{{ entity.ow2 }}</td>
+		</tr>
+		<tr>
+			<th>Ow3</th>
+			<td>{{ entity.ow3 }}</td>
+		</tr>
+		<tr>
+			<th>T1</th>
+			<td>{{ entity.t1 }}</td>
+		</tr>
+		<tr>
+			<th>Nr2</th>
+			<td>{{ entity.nr2 }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<button type="button" class="btn btn-default btn-sm btn2" onclick="location.href='{{ path('gramfood_magazyn_kompletacje_lista') }}'">Powrót do listy</button>
+
+{% endblock %}
+
+
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<!-- morris.js -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/raphael/raphael.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/morris.js/morris.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- bootstrap-daterangepicker -->
+<script
+    src="{{ asset('bundles/gentelella-master/js/moment/moment.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/js/datepicker/daterangepicker.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('bundles/gentelella-master/js/custom.min.js') }}"></script>
+
+<!-- Datatables -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+
+{% endblock %}
+

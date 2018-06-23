@@ -1,0 +1,197 @@
+{% extends 'gramfood/base.html.twig' %}
+
+{% block page_title %}
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+	rel="stylesheet">
+<link
+	href="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+	rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+     {% include ':gramfood:modelDialog.html.twig' %}   
+
+<div class="x_panel">
+	<div class="x_title">
+		<h2>
+			Dodajesz nr Partii dla: <small>{{ id }}</small>
+		</h2>
+		<ul class="nav navbar-right panel_toolbox">
+			<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+			</li>
+			<li class="dropdown"><a class="dropdown-toggle" role="button"
+				aria-expanded="false" href="#" data-toggle="dropdown"><i
+					class="fa fa-wrench"></i></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Settings 1</a></li>
+					<li><a href="#">Settings 2</a></li>
+				</ul></li>
+			<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="x_content">
+
+		{% block body -%}
+
+{# 		{{ form(form) }}#}
+
+ {{ form_start(form, {"attr":{"name":"extPow", 'class':'form-horizontal', 'data-parsley-validate':'data-parsley-validate'}}) }}  
+ 
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kod</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.kod, {'value' : rw[0].kod, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', readonly:'disabled' }}) }}
+                                             
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idRW</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.idrw, {'value' : rw[0].id, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', readonly:'disabled' }}) }}
+                                             
+                                            </div>
+                                        </div>   
+                                                    
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idPZ<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-10">
+                                            {{ form_widget(form.idpz, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%', required:'required' }}) }}
+                                            </div>
+                                            <div class="col-md-2 col-sm-1 col-xs-12">
+                                            <button class="btn btn-primary" type="button" onClick="wyszukaj_PZ('{{ rw[0].kod }}', '{{ rw[0].nazw }}')" >Wyszukaj</button>
+                                            </div>
+                                        </div>          
+                                                                                                  
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">snPZ<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.snpz, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%',  required:'required' }}) }}
+                                             
+                                            </div>
+                                        </div>    
+
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ilość<span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.il, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%', required:'required' }}) }}
+                                             
+                                            </div>
+                                        </div>    
+                                                                                
+                                         <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">JM</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.jm, {'value' : rw[0].jm, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', readonly:'disabled' }}) }}
+                                             
+                                            </div>
+                                        </div>   
+                                        
+                                            {{ form_widget(form.user, {'value' : 'app'}) }}
+                                            <input id="appbundle_extgramfoodkompow_maxil" type="hidden" value="">
+                                            
+                                        
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button onclick="location.href='{{ path('gramfood_magazyn_kompletacje_lista') }}'" class="btn btn-default" type="button">Cancel</button>
+                                                <button class="btn btn-primary" type="reset">Reset</button>
+                                                 {{ form_widget(form.save,  {'attr': { 'class':'btn btn-primary pull-right' }}) }}
+                                            </div>
+                                        </div>
+                                                                                                                                          
+ 
+ {{ form_end(form) }}
+
+   
+
+		{% endblock %}
+
+	</div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<!-- morris.js -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/raphael/raphael.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/morris.js/morris.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- bootstrap-daterangepicker -->
+<script
+	src="{{ asset('bundles/gentelella-master/js/moment/moment.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/js/datepicker/daterangepicker.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('bundles/gentelella-master/js/custom.min.js') }}"></script>
+
+<!-- Datatables -->
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script
+	src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+
+    <!-- validator -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/validator/validator.js') }}"></script>	
+
+<script language="javascript">    
+  {% include ':gramfood:jsBase.html.twig' %}
+</script>        
+
+{% endblock %}

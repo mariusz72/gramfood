@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>WMS App</title>
+
+<!-- Bootstrap -->
+<link href="{{ asset('bundles/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+<!-- Font Awesome -->
+<link href="{{ asset('bundles/gentelella-master/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+<!-- NProgress -->
+<link href="{{ asset('bundles/gentelella-master/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+<!-- Animate.css -->
+<link href="{{ asset('bundles/gentelella-master/vendors/animate.css/animate.min.css') }}" rel="stylesheet">
+
+<!-- Custom Theme Style -->
+<link href="{{ asset('bundles/gentelella-master/build/css/custom.min.css') }}" rel="stylesheet">
+
+<style>
+
+.login_content h1:after {
+    background: 0;
+    background: 0;
+    right: 0
+
+}
+
+.login_content h1:before {
+    background: 0;
+    background: 0;
+    left: 0
+}
+
+.login_content  {
+    padding: 5px 0 0;
+}
+
+.separator {
+    border-top: 0px;
+    margin-top: 20px;
+    padding-left: 30px;
+}
+
+
+
+</style>
+
+</head>
+
+<body class="login2">
+    <div>
+        <a class="hiddenanchor" id="signup"></a> 
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper" >
+            <div class="animate form login_form" style="padding: 20px; width: 400px; border-radius: 5%; background-color: rgba(221, 221, 221, 1);">
+                <section class="login_content">
+                    <form action="{{ path('gramfoodlogin_check') }}" method="post">
+                        
+                                <h1>
+                                    <img src="{{ asset('bundles/gramfood/images/cube.png') }}" style="width: 30px;" >
+                                        <span style="color:#0aadac;">WMS App
+                                            <div style="color: rgb(115, 135, 156); font-size: 10px; margin-top: -42px; margin-left: 74px;">for GramFood</div>
+                                        </span>
+                                </h1>
+                                <br>
+                                
+                        <div>
+                            <input type="text" id="username" name="_username" class="form-control" placeholder="Username"  value="{{ last_username }}" required="" />
+                        </div>
+                        <div>
+                            <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required="" />
+                        </div>
+{% if error %}                        
+                  <div class="alert alert-danger alert-dismissable" style="text-shadow: 0px 0px 0px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="icon fa fa-ban"></i> {{ error.message|trans }}
+                  </div>                        
+{% endif %}                                   
+                        <br>
+                        <div>
+{#                             <a class="btn btn-primary" style="width: 200px; text-shadow: 0px 0px 0px;"  "href="index.html">zaloguj</a> #}
+                            <button type="submit" style="width: 100%; text-shadow: 0px 0px 0px;" class="btn btn-primary  btn-normal">Zaloguj</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+                    </form>
+                </section>
+                
+            </div>
+
+                         <div align="center"  class="separator" style="padding-top: 350px;">
+                                <p align="center" >Copyright © 2017-{{ "now"|date("Y") }} <i>M.L.</i></p>
+                         </div> 
+
+        </div>
+        
+   
+        
+    </div>
+    
+    
+    <!-- jQuery -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script> 
+     
+</body>
+</html>

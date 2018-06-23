@@ -1,0 +1,82 @@
+
+    <table id="tabpz" class="table table-condensed">
+         <thead>
+             <tr>
+                 <th>Id</th>
+                 <th>NrR</th>
+                 <th>Data</th>
+                 <th>Ilość</th>
+                 <th>SN</th>
+                 <th style="text-align: right;">Akcja</th>
+             </tr>
+         </thead>
+         <tbody>  
+         
+{% if entities|length > 0 %}
+
+                 {% for entity in entities %}    
+             <tr>
+                 <td width="150px">{{ entity.id }}</td>
+                 <td width="50px">{{ entity.nrr }}</td>
+                 <td width="50px">{{ entity.data }}</td>
+                 <td width="20px">{{ entity.il }}</td>
+                 <td width="100px">{{ entity.sn }}</td>   
+                        <td width="200px" style="text-align: right;"><a href="#" onClick="wstawPZ('{{ entity.id }}','{{ entity.sn }}','{{ entity.il }}')" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Wstaw pozycje </a> 
+                        </td>
+                               
+             </tr>
+            {% endfor %}
+
+
+{% else %}
+
+                                <div class="alert alert-warning alert-dismissible fade in"
+                                    role="alert">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>Brak powiazań dla wskazanego RW.</strong> Musisz dodać nr Partii.
+                                </div>
+
+{% endif %}
+
+
+            
+         </tbody>
+     </table>
+     
+<script language="javascript">
+
+var table = $('#tabpz').DataTable({
+	"pageLength": 15,
+	"lengthMenu": [15, 25, 50], 
+    order: [[ 1, 'asc' ]],
+});
+
+function wstawPZ($id, $sn, $il){
+
+	$('#appbundle_extgramfoodkompow_idpz').val($id);
+	$('#appbundle_extgramfoodkompow_snpz').val($sn);
+	$('#appbundle_extgramfoodkompow_maxil').val($il);
+
+	closeModal('#{{ modal }}');
+			
+}
+
+	
+
+</script>
+
+
+     
+   
+     
+
+           
+ 
+
+
+   
+
+
