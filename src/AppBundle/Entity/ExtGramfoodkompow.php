@@ -45,7 +45,7 @@ class ExtGramfoodkompow {
 	
 	/**
 	 *
-	 * @var integer @ORM\Column(name="il", type="integer", nullable=false)
+     * @var float @ORM\Column(name="il", type="float", precision=10, scale=0, nullable=true)
 	 */
 	private $il;
 	
@@ -63,9 +63,9 @@ class ExtGramfoodkompow {
 	
 	/**
 	 *
-	 * @var string @ORM\Column(name="User", type="string", length=50, nullable=false)
+	 * @var string @ORM\Column(name="Uzyt", type="string", length=50, nullable=false)
 	 */
-	private $user;
+	private $uzyt;
 	
 	/**
 	 * @return string
@@ -222,8 +222,8 @@ class ExtGramfoodkompow {
 	 * @param string $user        	
 	 * @return ExtGramfoodkompow
 	 */
-	public function setUser($user) {
-		$this->user = $user;
+	public function setUzyt($uzyt) {
+		$this->uzyt = $uzyt;
 		
 		return $this;
 	}
@@ -233,7 +233,7 @@ class ExtGramfoodkompow {
 	 *
 	 * @return string
 	 */
-	public function getUser() {
-		return $this->user;
+	public function getUzyt() {
+		return $this->uzyt;
 	}
 }
