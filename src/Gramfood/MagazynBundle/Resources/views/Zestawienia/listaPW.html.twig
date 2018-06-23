@@ -1,0 +1,342 @@
+{% extends 'gramfood/base.html.twig' %}
+
+{% block page_title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+    rel="stylesheet">
+<link
+    href="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+    rel="stylesheet">
+    
+    <style>
+    
+    
+td.details-control {
+ 
+    background: url('{{ asset('bundles/gramfood/images/details_open.png') }} ') no-repeat center center;
+
+    cursor: pointer;
+
+}
+
+tr.shown td.details-control {
+
+    background: url('{{ asset('bundles/gramfood/images/details_close.png') }} ') no-repeat center center;
+
+}
+
+
+    </style>    
+    
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>
+            Zestawienia <small>Lista PW (Przyjęcie wewnętrzne)</small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" role="button"
+                aria-expanded="false" href="#" data-toggle="dropdown"><i
+                    class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a></li>
+                    <li><a href="#">Settings 2</a></li>
+                </ul></li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+
+        {% block body -%}
+
+
+<table id="listaWz" class="table table-striped bulk_action table-bordered">
+            <tfoot>
+            <tr >
+                <th><i class="fa fa-fw fa-filter"></i></th>
+                <td>text</td>                
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>
+                <td>text</td>        
+                <td>text</td>         
+            </tr>
+        </tfoot>   
+</table>
+
+
+        {% endblock %}
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<!-- morris.js -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/raphael/raphael.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/morris.js/morris.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- bootstrap-daterangepicker -->
+<script
+    src="{{ asset('bundles/gentelella-master/js/moment/moment.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/js/datepicker/daterangepicker.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('bundles/gentelella-master/js/custom.min.js') }}"></script>
+
+<!-- Datatables -->
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/datatables.net-scroller/js/dataTables.scroller.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script
+    src="{{ asset('bundles/gentelella-master/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+      
+    
+<script language="javascript">
+
+{% include ':gramfood:jsBase.html.twig' %}  
+
+var dataSet = [
+
+    {% for entity in entities %}
+    [
+        "",
+        "{{ entity.id }}",
+        "{{ entity.typ }}",
+        "{{ entity.nrr }}",
+        "{{ entity.idf }}",
+        "{{ entity.idwz }}",
+        "{{ entity.idpz }}",
+        "{{ entity.data }}",
+        "{{ entity.Alias }}",
+        "{{ entity.kod }}",
+        "{{ entity.nazw }}",
+        "{{ entity.il }}",
+        "{{ entity.jm }}",
+        "{{ entity.kat }}",
+        "{{ entity.sn }}",
+        "{{ entity.dwaz }}"
+    ],
+    {% endfor %}
+
+];
+
+
+function format ( d ) {
+
+    // `d` is the original data object for the row
+
+    var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaProdukt_z_PW', { 'pw': '<path>' }) }}",d[4]) ;
+    
+    return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
+           '<tr>'+
+            '<th width="150px">ID</th><td>'+
+            
+            '<div class="btn-group">'+
+            '<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" type="button" aria-expanded="false">'+
+            d[1]+ 
+            '    <span class="caret"></span>'+
+            '</button>'+
+            '<ul role="menu" class="dropdown-menu">'+
+            '    <li><a href="'+path+'">Pokaż Składniki</a></li>'+
+            '    <li><a href="#">Generuj certyfikat</a></li>'+
+            '    <li><a href="#">Generuj kod EAN-128</a></li>'+
+            '</ul>'+
+            '</div>'+            
+
+            '</td>'+
+        '</tr>'+
+        '<tr>'+            
+            '<th>Typ</th><td> '+d[2]+'</td>'+
+        '</tr>'+
+        '<tr>'+          
+            '<th>IDf</th><td> '+d[4]+'</td>'+
+        '</tr>'+
+         '<tr>'+
+            '<th>Data ważności</th><td> '+d[15]+'</td>'+
+        '</tr>'+
+        '</table>';
+}
+
+
+$(document).ready(function() {
+
+
+    $('#listaWz tfoot td').each( function (i) {
+        var title = $(this).text();
+        if(i>=0){
+        $(this).html( '<input id="cnn'+i+'" type="text" placeholder="*" />' );
+        };
+    } );    
+    	
+
+    var table = $('#listaWz').DataTable({
+        data: dataSet,
+       // stateSave: true, //zapamietuje stan tabeli, aby wrocic do tego samego miejsca
+        order: [[ 1, 'desc' ]],
+        columns: [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "width": "20px", 
+                "defaultContent": ''
+            },
+            { title: "Id" }, 
+            { title: "Typ", "visible": false },
+            { title: "NrR" },
+            { title: "IDf", "visible": false },
+            { title: "IdWZ", "visible": false },
+            { title: "IdPZ", "visible": false },
+            { title: "Data" },
+            { title: "Alias" },
+            { title: "Kod" },
+            { title: "Nazwa" },
+            { title: "Ilość" },
+            { title: "JM" },
+            { title: "Kat", "visible": false, },
+            { title: "SN" }
+        ],
+
+        });
+
+
+ // Add event listener for opening and closing details
+
+    $('#listaWz tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+
+        else {
+            // Open this row
+            row.child( format(row.data(), row.index()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+
+
+
+    /*
+     * Wspólne JS dla datatable
+     */
+     
+         // Apply the search
+         table.columns().every( function (colIdx) {
+             var that = this;
+             $( 'input', this.footer() ).on( 'keyup change input', function () {
+                 if ( that.search() !== this.value ) {
+                    $('input', table.column(colIdx).footer()).addClass( "input_borger_red" );  
+                     that
+                         .search( this.value, true, false, true )
+                         .draw();
+                 }
+                 if ( that.search() == '' ) {
+                     $('input', table.column(colIdx).footer()).removeClass(); 
+                     table.draw();
+                 }
+               
+                
+             } );
+         } );   
+
+         // Restore state - aktualizacjia value w imputach search
+         var state = table.state.loaded();
+         if (state) {
+             table.columns().eq(0).each(function (colIdx) {
+                 var colSearch = state.columns[colIdx].search;
+                 $('input', table.column(colIdx).footer()).addClass( "" );
+                 if (colSearch.search) {
+                     $('input', table.column(colIdx).footer()).val(colSearch.search);
+                     $('input', table.column(colIdx).footer()).addClass( "input_borger_red" );
+                 }
+             });
+
+             table.draw();
+         } 
+    
+    
+} );  
+
+
+
+
+</script>
+
+{% endblock %}
+    
