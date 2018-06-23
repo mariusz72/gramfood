@@ -1,3 +1,7 @@
+gramfood_magazyn_test:
+    path:     /test
+    defaults: { _controller: GramfoodMagazynBundle:Default:test }
+    
 gramfood_magazyn_homepage:
     path:     /
     defaults: { _controller: GramfoodMagazynBundle:Default:index }
@@ -11,9 +15,14 @@ gramfood_magazyn_kompletacje_lista:
     defaults: { _controller: GramfoodMagazynBundle:Kompletacje:lista } 
     
 gramfood_magazyn_kompletacje_listaProdukt:
-    path:     /kompletacjeProdukt/{kod}/{sn}
+    path:     /kompletacjeProdukt/{kod}
     defaults: { _controller: GramfoodMagazynBundle:Kompletacje:listaProdukt }     
-    
+    requirements: { _method: post }
+
+gramfood_magazyn_kompletacje_listaProdukt_z_PW:
+    path:     /kompletacjeProdukt/{pw}
+    defaults: { _controller: GramfoodMagazynBundle:Kompletacje:listaProduktZPw }     
+            
 gramfood_magazyn_kompletacje_show:
     path:     /kompletacje/{id}
     defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:show" }  

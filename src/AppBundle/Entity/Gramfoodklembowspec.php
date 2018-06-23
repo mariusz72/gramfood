@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Gramfoodklembowspec
  *
  * @ORM\Table(name="gramfoodklembowspec")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\GramfoodklembowspecRepository")
+ * @ORM\Entity
  */
 class Gramfoodklembowspec {
 	/**

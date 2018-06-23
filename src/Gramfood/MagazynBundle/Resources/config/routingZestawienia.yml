@@ -5,3 +5,11 @@ gramfood_zestawienia_listaWZ:
 gramfood_zestawienia_listaTowary:
     path:     /zestawienia/listaTowary
     defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaTowary } 
+
+gramfood_zestawienia_listaPZ:
+    path:     /zestawienia/listaPZ
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPZ } 
+        
+gramfood_zestawienia_listaPW:
+    path:     /zestawienia/listaPW
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPW }         

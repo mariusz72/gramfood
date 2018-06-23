@@ -36,7 +36,7 @@ class ExtGramfoodkompow {
 	
 	/**
 	 *
-     * @var float @ORM\Column(name="il", type="float", precision=10, scale=0, nullable=true)
+	 * @var integer @ORM\Column(name="il", type="integer", nullable=false)
 	 */
 	private $il;
 	
@@ -54,7 +54,7 @@ class ExtGramfoodkompow {
 	
 	/**
 	 *
-	 * @var string @ORM\Column(name="Uzyt", type="string", length=50, nullable=false)
+	 * @var string @ORM\Column(name="User", type="string", length=50, nullable=false)
 	 */
-	private $uzyt;
+	private $user;
 }

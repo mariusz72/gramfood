@@ -184,7 +184,8 @@ var dataSet = [
         "{{ entity.il }}",
         "{{ entity.jm }}",
         "{{ entity.kat }}",
-        "{{ entity.sn }}"
+        "{{ entity.sn }}",
+        "{{ entity.dwaz }}"        
     ],
     {% endfor %}
 
@@ -195,9 +196,12 @@ function format ( d ) {
 
     // `d` is the original data object for the row
 
-    var path = setURL2("{{ path('gramfood_magazyn_kompletacje_listaProdukt', { 'kod': '<path>', 'sn': '<path2>' }) }}",d[9],d[14]) ;
+    var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaProdukt', { 'kod': '<path>' }) }}",d[9]) ;
+    {#    var path = setURL2("{{ path('gramfood_magazyn_kompletacje_listaProdukt', { 'kod': '<path>', 'sn': '<path2>' }) }}",d[9],d[14]) ; #}
 
-    return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
+    return '  <form action="'+path+'" method="post">'+   
+           ' <input type="hidden" id="sn" name="sn" value="'+d[14]+'">'+
+           '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
         '<tr>'+
             '<th>ID</th><td>'+
             
@@ -207,12 +211,12 @@ function format ( d ) {
             '    <span class="caret"></span>'+
             '</button>'+
             '<ul role="menu" class="dropdown-menu">'+
-            '    <li><a href="'+path+'">Pokaż Składniki</a></li>'+
+//             '    <li><a href="'+path+'">Pokaż Składniki_a</a></li>'+
+            '    <li><a href="#" onclick="$(this).closest(\'form\').submit()">Pokaz składniki</a></li>'+
             '    <li><a href="#">Generuj certyfikat</a></li>'+
             '    <li><a href="'+path+'">Generuj kod EAN-128</a></li>'+
             '</ul>'+
             '</div>'+            
-
             '</td>'+
         '</tr>'+
         '<tr>'+            
@@ -228,9 +232,11 @@ function format ( d ) {
             '<th>IdPZ</th><td>'+d[6]+'</td>'+
          '</tr>'+
          '<tr>'+
-            '<th>Kat</th><td>'+d[13]+'</td>'+
+            '<th>Data ważności</th><td>'+d[15]+'</td>'+
         '</tr>'+
-    '</table>';
+    '</table>'+
+    '  </form>';
+
 }
 
 

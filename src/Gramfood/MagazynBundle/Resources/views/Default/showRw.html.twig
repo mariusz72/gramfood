@@ -16,10 +16,10 @@
              <td border="0">{{ loop.index }}</td>
                  <td width="200px" >{{ entity.id }}</td>           
                  <td width="20px">{{ entity.typ }}</td>
-                 <td width="100px">{{ entity.kod }}</td>
-                 <td width="400px">{{ entity.nazw }}</td>           
+                 <td width="30px">{{ entity.kod }}</td>
+                 <td >{{ entity.nazw }}</td>           
                  <td width="20px">{{ entity.il }}</td>
-                 <td width="100px">{{ entity.jm }}</td>   
+                 <td width="20px">{{ entity.jm }}</td>   
                  <td> <button type="button" class="btn btn-default btn-sm" onClick="wyswietl_nrpartii('{{ entity.id }}','{{ entity.nazw }}')">NR PARTII</button></td>   
              </tr> 
              {% set sum = sum + entity.il  %} 

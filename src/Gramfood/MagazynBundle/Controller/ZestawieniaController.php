@@ -47,5 +47,41 @@ class ZestawieniaController extends Controller {
 		) );
 		
 	}
+	
+	/**
+	 * Lists all WZ entities.
+	 */
+	public function listaPWAction() {
+		
+		
+		$em = $this->getDoctrine ()->getManager ();
+		
+		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+				array (	'typ' => 'PW', 'akt' => 'T', 'anul' => 'N'),
+				array (	'id' => 'ASC'));
+		
+		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPW.html.twig', array (
+				'entities' => $entities
+		) );
+		
+	}
+	
+	/**
+	 * Lists all WZ entities.
+	 */
+	public function listaPZAction() {
+		
+		
+		$em = $this->getDoctrine ()->getManager ();
+		
+		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+				array (	'typ' => 'ZAT', 'akt' => 'T', 'anul' => 'N'),
+				array (	'id' => 'ASC'));
+		
+		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPZ.html.twig', array (
+				'entities' => $entities
+		) );
+		
+	}
 
 }

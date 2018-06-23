@@ -8,7 +8,6 @@ use AppBundle\Entity\Gramfoodklembowzamzy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\ExtGramfoodkompow;
-use AppBundle\Entity\Gramfoodklembowspec;
 use AppBundle\Form\ExtGramfoodkompowType;
 
 class KompletacjeController extends Controller {
@@ -35,29 +34,16 @@ class KompletacjeController extends Controller {
 	/**
 	 * Lists kompletacji dla produktu.
 	 */
-	public function listaProduktAction($kod, $sn) {
+	public function listaProduktAction($kod, Request $request) {
 		
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
-	#	$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-	#			array (	'typ' => 'PW', 'kod' => $kod, 'sn' => $sn),
-	#			array (	'id' => 'ASC'));
-
-	#$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findByNrser($kod, $sn);
+		$sn = $request->request->get('sn');
 		
-		$repository = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' );
-		
-		$query = $repository->createQueryBuilder('a')
-				   ->where('a.typ like :typ and a.kod = :kod and a.sn LIKE :sn')
-                   ->setParameter('typ', 'PW')
-				   ->setParameter('kod', $kod)
-				   ->setParameter('sn', $sn)
-                   ->getQuery();
-				   
-		$entitiesSP = $query->execute();
-		
-				
+		$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+				array (	'typ' => 'PW', 'kod' => $kod, 'sn' => $sn),
+				array (	'id' => 'ASC'));
 		if ($entitiesSP) {
 			$bank = $entitiesSP[0]->getIdf();
 		}else{
@@ -67,6 +53,26 @@ class KompletacjeController extends Controller {
 		// $entities = $em->getRepository('AppBundle:Gramfoodklembowdok')->findAll();
 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
 				array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $bank),
+				array (	'id' => 'ASC'));
+		
+		return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
+				'entities' => $entities,
+				'wz' => 'T'
+		) );
+		
+	}
+	
+	/**
+	 * Lists kompletacji dla produktu.
+	 */
+	public function listaProduktZPwAction($pw) {
+		
+		
+		$em = $this->getDoctrine ()->getManager ();
+		
+		// $entities = $em->getRepository('AppBundle:Gramfoodklembowdok')->findAll();
+		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
+				array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $pw),
 				array (	'id' => 'ASC'));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
