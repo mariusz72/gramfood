@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ExtGramfoodkompow
  *
  * @ORM\Table(name="ext_gramfoodkompow")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ExtGramfoodkompowRepository")
  */
 class ExtGramfoodkompow {
 	/**

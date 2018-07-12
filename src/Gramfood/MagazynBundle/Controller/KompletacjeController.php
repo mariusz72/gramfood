@@ -24,9 +24,12 @@ class KompletacjeController extends Controller {
 			$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy ( 
 					array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N'),
 					array (	'id' => 'ASC'));
-		
+
+			$aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt('sdfrty');		
+
 			return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
-					'entities' => $entities
+					'entities' => $entities,
+					'aa' => $aa
 			) );
 	
 	}
