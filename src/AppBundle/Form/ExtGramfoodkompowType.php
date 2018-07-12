@@ -14,6 +14,7 @@ class ExtGramfoodkompowType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder->add ( 'kod')
+		->add ( 'idkpl' )
 		->add ( 'idrw' )
 		->add ( 'idpz' )
 		->add ( 'snpz' )

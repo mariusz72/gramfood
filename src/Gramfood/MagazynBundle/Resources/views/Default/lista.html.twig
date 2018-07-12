@@ -239,7 +239,7 @@ var dataSet = [
 ];
 
 
-function showRW($nrWiersza, $NrR, $bankN)
+function showRW($nrWiersza, $NrR, $bankN, $idkpl)
 {
 	//alert($id);
     var path = "{{ path('gramfood_magazyn_kompletacje_RwId') }}" ;
@@ -247,7 +247,7 @@ function showRW($nrWiersza, $NrR, $bankN)
                         cache:  false,
                         type: "POST",
                         url:    path,
-                        data: 'nrr='+$NrR+'&bankN='+$bankN,
+                        data: 'nrr='+$NrR+'&bankN='+$bankN+'&idkpl='+$idkpl,
                         success: function(result){
                         	$('#'+$nrWiersza).html(result);
 //                             return '<center><code>'+result+'</code></center>';
@@ -268,7 +268,7 @@ function format ( d , nrWiersza) {
 
         '<tr>'+
 
-            '<td>'+showRW(nrWiersza, d[4], d[5])+'</td>'+
+            '<td>'+showRW(nrWiersza, d[4], d[5], d[1])+'</td>'+
 
         '</tr>'+
 

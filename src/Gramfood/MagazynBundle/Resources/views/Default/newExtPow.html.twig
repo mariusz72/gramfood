@@ -15,6 +15,14 @@
                                         </div>
                                         
                                          <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idKPL</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            {{ form_widget(form.idkpl, {'value' : idkpl, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', readonly:'disabled' }}) }}
+                                             
+                                            </div>
+                                        </div>                                          
+                                        
+                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idRW</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                             {{ form_widget(form.idrw, {'value' : rw[0].id, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', readonly:'disabled' }}) }}

@@ -150,6 +150,7 @@ class KompletacjeController extends Controller {
 		
 		$NrR = $request->request->get('nrr');
 		$bankN = $request->request->get('bankN');
+		$idkpl = $request->request->get('idkpl');
 		
 		//file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $NrR. ' - ' . $bankN , true));
 		
@@ -161,7 +162,8 @@ class KompletacjeController extends Controller {
 		}
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:showRw.html.twig', array (
-				'entities' => $entities
+				'entities' => $entities,
+		        'idkpl' => $idkpl
 		) );
 
 	}
@@ -175,6 +177,7 @@ class KompletacjeController extends Controller {
 		$id = $request->query->get('id');
 		$modal = $request->query->get('modal');
 		$nazwa = $request->query->get('nazwa');
+		$idkpl = $request->query->get('idkpl');
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
@@ -189,7 +192,8 @@ class KompletacjeController extends Controller {
 				'entities' => $entities,
 				'id' => $id,
 				'nazwa' => $nazwa,
-				'modal' => $modal
+				'modal' => $modal,
+		        'idkpl' => $idkpl
 		) );
 		
 	}
@@ -335,6 +339,7 @@ class KompletacjeController extends Controller {
 		
 		$id = $request->query->get('id');
 		$modal = $request->query->get('modal');
+		$idkpl = $request->query->get('idkpl');
 		
 		$entity = new ExtGramfoodkompow ();
 		$form = $this->createCreateForm ( $entity );
@@ -348,6 +353,7 @@ class KompletacjeController extends Controller {
 		return $this->render ( 'GramfoodMagazynBundle:Default:newExtPow.html.twig', array (
 				'rw' => $rw,
 				'id' => $id,
+		        'idkpl' => $idkpl,
 				'modal' => $modal,
 				'entity' => $entity,
 				'form' => $form->createView ()
@@ -362,6 +368,7 @@ class KompletacjeController extends Controller {
 		$id = $request->query->get('id');
 		$idrw = $request->query->get('idrw');
 		$modal = $request->query->get('modal');
+		$idkpl = $request->query->get('idkpl');
 		
 		$em = $this->getDoctrine ()->getManager ();
 		$entity = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->find ( $id );
@@ -379,6 +386,7 @@ class KompletacjeController extends Controller {
 				'rw' => $rw,
 				'id' => $id,
 				'idrw' => $idrw,
+		        'idkpl' => $idkpl,
 				'modal' => $modal,
 				'entity' => $entity,
 				'form' => $editForm->createView ()

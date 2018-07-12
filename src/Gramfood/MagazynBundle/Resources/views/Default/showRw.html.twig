@@ -20,7 +20,7 @@
                  <td >{{ entity.nazw }}</td>           
                  <td width="20px">{{ entity.il }}</td>
                  <td width="20px">{{ entity.jm }}</td>   
-                 <td> <button type="button" class="btn btn-default btn-sm" onClick="wyswietl_nrpartii('{{ entity.id }}','{{ entity.nazw }}')">NR PARTII</button></td>   
+                 <td> <button type="button" class="btn btn-default btn-sm" onClick="wyswietl_nrpartii('{{ entity.id }}','{{ entity.nazw }}','{{ idkpl }}')">NR PARTII</button></td>   
              </tr> 
              {% set sum = sum + entity.il  %} 
             {% endfor %}

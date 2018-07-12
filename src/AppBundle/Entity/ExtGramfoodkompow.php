@@ -33,6 +33,12 @@ class ExtGramfoodkompow {
 	
 	/**
 	 *
+	 * @var string @ORM\Column(name="IDkpl", type="string", length=50, nullable=false)
+	 */
+	private $idkpl;
+	
+	/**
+	 *
 	 * @var string @ORM\Column(name="IDpz", type="string", length=50, nullable=false)
 	 */
 	private $idpz;
@@ -68,6 +74,22 @@ class ExtGramfoodkompow {
 	private $uzyt;
 	
 	/**
+     * @return string
+     */
+    public function getIdkpl()
+    {
+        return $this->idkpl;
+    }
+
+    /**
+     * @param string $idkpl
+     */
+    public function setIdkpl($idkpl)
+    {
+        $this->idkpl = $idkpl;
+    }
+
+    /**
 	 * @return string
 	 */
 	public function getSnpz() {
