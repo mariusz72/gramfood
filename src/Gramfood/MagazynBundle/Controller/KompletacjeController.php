@@ -21,15 +21,15 @@ class KompletacjeController extends Controller {
 			$em = $this->getDoctrine ()->getManager ();
 		
 			// $entities = $em->getRepository('AppBundle:Gramfoodklembowdok')->findAll();
-			$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy ( 
-					array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N'),
-					array (	'id' => 'ASC'));
+//			$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy ( 
+//					array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N'),
+//					array (	'id' => 'ASC'), 3);
 
-			$aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt('sdfrty');		
+			$aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt();		
 
 			return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
-					'entities' => $entities,
-					'aa' => $aa
+			    'entities' => $aa
+				//	'aa' => $aa
 			) );
 	
 	}

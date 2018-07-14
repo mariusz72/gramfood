@@ -69,8 +69,6 @@ tr.shown td.details-control {
 
 {% block page_content %}
 
-{{ dump(aa) }}
-
 <div class="x_panel">
 	<div class="x_title">
 		<h2>
@@ -223,16 +221,17 @@ var dataSet = [
     {% for entity in entities %}
     [
         "",
-        "{{ entity.id }}",
-        "{{ entity.typ }}",
-        "{{ entity.rejpar }}",
-        "{{ entity.rejpro }}",
-        "{{ entity.bankn }}",
-        "{{ entity.bank }}",
-        "{{ entity.nr }}",
-        "{{ entity.nrr }}",
-        "{{ entity.dwy }}",
-        "{{ entity.bank }}"
+        "{{ entity[0].id }}",
+        "{{ entity[0].typ }}",
+        "{{ entity[0].rejpar }}",
+        "{{ entity[0].rejpro }}",
+        "{{ entity[0].bankn }}",
+        "{{ entity[0].bank }}",
+        "{{ entity[0].nr }}",
+        "{{ entity[0].nrr }}",
+        "{{ entity[0].dwy }}",
+        "{{ entity[0].bank }}",
+        "{{ entity.idkpl }}"
     ],
     {% endfor %}
 
@@ -299,12 +298,22 @@ $(document).ready(function() {
                 title: "Id",
                 "mRender": function ( data, type, full ) { 
                         var out_text ='<button type="button" onclick="location.href=\'{{ path('gramfood_magazyn_kompletacje_lista') }}/'+data+'\'" class="btn btn-default btn-xs">'+data+'</button>';
-                        //              '&nbsp; <i style="color: green" class="fa fa-chain"></i>'; 
+                        //              '&nbsp; <i style="color: green" class="fa fa-share-alt"></i>'; 
                             
                     return out_text; 
                  }, 
              },
-            { title: "Typ" },
+            { title: "Typ",
+                 "mRender": function ( data, type, full ) { 
+                	 if (full[11] == full[1]) {
+             		    var ico = '<i class="fa fa-share-alt">';
+             		} else {
+             			var ico = '';
+                     	}
+                     var out_text = data +' '+ico;
+                 return out_text; 
+              },                
+                },
             { title: "Rejpar" },
             { title: "Rejpro" },
             { title: "Bankn" },
