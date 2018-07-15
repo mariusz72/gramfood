@@ -86,7 +86,7 @@ tr.shown td.details-control {
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-                <th><i class="fa fa-ellipsis-h"></i></th>
+
             </tr>
         </tfoot>   
 </table>
@@ -245,16 +245,16 @@ $(document).ready(function() {
             { title: "Ostatni",
             		 "width": "50px",
             		  },
-            { title: "x",
-            	className: 'project_progress',
-            	"width": "150px",
-                "mRender": function ( data, type, full ) { 
-                	var prog = '<div class="progress progress_sm">'+
-                               '<div class="progress-bar bg-green" role="progressbar" style="width: '+full[5]+'%;" '+
-                               '	  data-transitiongoal="'+full[5]+'"></div>';
-                     return prog; 
-                 },
-             }
+//            { title: "x",
+//            	className: 'project_progress',
+//            	"width": "150px",
+//                "mRender": function ( data, type, full ) { 
+//                	var prog = '<div class="progress progress_sm">'+
+//                               '<div class="progress-bar bg-green" role="progressbar" style="width: '+full[5]+'%;" '+
+//                               '	  data-transitiongoal="'+full[5]+'"></div>';
+//                     return prog; 
+//                },
+//             }
         ],
 
         });
