@@ -9,20 +9,36 @@
 {#                  <th>JM</th>#}
 {#              </tr>#}
 {#          </thead>#}
-         <tbody>       
+         <tbody>    
+
          {% set sum = 0 %}     
-                 {% for entity in entities %}    
+                 {% for entity in entities2 %}    
+                 
              <tr>
              <td border="0">{{ loop.index }}</td>
-                 <td width="200px" >{{ entity.id }}</td>           
-                 <td width="20px">{{ entity.typ }}</td>
-                 <td width="30px">{{ entity.kod }}</td>
-                 <td >{{ entity.nazw }}</td>           
-                 <td width="20px">{{ entity.il }}</td>
-                 <td width="20px">{{ entity.jm }}</td>   
-                 <td> <button type="button" class="btn btn-default btn-sm" onClick="wyswietl_nrpartii('{{ entity.id }}','{{ entity.nazw }}','{{ idkpl }}')">NR PARTII</button></td>   
+                 <td width="200px" >
+                 
+   
+                              
+                    {{ entity[0].id }}
+                    
+                 </td>           
+                 <td width="20px">{{ entity[0].typ }}</td>
+                 <td width="50px">{{ entity[0].kod }}
+                 
+              {# czy jest wprowadzone powiazanie  #}
+                 {% if  entity.idrw is defined and entity.idrw == entity[0].id %}
+                     <i class="fa fa-share-alt green"></i>
+                  {% endif %}                      
+                 
+                 
+                 </td>
+                 <td >{{ entity[0].nazw }}</td>           
+                 <td width="20px">{{ entity[0].il }}</td>
+                 <td width="20px">{{ entity[0].jm }}</td>   
+                 <td> <button type="button" class="btn btn-default btn-sm" onClick="wyswietl_nrpartii('{{ entity[0].id }}','{{ entity[0].nazw }}','{{ idkpl }}')">NR PARTII</button></td>   
              </tr> 
-             {% set sum = sum + entity.il  %} 
+             {% set sum = sum + entity[0].il  %} 
             {% endfor %}
              <tr>
                  <td colspan="5"></td>

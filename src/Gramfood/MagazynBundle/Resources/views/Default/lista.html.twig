@@ -231,14 +231,15 @@ var dataSet = [
         "{{ entity[0].nrr }}",
         "{{ entity[0].dwy }}",
         "{{ entity[0].bank }}",
-        "{{ entity.idkpl }}"
+        "{{ entity.idkpl }}",
+        "{{ entity.idrw }}"
     ],
     {% endfor %}
 
 ];
 
 
-function showRW($nrWiersza, $NrR, $bankN, $idkpl)
+function showRW($nrWiersza, $NrR, $bankN, $idkpl, $idrw)
 {
 	//alert($id);
     var path = "{{ path('gramfood_magazyn_kompletacje_RwId') }}" ;
@@ -246,11 +247,11 @@ function showRW($nrWiersza, $NrR, $bankN, $idkpl)
                         cache:  false,
                         type: "POST",
                         url:    path,
-                        data: 'nrr='+$NrR+'&bankN='+$bankN+'&idkpl='+$idkpl,
+                        data: 'nrr='+$NrR+'&bankN='+$bankN+'&idrw='+$idrw+'&idkpl='+$idkpl,
                         success: function(result){
                         	$('#'+$nrWiersza).html(result);
 //                             return '<center><code>'+result+'</code></center>';
-                            //alert('#'+$id);
+//                            alert('#'+$idrw);
                         }
                    });
     
@@ -267,7 +268,7 @@ function format ( d , nrWiersza) {
 
         '<tr>'+
 
-            '<td>'+showRW(nrWiersza, d[4], d[5], d[1])+'</td>'+
+            '<td>'+showRW(nrWiersza, d[4], d[5], d[1], d[12])+'</td>'+
 
         '</tr>'+
 
@@ -306,7 +307,7 @@ $(document).ready(function() {
             { title: "Typ",
                  "mRender": function ( data, type, full ) { 
                 	 if (full[11] == full[1]) {
-             		    var ico = '<i class="fa fa-share-alt">';
+             		    var ico = '<i class="fa fa-share-alt green">';
              		} else {
              			var ico = '';
                      	}

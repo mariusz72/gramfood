@@ -43,20 +43,27 @@ class KompletacjeController extends Controller {
 		$em = $this->getDoctrine ()->getManager ();
 		
 		$sn = $request->request->get('sn');
+		file_put_contents('c:\xampp\tmp\1_sn.txt', print_r( $sn. ' -'. $kod , true));
 		
-		$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'typ' => 'PW', 'kod' => $kod, 'sn' => $sn),
-				array (	'id' => 'ASC'));
+//		$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+//		    array (	'typ' => 'PW', 'kod' => $kod, 'sn' => $sn),
+//				array (	'id' => 'ASC'));
+
+		$entitiesSP = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToPw ($sn, $kod);
+		
+		file_put_contents('c:\xampp\tmp\entiti_sn.txt', print_r( $entitiesSP , true));
+		
 		if ($entitiesSP) {
 			$bank = $entitiesSP[0]->getIdf();
 		}else{
 			$bank = 'brak';
 		};
 		
-		// $entities = $em->getRepository('AppBundle:Gramfoodklembowdok')->findAll();
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
-				array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $bank),
-				array (	'id' => 'ASC'));
+		$entities = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToDok ($bank);
+		
+	//	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
+	//			array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $bank),
+	//			array (	'id' => 'ASC'));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
 				'entities' => $entities,
@@ -74,9 +81,11 @@ class KompletacjeController extends Controller {
 		$em = $this->getDoctrine ()->getManager ();
 		
 		// $entities = $em->getRepository('AppBundle:Gramfoodklembowdok')->findAll();
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
-				array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $pw),
-				array (	'id' => 'ASC'));
+//		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
+//				array (	'typ' => 'KPL', 'akt' => 'T', 'anul' => 'N', 'bank' => $pw),
+//				array (	'id' => 'ASC'));
+		
+		$entities = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToDok ($pw);
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
 				'entities' => $entities,
@@ -154,11 +163,14 @@ class KompletacjeController extends Controller {
 		$NrR = $request->request->get('nrr');
 		$bankN = $request->request->get('bankN');
 		$idkpl = $request->request->get('idkpl');
+		$idRw = $request->request->get('idrw');
 		
 		//file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $NrR. ' - ' . $bankN , true));
 		
 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
 				array (	'idf' => $bankN),	array (	'id' => 'ASC'));
+		
+		$entities2 = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findRwExt($bankN);
 		
 		if (! $entities) {
 			throw $this->createNotFoundException ( 'Unable to find Gramfoodklembowspec entity.' );
@@ -166,6 +178,7 @@ class KompletacjeController extends Controller {
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:showRw.html.twig', array (
 				'entities' => $entities,
+		        'entities2' => $entities2,
 		        'idkpl' => $idkpl
 		) );
 
