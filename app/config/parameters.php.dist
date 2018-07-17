@@ -1,0 +1,8 @@
+<?php
+	    $file_path = "../.git/ORIG_HEAD";
+	            $myfile = fopen($file_path, "r") or die("Unable to open file!");
+	            $v_git =  substr(fread($myfile,filesize($file_path)), 0, 7);
+	            $container->setParameter('v_git', $v_git);
+	    fclose($myfile);
+	    
+?>
