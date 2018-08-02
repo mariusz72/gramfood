@@ -167,8 +167,10 @@ class KompletacjeController extends Controller {
 		
 		//file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $NrR. ' - ' . $bankN , true));
 		
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'idf' => $bankN),	array (	'id' => 'ASC'));
+//		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+//				array (	'idf' => $bankN),	array (	'id' => 'ASC'));
+		
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findByIdOr ($bankN);
 		
 		$entities2 = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findRwExt($bankN);
 		
@@ -224,8 +226,10 @@ class KompletacjeController extends Controller {
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'kod' => $kod, 'typ' => 'ZAT'),	array (	'id' => 'ASC'));
+	//	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+	//			array (	'kod' => $kod, 'typ' => 'ZAT'),	array (	'id' => 'ASC'));
+		
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findByTypOr ($kod);
 		
 		if (!$entities) {
 			$entities = null;

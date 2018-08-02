@@ -47,7 +47,8 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->addSelect('s, e.idrw')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idrw')
-        ->where('s.idf = :bankN ')
+     //   ->where('s.idf = :bankN ')
+        ->andWhere('s.idf = :bankN OR s.idwz = :bankN  ')
         ->setParameter('bankN', $bankN)
         ->orderBy('s.id', 'ASC');
         
@@ -98,5 +99,39 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         
     }
     
+    /**
+     * @return string
+     */
+    public function findByIdOr($bankN)
+    {
+        $em = $this->getEntityManager()->createQueryBuilder();
+        $em
+        ->addSelect('s')
+        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        ->andWhere('s.idf = :bankN OR s.idwz = :bankN ')
+        ->setParameter('bankN', $bankN)
+        ->orderBy('s.id', 'ASC');
+
+        return $em->getQuery()->getResult();
+        
+    }
+    
+    /**
+     * @return string
+     */
+    public function findByTypOr($kod)
+    {
+        $em = $this->getEntityManager()->createQueryBuilder();
+        $em
+        ->addSelect('s')
+        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        ->where('s.kod = :kod ')
+        ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' ')
+        ->setParameter('kod', $kod)
+        ->orderBy('s.id', 'ASC');
+        
+        return $em->getQuery()->getResult();
+        
+    }
     
 }

@@ -17,7 +17,14 @@
              <tr>
                  <td width="20px">{{ entity.kod }}</td>
                  <td >
-                     <button name="idpz_button" onClick="location.href='{{ path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) }}'" type="button" class="btn btn-default btn-xs">{{ entity.idpz }}</button>
+                 
+                 {% if entity.idpz matches '{^PZ}' %}
+                 	{% set ahref = path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) %}
+                 {% elseif entity.idpz matches '{^PW}' %}
+               		{% set ahref = path('gramfood_magazyn_kompletacje_showPW', { 'id': entity.idpz }) %}
+                 {% endif %}
+                 
+                     <button name="idpz_button" onClick="location.href='{{ ahref }}'" type="button" class="btn btn-default btn-xs">{{ entity.idpz }}</button>
                  </td>
                  <td >{{ entity.snpz }}</td>
                  <td width="20px">{{ entity.il }}</td>
