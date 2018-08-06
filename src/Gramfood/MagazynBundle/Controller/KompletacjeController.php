@@ -114,17 +114,27 @@ class KompletacjeController extends Controller {
 	/**
 	 * Finds and displays a Gramfoodklembowspec entity.
 	 */
-	public function showPWAction($id) {
+	public function showPWAction($id, Request $request) {
 		$em = $this->getDoctrine ()->getManager ();
 		
+		$idpw = $request->query->get('idpw');
+		
+		if($idpw){
+		    $pole ='id';
+		    $twig_name = 'showPwPage.html.twig';
+		}else{
+		    $pole ='idf';
+		    $twig_name = 'showPw.html.twig';
+		}
+		
 		$entity = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'idf' => $id),	array (	'id' => 'ASC'));
+				array (	$pole => $id),	array (	'id' => 'ASC'));
 		
 		if (! $entity) {
 			throw $this->createNotFoundException ( 'Unable to find Gramfoodklembowspec entity.' );
 		}
 		
-		return $this->render ( 'GramfoodMagazynBundle:Default:showPw.html.twig', array (
+		return $this->render ( 'GramfoodMagazynBundle:Default:'.$twig_name, array (
 				'entity' => $entity[0]
 		) );
 	}
@@ -360,6 +370,7 @@ class KompletacjeController extends Controller {
 		$id = $request->query->get('id');
 		$modal = $request->query->get('modal');
 		$idkpl = $request->query->get('idkpl');
+		$il = $request->query->get('il');
 		
 		$entity = new ExtGramfoodkompow ();
 		$form = $this->createCreateForm ( $entity );
@@ -374,6 +385,7 @@ class KompletacjeController extends Controller {
 				'rw' => $rw,
 				'id' => $id,
 		        'idkpl' => $idkpl,
+		        'il' => $il,
 				'modal' => $modal,
 				'entity' => $entity,
 				'form' => $form->createView ()

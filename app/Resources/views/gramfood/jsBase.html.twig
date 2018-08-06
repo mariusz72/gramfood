@@ -87,7 +87,7 @@ function ustawNazweModal()
  * 
  * @author Mariusz Ludwikowski
  */
- function wyswietl_nrpartii($id, $nazwa, $idkpl)
+ function wyswietl_nrpartii($id, $nazwa, $idkpl, $il)
 {
 
 	var path = "{{ path('gramfood_magazyn_kompletacje_ExtPowShow') }}" ;
@@ -103,7 +103,7 @@ function ustawNazweModal()
 
 	var title = ' <i class="fa fa-bars"></i> Nr Partii: <b>'+$id+'</b> (<code>'+$nazwa+'</code>)' ;
 	var footer = '<button type="button" class="btn btn-default" onClick="closeModal(\'#' + name + '\')">Close</button>'+
-	             '<button type="button" class="btn btn-primary" onClick="dodaj_extpow(\''+$id+'\', \''+$nazwa+'\', \''+$idkpl+'\')" style="width: 150px;" > Dodaj </button>' ;
+	             '<button type="button" class="btn btn-primary" onClick="dodaj_extpow(\''+$id+'\', \''+$nazwa+'\', \''+$idkpl+'\', \''+$il+'\')" style="width: 150px;" > Dodaj </button>' ;
 {# 	             '<button type="button" class="btn btn-primary" onClick="location.href=\''+pathAdd+'\'" style="width: 150px;" > Dodaj </button>' ;#}
 	
 	setModalBox(title,content,footer,size,name);
@@ -114,7 +114,7 @@ function ustawNazweModal()
 	var request = $.ajax({
 				        cache:  false,
 				        url:    path,
-				        data:   'id='+$id+'&modal='+name+'&nazwa='+$nazwa+'&idkpl='+$idkpl,
+				        data:   'id='+$id+'&modal='+name+'&nazwa='+$nazwa+'&idkpl='+$idkpl+'&il='+$il,
 				        success: function(result){
 				        	$('#'+ name).find('.modal-body').html(result);
 				        }
@@ -168,7 +168,7 @@ function ustawNazweModal()
  * 
  * @author Mariusz Ludwikowski
  */
- function dodaj_extpow($id, $nazwa, $idkpl)
+ function dodaj_extpow($id, $nazwa, $idkpl, $il)
 {
 
 {#     var path = setURL("{{ path('gramfood_magazyn_kompletacje_ExtPowAdd', { 'id': '<path>' }) }}",$id) ;#}
@@ -193,7 +193,7 @@ function ustawNazweModal()
     var request = $.ajax({
                         cache:  false,
                         url:    path,
-                        data:   'id='+$id+'&modal='+name+'&idkpl='+$idkpl,
+                        data:   'id='+$id+'&modal='+name+'&idkpl='+$idkpl+'&il='+$il,
                         success: function(result){
                             $('#'+ name).find('.modal-body').html(result);
                         }

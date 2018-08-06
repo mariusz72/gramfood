@@ -31,7 +31,7 @@
                                         </div>   
                                                     
                                          <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idPZ<span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">idPZ/PW<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-10">
                                             {{ form_widget(form.idpz, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%', required:'required' }}) }}
                                             </div>
@@ -41,7 +41,7 @@
                                         </div>          
                                                                                                   
                                          <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">snPZ<span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">sn<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                             {{ form_widget(form.snpz, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%',  required:'required' }}) }}
                                              
@@ -51,7 +51,7 @@
                                          <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ilość<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                            {{ form_widget(form.il, {'attr': { 'class':'form-control input-sm', 'style':'width: 100%', required:'required' }}) }}
+                                            {{ form_widget(form.il, {'value' : il, 'attr': { 'class':'form-control input-sm', 'style':'width: 100%', required:'required' }}) }}
                                              
                                             </div>
                                         </div>    
