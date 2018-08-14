@@ -419,6 +419,7 @@ class KompletacjeController extends Controller {
 				'id' => $id,
 				'idrw' => $idrw,
 		        'idkpl' => $idkpl,
+				'il' => $entity->getIl(),
 				'modal' => $modal,
 				'entity' => $entity,
 				'form' => $editForm->createView ()

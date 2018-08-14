@@ -134,4 +134,74 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         
     }
     
+    /**
+     * @return string
+     */
+    public function findSkladnikiKompletacjiByKPL($idkpl, $idrw = NULL)
+    {
+//     	$em = $this->getEntityManager()->createQueryBuilder();
+//     	$em
+//     	->addSelect('s')
+//     	->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+//     	->from('AppBundle\Entity\gramfoodklembowdok', 'd')
+//     	->where('d.id = :idkpl ')
+//     	->andWhere('d.bankn = s.idf')
+//     	->setParameter('idkpl', $idkpl)
+//     	->orderBy('s.id', 'ASC');
+
+    	if(preg_match("/^S\./i", $idrw )){
+    		$s_id = 's.idwz' ;
+    	}else{
+    		$s_id = 's.idf';
+    	};
+
+    	$em = $this->getEntityManager();
+    	$query = $em->createQuery(
+    			'SELECT s
+			    FROM AppBundle:Gramfoodklembowspec s, AppBundle:Gramfoodklembowdok d
+			    WHERE 
+					d.id = :idkpl AND
+ 				    d.bankn = '.$s_id.'
+    			ORDER BY s.id ASC'
+    			)->setParameter('idkpl', $idkpl);
+    			
+    			file_put_contents('/tmp/111_SQL.txt', print_r( $query->getSQL() , true));
+    			
+    			return $query->getResult();
+    	
+    //	return $em->getQuery()->getResult();
+    	
+    }
+    
+    /**
+     * @return string
+     */
+    public function findByPZwExtSpec($idrw)
+    {
+    	
+    	$em = $this->getEntityManager();
+    	$query = $em->createQuery(
+    			'SELECT s, e
+			    FROM AppBundle:Gramfoodklembowspec s, AppBundle:ExtGramfoodkompow e
+			    WHERE
+					s.id = e.idpz AND
+ 					e.idrw = :idrw
+			    ORDER BY s.id ASC'
+    			)->setParameter('idrw', $idrw);
+    
+//     			$em = $this->getEntityManager()->createQueryBuilder();
+//     			$em
+//     			->addSelect('e, s')
+//     			->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+//     			->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
+//     			->Where('e.idrw = :idrw ')
+//     			->setParameter('idrw', $idrw)
+//     			->orderBy('e.id', 'ASC');
+    			
+    			return $query->getResult();
+    			
+    			//	return $em->getQuery()->getResult();
+    			
+    }
+    
 }

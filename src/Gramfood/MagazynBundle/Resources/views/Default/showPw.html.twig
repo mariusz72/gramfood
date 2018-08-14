@@ -54,7 +54,20 @@ th {
 		</tr>
 		<tr>
 			<th>IDf</th>
-			<td>{{ entity.idf }}</td>
+			<td>
+			
+            <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" type="button" aria-expanded="false">
+            {{ entity.idf }}
+                <span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu">
+                <li><a href="{{ path('gramfood_magazyn_kompletacje_listaProdukt_z_PW', { 'pw': entity.idf }) }}">Pokaż Składniki</a></li>
+
+            </ul>
+            </div>
+             			
+			</td>
 		</tr>
 		<tr>
 			<th>Data</th>

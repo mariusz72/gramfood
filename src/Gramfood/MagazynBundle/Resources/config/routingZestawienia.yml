@@ -12,4 +12,12 @@ gramfood_zestawienia_listaPZ:
         
 gramfood_zestawienia_listaPW:
     path:     /zestawienia/listaPW
-    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPW }         
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPW }
+    
+gramfood_zestawienia_raportZKPL_url:
+    path:     /zestawienia/raportZKAPL
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:raportZKPL }  
+
+gramfood_zestawienia_raportZKPL:
+    path:     /zestawienia/raportZKAPL/{idkpl}/{idrw}/{idpw}
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:raportZKPL }                
