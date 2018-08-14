@@ -1,0 +1,259 @@
+{% extends 'gramfood/basePrint.html.twig' %}
+
+{% block page_title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"   rel="stylesheet">
+<link href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    
+
+<style>
+    .top_tab, .top_tab th, .top_tab td {
+        border: 1px solid black;
+    }
+    .top_tab td {
+        padding: 5px;
+        text-align: center;   
+    }
+    
+    .lista_tab td {
+        padding: 3px !important;
+    }
+    
+     .lista_tab th { 
+          background-color: aliceblue;
+     }     
+     
+.tabinside tr td{border-top:1px solid #cccddd;border-left:0px solid #ffffff; border-top-style: dotted;}
+.tabinside tr td:first-child{border-left:0;}
+.tabinside tr:first-child td{border-top:0;}     
+    
+</style>    
+  
+    
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+
+
+
+
+<table class="top_tab" style="width:100%">
+  <tr>
+    <td width="150px">
+   <p align="left"> WMS app 
+    <br><br>
+    GRAM food<br>
+    05-205 Klembów<br>
+    5361912883<br>
+    </p>
+    </td>
+    <td>
+        <p>Zestawienia składników produktu:</p>
+        <h3>{{ produktPw[0].nazw }}</h3>
+    </td>
+    <td width="150px">
+    Data raportu: <br>
+    26.06.2018 <br><br>
+    Data ważności: <br>
+    {{ produktPw[0].dwaz }}    
+    </td>
+  </tr>
+  <tr>
+    <td>SN: <b>{{ produktPw[0].sn }}</b></td>
+    <td>PW: <b>{{ produktPw[0].nrr }}</b></td>
+    <td>kod: <b>{{ produktPw[0].kod }}</b></td>
+  </tr>  
+</table>
+<br>
+
+    <div class="x_content">
+
+        {% block body -%}
+        
+{# makro wyswietlajace tabele        #}
+{% macro tworz_tabele(table_in) %}
+<table class="lista_tab table" border=0>
+    <tr>
+        <th width="20px"></th>
+        <th style="text-align: center;">Nazwa</th>
+        <th style="text-align: right;">Ilość</th>
+        <th align="left">JM</th>
+        <th style="text-align: right;">Kod</th>
+        <th style="text-align: right;">Nr</th>
+    </tr>
+    {% for entity in table_in %}
+    <tr>
+        <td width="20px">{{ loop.index }}.</td>
+        <td>{{ entity[0].nazw }}</td>
+        <td align="right" width="70px">{{ entity[0].il }}</td>
+        <td align="left" width="30px">{{ entity[0].jm }}</td>
+        <td align="right" width="50px">{{ entity[0].kod }}</td>
+        <td align="right" width="200px">{{ entity[0].nrr }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan=5 width="10px">
+      {% if entity[1] is defined %}  
+        <table  class="tabinside" style="width:100%" border=0>
+            {% set lp = 1 %}
+            {% for key, entity2 in entity[1] %}
+                   
+{#               {% if entity2.id is defined and entity2.id matches '{^(PZ|PW|RW)}'%}#}
+              
+                        {% if entity2 is defined %}
+                        <tr>
+                        
+                        
+
+                      {% if entity2[0] is defined%}
+                            <td width="20px"></td>                          
+                            <td colspan=5>              
+{#                             {{ dump(entity2[0]) }}#}
+                                {% for key, entity3 in entity2[1] %}
+                                   {{ _self.tworz_tabele(entity2) }}
+{#                                     {{ dump(entity2[0]) }} #}
+                                {% endfor %}
+                             </td>
+                               
+                            {% elseif entity2.id is defined %}
+                            
+                            <td width="20px"><i class="fa fa-chevron-right"></i></td>                          
+                            <td>
+                                {{ entity2.alias }}
+                            </td>
+                            <td width="250px">
+                              Data: {{ entity2.data }} <br> 
+                              Data Waż: {{ entity2.dwaz }}<br>
+                                SN: {{ entity2.sn }}
+                            </td>
+                            <td style="text-align: right;" width="70px">
+                                {{ entity2.il }}
+                            </td>  
+                            <td width="30px">
+                                {{ entity2.jm }}
+                            </td> 
+                            <td width="250px" style="text-align: right;">
+                                {{ entity2.nrr }}
+                            </td>                            
+                            
+                      {% endif %}            
+               
+                        {% endif %}
+{#                {% endif %} #}
+        {% set lp = lp+1 %}
+            {% endfor %}
+        </table>
+      {% endif %}
+        
+        </td>
+    </tr>    
+    {% endfor %}
+</table>
+{% endmacro %}      
+{# koniec makra#}
+  
+{# makro wyswietlajace tabele        #}
+{% macro tworz_tabele2(table_in) %}
+
+    {% for entity in table_in %}
+    <tr>
+        <td width="20px">{{ loop.index }}.</td>
+        <td>{{ entity[0].nazw }}</td>
+        <td>{{ entity[0].kod }}</td>
+        <td align="right">{{ entity[0].il }}</td>
+        <td align="left">{{ entity[0].jm }}</td>
+        <td align="right">{{ entity[0].nrr }}</td>
+    </tr>
+    {% endfor %}
+
+{% endmacro %}      
+{# koniec makra#}
+  
+
+
+
+{# {{ dump(tabelaPowiazan) }}#}
+{# {{ tabelaPowiazan[0] }}#}
+
+
+{{ _self.tworz_tabele(tabelaPowiazan) }}
+
+
+{#     {% for entity in tabelaPowiazan %}#}
+{#     <tr>#}
+{#         <td width="20px">{{ loop.index }}.</td>#}
+{#         <td>{{ entity[0].nazw }}</td>#}
+{#         <td>{{ entity[0].kod }}</td>#}
+{#         <td align="right">{{ entity[0].il }}</td>#}
+{#         <td align="left">{{ entity[0].jm }}</td>#}
+{#         <td align="right">{{ entity[0].nrr }}</td>#}
+{#     </tr>#}
+{#     <tr>#}
+{#         <td></td>#}
+{#         <td colspan=5 width="10px">#}
+{#       {% if entity[1] is defined %}  #}
+{#         <table  border=0>#}
+{#             {% for key, entity2 in entity[1] %}#}
+                   
+{# {#                         {% if entity2 is defined and entity2.id matches '{^(PZ|PW)}'%}#}
+{#                         {% if entity2 is defined %}#}
+{#                         <tr>#}
+{#                             <td width="20px">{{ loop.index }}.</td>                          #}
+{#                             <td>#}
+{#                             {% if entity2[1] is defined%}#}
+{#                                 {% for key, entity3 in entity2 %}#}
+{#                                     {{ dump(entity3) }} #}
+{#                                 {% endfor %}#}
+                               
+{#                             {% elseif entity2.id is defined %}#}
+{#                                 {{ entity2.id }}#}
+{#                             {% endif %}            #}
+{#                             </td>#}
+{#                         </tr>                    #}
+{#                         {% endif %}#}
+                   
+{#             {% endfor %}#}
+{#         </table>#}
+{#       {% endif %}#}
+        
+{#         </td>#}
+{#     </tr>    #}
+{#     {% endfor %}#}
+
+
+
+        {% endblock %}
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+
+<!-- Datatables -->
+<script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+      
+    
+<script language="javascript">
+
+
+</script>
+
+{% endblock %}
+    

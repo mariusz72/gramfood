@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>WMS App</title>
+
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('bundles/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('bundles/gentelella-master/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+{% block stylesheets %}	
+{% endblock stylesheets %}
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('bundles/gentelella-master/build/css/custom.min.css') }}" rel="stylesheet">
+
+<style>
+
+body {
+    color: #73879C;
+    background: #ffffff;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
+}
+
+</style>
+	
+	
+</head>
+
+<body class="nav-md">
+
+
+        <!-- page content -->
+
+
+
+
+                {% block page_content %}{% endblock %}
+
+
+
+        <!-- /page content -->
+
+
+
+
+{% block javascripts %}
+    <!-- jQuery -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('bundles/gentelella-master/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{{ asset('bundles/gentelella-master/build/js/custom.min.js') }}"></script>
+	
+{% endblock javascripts %}
+
+{% block modals %}{% endblock modals %}
+
+
+</body>
+</html>
