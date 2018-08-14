@@ -102,8 +102,10 @@ class ZestawieniaController extends Controller {
 		
 		$idRWzEXT = $this->listaEXTzKPL($idkpl_zEXT);
 		
-		if(is_object($idRWzEXT[0])){
-			$idrwEXT = $idRWzEXT[0]->getIdrw();
+		if(isset($idRWzEXT[0])){
+    //		if(is_object($idRWzEXT[0])){
+    			$idrwEXT = $idRWzEXT[0]->getIdrw();
+    //		}else{  $idrwEXT = 'S.BRAK';  };
 		}else{
 			$idrwEXT = 'S.BRAK';
 		}
