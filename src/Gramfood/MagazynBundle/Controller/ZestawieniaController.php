@@ -87,8 +87,8 @@ class ZestawieniaController extends Controller {
 	
 	private function listaEXTzKPL($idkpl) {
 		$em = $this->getDoctrine ()->getManager ();
-		$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findBy (array (	'idkpl' => $idkpl));
-		file_put_contents('/tmp/111_listaEXT.txt', print_r( $lista , true));
+	//	$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findBy (array (	'idkpl' => $idkpl));
+		$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findSkladnikiKompletacjiByKPL ($idkpl);
 		return $lista;
 	}
 	
@@ -102,17 +102,14 @@ class ZestawieniaController extends Controller {
 		
 		$idRWzEXT = $this->listaEXTzKPL($idkpl_zEXT);
 		
+		
 		if(isset($idRWzEXT[0])){
-    //		if(is_object($idRWzEXT[0])){
-    			$idrwEXT = $idRWzEXT[0]->getIdrw();
-    //		}else{  $idrwEXT = 'S.BRAK';  };
+    			$idrwEXT = $idRWzEXT[0]->getId();
 		}else{
-			$idrwEXT = 'S.BRAK';
+		    $idrwEXT = 'S.BRAK';
 		}
 		
 		$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findSkladnikiKompletacjiByKPL ($idkpl[0]->getId(), $idrwEXT);
-
-		file_put_contents('/tmp/111_listaRW.txt', print_r( $lista , true));
 		
 		return $lista;
 	}
@@ -120,20 +117,16 @@ class ZestawieniaController extends Controller {
 	private function listaRWzKPL($idkpl) {
 		$em = $this->getDoctrine ()->getManager ();
 		$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findSkladnikiKompletacjiByKPL ($idkpl);
-		file_put_contents('/tmp/111_listaRWzKPL.txt', print_r( $lista , true));
 		return $lista;
 	}
 	
 	private function listaPZzRW($idrw) {
 		$em = $this->getDoctrine ()->getManager ();
 		$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findBy (array ('idrw' => $idrw));
-		
-		//$lista = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findByPZwExtSpec ( $idrw);
 		$lista_out = array();
 		
 		foreach ($lista as $key => $item) {
 			$lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item->getIdpz()));
-			//file_put_contents('/tmp/22_listaPZ_'.$idrw.'.txt', print_r( $lista_spec , true));
 			array_push($lista_out, array('id' => $item->getIdpz(), 
 										'il'  => $item->getIl(),
 										'nazw'  => $lista_spec[0]->getNazw(),
@@ -146,11 +139,6 @@ class ZestawieniaController extends Controller {
 										'sn'  => $lista_spec[0]->getSn()
 			));
 		}
-		
-		//$lista = array(array('id' => 'abcdef', 'id2' => '1234'));
-		
-		//tworzenie tablicy z 2 uzyskanych obiektów doctrina
-		//$new_tab = array($lista->get);
 		
 		return $lista_out;
 	}
@@ -185,7 +173,7 @@ class ZestawieniaController extends Controller {
 				};
 			};
 			
-			
+			//	file_put_contents('/tmp/111_tablicaPowiazan.txt', print_r( $tablicaPowiazan , true));
 			
 		};
 		return $tablicaPowiazan;
@@ -196,31 +184,10 @@ class ZestawieniaController extends Controller {
 	 */
 	public function raportZKPLAction($idkpl, $idrw, $idpw) {
 
-		
-	//	$listaRW = $this->listaRWzKPL($idkpl);
-// 		$listaRW = $this->listaRW($idpw);
-		
-// 		$tablicaPowiazan = array();
-		
-// 		foreach ($listaRW as $keyRW => $itemRW) {
-			
-// 			$tablicaPowiazan[$keyRW][0] = $itemRW->getId();
-		
-// 			$listaPZ = $this->listaPZzRW($itemRW->getId());
-
-//   			foreach ($listaPZ as $keyPZ => $itemPZ) {
-//   				$tablicaPowiazan[$keyRW][][$keyPZ] = $itemPZ->getIdpz();
-//   			}
-			
-// 			//$tablicaPowiazan[$key][] = $this->listaPZzRW($item->getId());
-// 		};
-
 		$tablicaPowiazan2 = $this->tworzTablice($idpw, 1, $idkpl);
 		
 		$em = $this->getDoctrine ()->getManager ();
 		$produktPw = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('idf' => $idpw));
-			
-		file_put_contents('/tmp/111_tabelaPow.txt', print_r( $tablicaPowiazan2 , true));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:raportZKPL.html.twig', array (
 				'tabelaPowiazan' => $tablicaPowiazan2,

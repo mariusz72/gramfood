@@ -137,6 +137,27 @@ class ExtGramfoodkompowRepository extends EntityRepository {
     /**
      * @return string
      */
+    public function findSkladnikiKompletacjiByKPL_SPR($idkpl)
+    {
+        
+        $em = $this->getEntityManager();
+        $query1 = $em->createQuery(
+                'SELECT s
+			    FROM AppBundle:Gramfoodklembowspec s, AppBundle:Gramfoodklembowdok d
+			    WHERE
+					d.id = :idkpl AND
+ 				    (d.bankn = s.idwz OR d.bankn = s.idf)
+    			ORDER BY s.id ASC'
+                )->setParameter('idkpl', $idkpl);
+                        
+           return $query1->getResult();
+                        
+    }
+    
+    
+    /**
+     * @return string
+     */
     public function findSkladnikiKompletacjiByKPL($idkpl, $idrw = NULL)
     {
 //     	$em = $this->getEntityManager()->createQueryBuilder();
@@ -148,13 +169,14 @@ class ExtGramfoodkompowRepository extends EntityRepository {
 //     	->andWhere('d.bankn = s.idf')
 //     	->setParameter('idkpl', $idkpl)
 //     	->orderBy('s.id', 'ASC');
-
+        
     	if(preg_match("/^S\./i", $idrw )){
     		$s_id = 's.idwz' ;
     	}else{
     		$s_id = 's.idf';
     	};
 
+    	
     	$em = $this->getEntityManager();
     	$query = $em->createQuery(
     			'SELECT s
@@ -165,7 +187,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
     			ORDER BY s.id ASC'
     			)->setParameter('idkpl', $idkpl);
     			
-    			file_put_contents('/tmp/111_SQL.txt', print_r( $query->getSQL() , true));
+    		//	file_put_contents('/tmp/111_SQL.txt', print_r( $query->getSQL() , true));
     			
     			return $query->getResult();
     	
