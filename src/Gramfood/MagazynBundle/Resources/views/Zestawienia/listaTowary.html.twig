@@ -185,6 +185,9 @@ var dataSet = [
 
 function format ( d ) {
 
+	var path = setURL("{{ path('gramfood_zestawienia_listaPZ_kod', { 'kod': '<path>' }) }}",d[1]) ;
+	var path2 = setURL("{{ path('gramfood_zestawienia_listaWZ_kod', { 'kod': '<path>' }) }}",d[1]) ;
+
     return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
  
             '<tr>'+
@@ -195,8 +198,8 @@ function format ( d ) {
             '    <span class="caret"></span>'+
             '</button>'+
             '<ul role="menu" class="dropdown-menu">'+
-            '    <li><a href="#">Pokaż sprzedaż</a></li>'+
-            '    <li><a href="#">Pokaż zakupy</a></li>'+
+            '    <li><a href="'+path+'">Lista PZ (Zakupy)</a></li>'+
+            '    <li><a href="'+path2+'">Lista WZ (Sprzedaż)</a></li>'+
             '</ul>'+
             '</div>'+            
 
@@ -239,8 +242,8 @@ $(document).ready(function() {
             { title: "JM",
             	"width": "20px",
             	 },
-            { title: "Stan",
-            	"width": "50px",
+            { title: "Stan wg. IB",
+            	"width": "100px",
             	 },
             { title: "Ostatni",
             		 "width": "50px",

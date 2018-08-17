@@ -33,7 +33,11 @@ gramfood_magazyn_kompletacje_showPW:
     
 gramfood_magazyn_kompletacje_showPZ:
     path:     /kompletacje/PZ/{id}
-    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:showPZ" }             
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:showPZ" }      
+    
+gramfood_magazyn_kompletacje_listaPZ:
+    path:     /kompletacje/listaPZ/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:listaPZ" }  
     
 gramfood_magazyn_kompletacje_RwId:
     path:     /kompletacjeRwId

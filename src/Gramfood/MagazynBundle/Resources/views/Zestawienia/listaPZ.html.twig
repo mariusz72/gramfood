@@ -194,6 +194,8 @@ var dataSet = [
 
 function format ( d ) {
 
+	var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaPZ', { 'id': '<path>' }) }}",d[1]) ;
+
     return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
         '<tr>'+
             '<th width="150px">ID</th><td>'+
@@ -204,7 +206,7 @@ function format ( d ) {
             '    <span class="caret"></span>'+
             '</button>'+
             '<ul role="menu" class="dropdown-menu">'+
-            '    <li><a href="#" onclick="alert(\'raport pdf\')">Pokaż Produkty</a></li>'+
+            '    <li><a href="'+path+'">Pokaż Kompletacje</a></li>'+
             '</ul>'+
             '</div>'+            
 

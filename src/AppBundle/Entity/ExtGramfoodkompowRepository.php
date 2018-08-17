@@ -39,6 +39,31 @@ class ExtGramfoodkompowRepository extends EntityRepository {
     /**
      * @return string
      */
+    public function findToExt_zPZ($arrayKPL)
+    {
+    	//$em = $this->entityManager->createQueryBuilder();
+    	$em = $this->getEntityManager()->createQueryBuilder();
+    	// $em = $this->getDoctrine()->entityManager->createQueryBuilder();
+    	$em
+    	->addSelect('d, e.idkpl, e.idrw')
+    	->from('AppBundle\Entity\Gramfoodklembowdok', 'd')
+    	//     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
+    	->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 'd.id = e.idkpl')
+    	->where('d.typ = \'KPL\' ')
+    	->andWhere('d.akt = \'T\'')
+    	->andWhere('d.id LIKE \'KPL.%\'')
+    	->andWhere('e.idkpl IN (:arrayKPL)')
+    	->setParameter('arrayKPL', $arrayKPL)
+    	//   ->setMaxResults(3)
+    	->orderBy('d.id', 'DESC');
+    	
+    	return $em->getQuery()->getResult();
+    	
+    }
+    
+    /**
+     * @return string
+     */
     public function findRwExt($bankN)
     {
         //$em = $this->entityManager->createQueryBuilder();

@@ -43,7 +43,7 @@ class KompletacjeController extends Controller {
 		$em = $this->getDoctrine ()->getManager ();
 		
 		$sn = $request->request->get('sn');
-		file_put_contents('c:\xampp\tmp\1_sn.txt', print_r( $sn. ' -'. $kod , true));
+	//	file_put_contents('c:\xampp\tmp\1_sn.txt', print_r( $sn. ' -'. $kod , true));
 		
 //		$entitiesSP = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
 //		    array (	'typ' => 'PW', 'kod' => $kod, 'sn' => $sn),
@@ -51,7 +51,7 @@ class KompletacjeController extends Controller {
 
 		$entitiesSP = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToPw ($sn, $kod);
 		
-		file_put_contents('c:\xampp\tmp\entiti_sn.txt', print_r( $entitiesSP , true));
+	//	file_put_contents('c:\xampp\tmp\entiti_sn.txt', print_r( $entitiesSP , true));
 		
 		if ($entitiesSP) {
 			$bank = $entitiesSP[0]->getIdf();
@@ -161,6 +161,29 @@ class KompletacjeController extends Controller {
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:'.$twig_name, array (
 				'entity' => $entity[0]
+		) );
+	}
+	
+	/**
+	 * Finds and displays a Gramfoodklembowspec entity.
+	 */
+	public function listaPZAction($id, Request $request) {
+		$em = $this->getDoctrine ()->getManager ();
+		
+		$entity_ext = $em->getRepository('AppBundle:ExtGramfoodkompow')->findBy (array ('idpz' => $id));
+		
+		$ids = array();
+		foreach($entity_ext as $w) {
+			$ids[] = $w->getIdkpl();
+		}
+		
+		file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $ids , true));
+		
+		$aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt_zPZ($ids);
+		
+		return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
+				'entities' => $aa
+				//	'aa' => $aa
 		) );
 	}
 

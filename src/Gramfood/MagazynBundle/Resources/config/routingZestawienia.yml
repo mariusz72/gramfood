@@ -2,6 +2,10 @@ gramfood_zestawienia_listaWZ:
     path:     /zestawienia/listaWZ
     defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaWZ } 
 
+gramfood_zestawienia_listaWZ_kod:
+    path:     /zestawienia/listaWZ/{kod}
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaWZkod } 
+    
 gramfood_zestawienia_listaTowary:
     path:     /zestawienia/listaTowary
     defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaTowary } 
@@ -9,6 +13,10 @@ gramfood_zestawienia_listaTowary:
 gramfood_zestawienia_listaPZ:
     path:     /zestawienia/listaPZ
     defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPZ } 
+    
+gramfood_zestawienia_listaPZ_kod:
+    path:     /zestawienia/listaPZ/{kod}
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaPZkod }     
         
 gramfood_zestawienia_listaPW:
     path:     /zestawienia/listaPW
