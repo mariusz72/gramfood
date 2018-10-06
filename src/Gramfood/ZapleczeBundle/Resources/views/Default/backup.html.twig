@@ -32,7 +32,7 @@
 <div class="x_panel">
     <div class="x_title">
         <h2>
-            Zaplecze -> Użytkownicy <small>Lista uzytkowników</small>
+            Zaplecze -> Narzędzia <small>Zabezpieczenie tabel (backup)</small>
         </h2>
         <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -53,48 +53,23 @@
 
         {% block body -%}
 
-
-        <table id="datatable"
-            class="table table-striped jambo_table bulk_action table-bordered">
-            <thead>
-                <tr class="headings">
-                    <th class="column-title">ID</th>
-                    <th class="column-title">Imie</th>
-                    <th class="column-title">Nazwisko</th>
-                    <th class="column-title">Nazwa</th>
-                    <th class="column-title">Aktywny</th>
-                    <th  style="text-align: center;">Akcja</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for entity in entities %}
-                <tr>
-                    <td>{{ entity.id }}</td>
-                    <td>{{ entity.imie }}</td>
-                    <td>{{ entity.nazw }}</td>
-                    <td>{{ entity.alias }}</td>
-                    <td>{{ entity.akt }}</td>
-                                    
-                    <td  style="text-align: right;">
-                        
-                    <form action="#" id="formDEL{{ entity.id }}" method="post">
-                        <input name="_method" type="hidden" value="DELETE">
-                        <div id="form">
-                        <div>
-                           <a href="#"  onClick="alert('nieaktywne!')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <button name="form_button" id="{{ entity.id }}" onClick="alert('nieaktywne!')" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+             {#      <form action="#" id="formDEL{{ entity.id }}" method="post">  #} 
+                     <form id="formBackup" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                     
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Wybierz tabele</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select2_multiple form-control" name="form[table][]" id="form_table" multiple="multiple">
+                            <option>ext_gramfoodkompow</option>
+       {#                      <option>gramfoodklembowdok</option> #} 
+       {#                      <option>gramfoodklembowspec</option> #} 
+                          </select>
                         </div>
-                            <input name="form[_token]" id="form__token" type="hidden" value="crtfg82cd293610b035a6c8f2069e5fe8387b86f">
-                            <input name="form[name]" id="form__name" type="hidden" value="{{ entity.id }}">
-                        </div>
-                    </form>   
-
-                  </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+                      </div>
+                            <input name="form[_token]" id="form__token" type="hidden" value="crtfg82cd293610b035a6c8f2069e523er45b86f">
+                            <input name="form[name]" id="form__name" type="hidden" value="kopia">
+                            <button class="btn btn-primary" type="submit">Wykonaj kopie tabel</button>
+                    </form> 
 
         {% endblock %}
 
@@ -103,7 +78,7 @@
 </div>
 
 
-
+{{ dump(tables) }}
 
 {% endblock %}
 

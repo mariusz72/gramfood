@@ -1,3 +1,7 @@
 gramfood_zaplecze_listaUzytkownikow:
     path:     /zaplecze/listaUzytkownikow
     defaults: { _controller: GramfoodZapleczeBundle:Default:listaUzytkownikow }
+
+gramfood_zaplecze_backup:
+    path:     /zaplecze/backup
+    defaults: { _controller: GramfoodZapleczeBundle:Default:backup }

@@ -36,7 +36,7 @@
                   
 {#                   <li><a href="{{ path('table') }}"><i class="fa fa-cubes"></i>Zestawienia</a>#}
 				  
-				  <li><a><i class="fa fa-cubes"></i>Zestawienia<span class="fa fa-chevron-down"></span></a>
+				  <li><a><i class="fa fa-cubes"></i> Zestawienia<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ path('gramfood_zestawienia_listaWZ') }}">WZ (Sprzedaż)</a></li>
                       <li><a href="{{ path('gramfood_zestawienia_listaPZ') }}">PZ (Zakupy)</a></li>
@@ -58,8 +58,14 @@
                       <li><a href="#">Add</a></li>
                     </ul>
                   </li>
+
+                  <li><a><i class="fa fa-user"></i> Narzędzia <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{ path('gramfood_zaplecze_backup') }}">Kopia tabel</a></li>
+                    </ul>
+                  </li>
                   
-                </ul>
+                </ul>                
               </div>
 
             </div>
