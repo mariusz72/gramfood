@@ -50,22 +50,30 @@
     </div>
 
     <div class="x_content">
+    
+                  <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                      <div class="ui-pnotify-icon"><span class="glyphicon glyphicon-info-sign"></span></div>
+                      <h4 class="ui-pnotify-title">Wykonanie kopi zapasowej tabel SQL</h4>
+                      <div class="ui-pnotify-text" aria-role="alert">Wykonanie kopi bazy oraz schematu tabel może potrwać kilka minut.</div>
+                    </div>
+                  </div>    
 
         {% block body -%}
 
              {#      <form action="#" id="formDEL{{ entity.id }}" method="post">  #} 
                      <form id="formBackup" data-parsley-validate class="form-horizontal form-label-left" method="post">
                      
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Wybierz tabele</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select2_multiple form-control" name="form[table][]" id="form_table" multiple="multiple">
-                            <option>ext_gramfoodkompow</option>
+       {#               <div class="form-group">#} 
+       {#                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Wybierz tabele</label>#} 
+       {#                 <div class="col-md-6 col-sm-6 col-xs-12">#} 
+       {#                   <select class="select2_multiple form-control" name="form[table][]" id="form_table" multiple="multiple">#} 
+       {#                     <option>ext_gramfoodkompow</option>#} 
        {#                      <option>gramfoodklembowdok</option> #} 
        {#                      <option>gramfoodklembowspec</option> #} 
-                          </select>
-                        </div>
-                      </div>
+       {#                   </select>#} 
+       {#                 </div>#} 
+       {#               </div>#} 
                             <input name="form[_token]" id="form__token" type="hidden" value="crtfg82cd293610b035a6c8f2069e523er45b86f">
                             <input name="form[name]" id="form__name" type="hidden" value="kopia">
                             <button class="btn btn-primary" type="submit">Wykonaj kopie tabel</button>
@@ -78,7 +86,7 @@
 </div>
 
 
-{{ dump(tables) }}
+{#{ dump(tables) }#}
 
 {% endblock %}
 

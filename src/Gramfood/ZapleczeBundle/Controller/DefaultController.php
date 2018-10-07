@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class DefaultController extends Controller
 {
@@ -26,10 +28,34 @@ class DefaultController extends Controller
         $tables = $request->request->get('form');
         if(isset($tables['name'])){
             $tables = "jest";
-            if (!extension_loaded('zip')) {
-                dl('zip.so');
-            }
+
+
+         #       echo 'Start';
+         #       ob_flush();
+         #       flush();
+         #       sleep(3);
+         #      echo 'Stop';
+         #      ob_flush();
+         #     flush();
+
+            
+            
             $zip = new \ZipArchive();
+            $fileSystem = new Filesystem();
+            
+            try {
+                $tmpFile = sys_get_temp_dir().'/'.random_int(0, 1000);
+                $fileSystem->mkdir($tmpFile);
+            } catch (IOException $exception) {
+                echo "An error occurred while creating your directory at ".$exception->getPath();
+            }
+            #file_put_contents("c:\\Users\PC\\Downloads\\AAA_tmp.txt", $tmpFile);
+            
+            $zipFilename = $tmpFile.'/SqlBackub_gramfood_'.date("Y-m-d_Hi").'.zip';
+            $zip->open($zipFilename, \ZipArchive::CREATE);
+         #   $zip->addGlob("C:/Users/PC/Downloads/AAA/*.*");
+         #   $zip->addFromString('test.txt', 'file content goes here');
+         #   $zip->close();
             
            $em = $this->getDoctrine ()->getManager ();
             
@@ -41,14 +67,14 @@ class DefaultController extends Controller
                         ); 
             */
             // schema dla wszystkich tabel w bazie
-            $entityManager = $this->get('doctrine')->getManager();
+            $entityManager =  $em;
             $classes =  $entityManager->getMetadataFactory()->getAllMetadata();
             $tables =  $tool->getCreateSchemaSql($classes);
            //$tables = $em->getConnection()->getSchemaManager()->listTables();
            
            // lista tabel
            //$em = $this->getDoctrine()->getManager();
-           $meta = $em->getMetadataFactory()->getAllMetadata();
+            $meta = $classes;
            foreach ($meta as $m) {
                // $entities[] = $m->getTableName(); // tablica tabel
                $tableName = $m->getTableName();
@@ -61,7 +87,7 @@ class DefaultController extends Controller
                $_v = 0;
                $content = '(';
                $content_s = '';
-               if ($st_counter == 15 || $st_counter == 0 )
+               if ($st_counter == 100 || $st_counter == 0 )
                {
                    $content_s = "INSERT INTO ".$tableName." (";
                }
@@ -94,7 +120,7 @@ class DefaultController extends Controller
                if (count($result)-1>$key)
                {
                    
-                   if ($st_counter == 14){
+                   if ($st_counter == 99){
                        $content.= ';';
                    }else{
                        $content.= ',';
@@ -104,7 +130,7 @@ class DefaultController extends Controller
 
                $content .= "\n";
                
-               if ($st_counter == 15 || $st_counter == 0 )
+               if ($st_counter == 100 || $st_counter == 0 )
                {
                    $content_all .= $content_s .") VALUES \n". $content;
                    $st_counter = 0;
@@ -115,20 +141,35 @@ class DefaultController extends Controller
                $st_counter ++;
            }
            
-           $filename  = "c:\\Users\PC\\Downloads\\AAA\\table_" . $tableName . ".sql";
-           file_put_contents($filename, print_r( $content_all , true));
+          # $filename  = "c:\\Users\PC\\Downloads\\AAA\\table_" . $tableName . ".sql";
+           $zip->addFromString("table_" . $tableName . ".sql", $content_all);
+          # file_put_contents($filename, print_r( $content_all , true));
            }
            
-           file_put_contents("c:\\Users\PC\\Downloads\\AAA\\SCHEMA_CREATE_ALL-TABLE.SQL", print_r( $tables , true));
+           $zip->addFromString('SCHEMA_CREATE_ALL-TABLE.SQL', implode("\n", $tables));
            
+           #file_put_contents("c:\\Users\PC\\Downloads\\AAA_tmp.txt", sys_get_temp_dir());
+           #file_put_contents("c:\\Users\PC\\Downloads\\AAA\\SCHEMA_CREATE_ALL-TABLE.SQL", print_r( $tables , true));
+           
+       
+       $zip->close();     
+       
+        $response = new Response(file_get_contents($zipFilename));
+        $response->headers->set('Content-Type', 'application/zip');
+        $response->headers->set('Content-Disposition', 'attachment;filename="' . basename($zipFilename) . '"');
+        $response->headers->set('Content-length', filesize($zipFilename));
+       
+        try {
+            $fileSystem->remove($tmpFile);
+        } catch (IOException $exception) {
+            echo "An error occurred while Delete your directory at ".$exception->getPath();
         }
-            
-            
-
-        
+               
+        return $response;
+        }         
         
         return $this->render('GramfoodZapleczeBundle:Default:backup.html.twig', array (
-            'tables' => $tables
+            'tables' => 'OK2'
         ) );
         
     }
