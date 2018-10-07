@@ -141,7 +141,6 @@ class DefaultController extends Controller
                $st_counter ++;
            }
            
-          # $filename  = "c:\\Users\PC\\Downloads\\AAA\\table_" . $tableName . ".sql";
            $zip->addFromString("table_" . $tableName . ".sql", $content_all);
           # file_put_contents($filename, print_r( $content_all , true));
            }
