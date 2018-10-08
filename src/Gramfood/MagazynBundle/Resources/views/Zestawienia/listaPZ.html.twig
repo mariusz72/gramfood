@@ -180,11 +180,11 @@ var dataSet = [
         "{{ entity.data }}",
         "{{ entity.Alias }}",
         "{{ entity.kod }}",
-        "{{ entity.nazw }}",
+        "{{ entity.nazw|e('html_attr') }}",
         "{{ entity.il }}",
         "{{ entity.jm }}",
         "{{ entity.kat }}",
-        "{{ entity.sn }}",
+        "{{ entity.sn|e('html_attr') }}",
         "{{ entity.dwaz }}"
     ],
     {% endfor %}

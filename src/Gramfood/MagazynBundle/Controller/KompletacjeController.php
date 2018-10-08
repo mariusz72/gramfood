@@ -177,7 +177,7 @@ class KompletacjeController extends Controller {
 			$ids[] = $w->getIdkpl();
 		}
 		
-		file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $ids , true));
+		//file_put_contents('/tmp/111_sprTrasmit.txt', print_r( $ids , true));
 		
 		$aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt_zPZ($ids);
 		

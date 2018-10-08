@@ -114,11 +114,11 @@
                       {% if entity2[0] is defined%}
                             <td width="20px"></td>                          
                             <td colspan=5>              
-{#                             {{ dump(entity2[0]) }}#}
-                                {% for key, entity3 in entity2[1] %}
+                 {#            {{ dump(entity2[0][1][0]) }}#}
+                                 {% for entity3 in entity2[0][1] %}
                                    {{ _self.tworz_tabele(entity2) }}
-{#                                     {{ dump(entity2[0]) }} #}
-                                {% endfor %}
+{#                                      {{ dump(entity2[0]) }} #}
+                                 {% endfor %}
                              </td>
                                
                             {% elseif entity2.id is defined %}
