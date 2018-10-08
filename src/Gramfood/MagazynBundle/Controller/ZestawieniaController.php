@@ -59,7 +59,7 @@ class ZestawieniaController extends Controller {
 		
 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowtowary' )->findBy (
 				array (	),
-				array (	'id' => 'ASC'));
+				array (	'ostr' => 'DESC'));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaTowary.html.twig', array (
 				'entities' => $entities
