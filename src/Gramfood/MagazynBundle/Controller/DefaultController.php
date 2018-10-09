@@ -60,7 +60,6 @@ class DefaultController extends Controller {
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
 		
 		$pdf->Output($filename.".pdf",'I'); // This will output the PDF as a response directly
-		
 		#$html = $this->renderView('AcmeDemoBundle:Demo:test.html.twig');
 		return $this->render($html);
 		
