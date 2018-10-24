@@ -139,6 +139,7 @@ class DefaultController extends Controller
                }
                
                $st_counter ++;
+               $value ='';
            }
            
            $zip->addFromString("table_" . $tableName . ".sql", $content_all);
