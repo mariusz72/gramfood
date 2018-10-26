@@ -115,10 +115,17 @@
                             <td width="20px"></td>                          
                             <td colspan=5>              
                  {#            {{ dump(entity2[0][1][0]) }}#}
+                 		{% if entity2[0][1] is defined%}
                                  {% for entity3 in entity2[0][1] %}
                                    {{ _self.tworz_tabele(entity2) }}
 {#                                      {{ dump(entity2[0]) }} #}
                                  {% endfor %}
+                        {% else %}
+                                 {% for entity3 in entity2[0] %}
+                                   {{ _self.tworz_tabele(entity2) }}
+                                 {% endfor %} 
+                        {% endif %} 
+                                 
                              </td>
                                
                             {% elseif entity2.id is defined %}

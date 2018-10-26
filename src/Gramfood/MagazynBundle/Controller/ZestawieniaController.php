@@ -197,6 +197,19 @@ class ZestawieniaController extends Controller {
 // 					$tablicaPowiazan[$keyRW][1][$keyPZ] = $itemPZ;
 // 				};
 // 			};
+
+	//		foreach ($listaPZ as $keyPZ => $itemPZ) {
+	//		    if(preg_match("/^PW/i", $itemPZ['id'] )){
+	//		        $tablicaPowiazan[$keyRW][1][$keyPZ] = $itemPZ;
+	//		        $tablicaPowiazan[$keyRW][1][$keyPZ+1] = $this->tworzTablice($itemPZ['id'],2, $idkpl);
+	//		        file_put_contents('/tmp/111_tablicaPowiazan_'.$itemPZ['id'].'.txt', print_r( $tablicaPowiazan , true));
+	//		        //$tablicaPowiazan[$keyRW][][$keyPZ][0] =  $this->tworzTablice($itemPZ->getIdpz(),2);
+	//		        //$tablicaPowiazan[$keyRW][][$keyPZ] = $itemPZ->getIdpz();
+	//		    }else{
+	//		        $tablicaPowiazan[$keyRW][1][$keyPZ] = $itemPZ;
+	//		    };
+	//		};
+			
 			
 			foreach ($listaPZ as $keyPZ => $itemPZ) {
 				if(preg_match("/^PW/i", $itemPZ['id'] )){
