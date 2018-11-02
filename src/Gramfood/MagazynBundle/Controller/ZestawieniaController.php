@@ -22,7 +22,7 @@ class ZestawieniaController extends Controller {
 			$em = $this->getDoctrine ()->getManager ();
 
 			$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy ( 
-					array (	'typ' => 'WZ', 'akt' => 'T', 'anul' => 'N'),
+					array (	'typ' => array('VAT', 'WZ'), 'akt' => 'T', 'anul' => 'N'),
 					array (	'id' => 'ASC'));
 		
 			return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaWZ.html.twig', array (
@@ -40,7 +40,7 @@ class ZestawieniaController extends Controller {
 		$em = $this->getDoctrine ()->getManager ();
 		
 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'typ' => 'WZ', 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
+				array (	'typ' => array('VAT', 'WZ'), 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
 				array (	'id' => 'ASC'));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaWZ.html.twig', array (
