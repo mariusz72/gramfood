@@ -151,7 +151,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->addSelect('s')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
         ->where('s.kod = :kod ')
-        ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\'')
+        ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\'')
         ->setParameter('kod', $kod)
         ->orderBy('s.id', 'ASC');
         
