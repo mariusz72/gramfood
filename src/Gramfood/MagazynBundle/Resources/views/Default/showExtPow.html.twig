@@ -21,7 +21,7 @@
                  
                  {% if entity.idpz matches '{^PZ}' %}
                  	{% set ahref = path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) %}
-                 {% elseif entity.idpz matches '{^PW}' %}
+                 {% elseif entity.idpz matches '{^PW|^PPW}' %}
                		{% set ahref = path('gramfood_magazyn_kompletacje_showPW', { 'id': entity.idpz, 'idpw': entity.idpz}) %}
                  {% endif %}
                  
