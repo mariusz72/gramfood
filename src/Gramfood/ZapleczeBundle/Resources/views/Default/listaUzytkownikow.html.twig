@@ -59,9 +59,9 @@
             <thead>
                 <tr class="headings">
                     <th class="column-title">ID</th>
-                    <th class="column-title">Imie</th>
-                    <th class="column-title">Nazwisko</th>
-                    <th class="column-title">Nazwa</th>
+                    <th class="column-title">Użytkownkik</th>
+                    <th class="column-title">Email</th>
+                    <th class="column-title">Role</th>
                     <th class="column-title">Aktywny</th>
                     <th  style="text-align: center;">Akcja</th>
                 </tr>
@@ -70,10 +70,14 @@
                 {% for entity in entities %}
                 <tr>
                     <td>{{ entity.id }}</td>
-                    <td>{{ entity.imie }}</td>
-                    <td>{{ entity.nazw }}</td>
-                    <td>{{ entity.alias }}</td>
-                    <td>{{ entity.akt }}</td>
+                    <td>{{ entity.username }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td>
+                        {% for role in entity.roles %}
+                        {{ role }} <br> 
+                        {% endfor %}                    
+                    </td>
+                    <td>{{ entity.enabled }}</td>
                                     
                     <td  style="text-align: right;">
                         
