@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Gramfood\MagazynBundle\GramfoodMagazynBundle(),
             new Gramfood\ZapleczeBundle\GramfoodZapleczeBundle(),
             new Gramfood\loginBundle\GramfoodloginBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
