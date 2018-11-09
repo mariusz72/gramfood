@@ -61,7 +61,7 @@
                     <th class="column-title">ID</th>
                     <th class="column-title">Użytkownkik</th>
                     <th class="column-title">Email</th>
-                    <th class="column-title">Role</th>
+                    <th class="column-title">Rola</th>
                     <th class="column-title">Aktywny</th>
                     <th  style="text-align: center;">Akcja</th>
                 </tr>
@@ -73,9 +73,8 @@
                     <td>{{ entity.username }}</td>
                     <td>{{ entity.email }}</td>
                     <td>
-                        {% for role in entity.roles %}
-                        {{ role }} <br> 
-                        {% endfor %}                    
+                    {{ entity.roles|join(', ') }}
+                
                     </td>
                     <td>{{ entity.enabled }}</td>
                                     

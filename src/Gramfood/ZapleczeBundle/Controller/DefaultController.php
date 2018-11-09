@@ -16,7 +16,7 @@ class DefaultController extends Controller
     	$em = $this->getDoctrine ()->getManager ();
     	
     	$entities = $em->getRepository('AppBundle:ExtGramfoodUser')->findAll();
-    	
+    //	file_put_contents("/tmp/AAA_tmp2.txt", print_r($entities, true));
     	return $this->render('GramfoodZapleczeBundle:Default:listaUzytkownikow.html.twig', array (
     			'entities' => $entities
     	) );
