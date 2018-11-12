@@ -66,37 +66,52 @@
  <!-- /page content -->
 
 
-    <div>
-            <form action="{{ path('fos_user_change_password') }}"  method="POST" class="fos_user_change_password">
-    <div id="fos_user_change_password_form" >
-        <div>
-            <label for="fos_user_change_password_form_current_password" class="required">Stare hasło </label>
-            <input type="password" id="fos_user_change_password_form_current_password" name="fos_user_change_password_form[current_password]" required="required" />
-        </div>
-        <div>
-            <label for="fos_user_change_password_form_new_first" class="required">Nowe hasło</label>
-            <input type="password" id="fos_user_change_password_form_new_first" name="fos_user_change_password_form[new][first]" required="required" />
-        </div>
-        <div>
-            <label for="fos_user_change_password_form_new_second" class="required">Nowe hasło</label>
-            <input type="password" id="fos_user_change_password_form_new_second" name="fos_user_change_password_form[new][second]" required="required" />
-     </div>
-        <input type="hidden" id="fos_user_change_password_form__token" name="fos_user_change_password_form[_token]" value="868749eb0858e0babf0c33c15504acec74dff77c" />
-    </div>
-    <div>
-        <input type="submit" value="Ustaw nowe hasło" />
-    </div>
-</form>
-        </div>
 
-               
+        <div class="wrapper">
+        {% block wrapper %}
 
+
+            <div class="content-wrapper">
+            {% block content %}
+                {% block flash_messages %}
+                    {{ include(_entity_config is defined ? _entity_config.templates.flash_messages : '@EasyAdmin/default/flash_messages.html.twig') }}
+                {% endblock flash_messages %}
+
+                <section class="content-header">
+                {% block content_header %}
+                    <h1 class="title">{% block content_title %}{% endblock %}</h1>
+                {% endblock content_header %}
+                {% block content_help %}
+                    {% if _entity_config is defined and _entity_config[app.request.query.get('action')]['help']|default(false) %}
+                        <div class="box box-widget help-entity">
+                            <div class="box-body">
+                                {{ _entity_config[app.request.query.get('action')]['help']|trans|raw }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endblock content_help %}
+                </section>
+
+                <section id="main" class="content">
+                    {% block main %}{% endblock %}
+                </section>
+            {% endblock content %}
             </div>
-        </div>        
-        
+        {% endblock wrapper %}
+        </div>
 
-<!-- /page content -->     
-               {% endblock %}
+        {% block body_javascript %}{% endblock body_javascript %}
+
+        {% for js_asset in easyadmin_config('design.assets.js') %}
+            <script src="{{ asset(js_asset) }}"></script>
+        {% endfor %}
+
+
+
+
+<!-- /page content -->               
+                
+                {% endblock %}
 
 
             </div>
@@ -132,4 +147,3 @@
 
 
 
-        
