@@ -23,6 +23,14 @@
         padding: 3px !important;
     }
     
+    .datarow {
+    	display:none;
+    }
+    
+    .breakrow {
+    	 background-color: #E0ECF8;
+    }
+    
      .lista_tab th { 
           background-color: aliceblue;
      }     
@@ -88,7 +96,7 @@
         <th style="text-align: right;">Nr</th>
     </tr>
     {% for entity in table_in %}
-    <tr>
+    <tr class="breakrow" >
         <td width="20px">{{ loop.index }}.</td>
         <td>{{ entity[0].nazw }}</td>
         <td align="right" width="70px">{{ entity[0].il }}</td>
@@ -96,7 +104,7 @@
         <td align="right" width="50px">{{ entity[0].kod }}</td>
         <td align="right" width="200px">{{ entity[0].nrr }}</td>
     </tr>
-    <tr>
+    <tr class="datarow" >
         <td></td>
         <td colspan=5 width="10px">
       {% if entity[1] is defined %}  
@@ -254,10 +262,24 @@
 <!-- Datatables -->
 <script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       
     
 <script language="javascript">
+
+
+
+    $( document ).ready(function() {
+
+
+        //collapse and expand sections
+
+        $('.breakrow').click(function(){
+            $(this).nextUntil('tr.breakrow').slideToggle(200);
+        });
+    });
+
+
 
 
 </script>
