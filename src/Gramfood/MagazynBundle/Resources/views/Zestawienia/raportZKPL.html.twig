@@ -28,11 +28,11 @@
     }
     
     .breakrow {
-    	 background-color: #E0ECF8;
+    	 background-color: aliceblue;
     }
     
      .lista_tab th { 
-          background-color: aliceblue;
+          background-color: #E0ECF8;
      }     
      
 .tabinside tr td{border-top:1px solid #cccddd;border-left:0px solid #ffffff; border-top-style: dotted;}
@@ -85,9 +85,9 @@
         {% block body -%}
         
 {# makro wyswietlajace tabele        #}
-{% macro tworz_tabele(table_in) %}
-<table class="lista_tab table" border=0>
-    <tr>
+{% macro tworz_tabele(table_in, iter) %}
+<table class="lista_tab table" id="table_{{ iter }}" border=0>
+    <tr id="tab_skladnikow_{{ iter }}" show="true">
         <th width="20px"></th>
         <th style="text-align: center;">Nazwa</th>
         <th style="text-align: right;">Ilość</th>
@@ -104,7 +104,7 @@
         <td align="right" width="50px">{{ entity[0].kod }}</td>
         <td align="right" width="200px">{{ entity[0].nrr }}</td>
     </tr>
-    <tr class="datarow" >
+    <tr class="datarow roller_{{ iter }}" id="datarow_{{ iter }}" >
         <td></td>
         <td colspan=5 width="10px">
       {% if entity[1] is defined %}  
@@ -125,12 +125,16 @@
                  {#            {{ dump(entity2[0][1][0]) }}#}
                  		{% if entity2[0][1] is defined%}
                                  {% for entity3 in entity2[0][1] %}
-                                   {{ _self.tworz_tabele(entity2) }}
+                                    {# kolejna iteracja tabeli w petli #}
+                                     {% set iter = iter + 1 %}	
+                                   {{ _self.tworz_tabele(entity2, iter) }}
 {#                                      {{ dump(entity2[0]) }} #}
                                  {% endfor %}
                         {% else %}
                                  {% for entity3 in entity2[0] %}
-                                   {{ _self.tworz_tabele(entity2) }}
+                                   {# kolejna iteracja tabeli w petli #}
+                                    {% set iter = iter + 1 %}                                 
+                                   {{ _self.tworz_tabele(entity2, iter) }}
                                  {% endfor %} 
                         {% endif %} 
                                  
@@ -173,31 +177,13 @@
 {% endmacro %}      
 {# koniec makra#}
   
-{# makro wyswietlajace tabele        #}
-{% macro tworz_tabele2(table_in) %}
-
-    {% for entity in table_in %}
-    <tr>
-        <td width="20px">{{ loop.index }}.</td>
-        <td>{{ entity[0].nazw }}</td>
-        <td>{{ entity[0].kod }}</td>
-        <td align="right">{{ entity[0].il }}</td>
-        <td align="left">{{ entity[0].jm }}</td>
-        <td align="right">{{ entity[0].nrr }}</td>
-    </tr>
-    {% endfor %}
-
-{% endmacro %}      
-{# koniec makra#}
-  
-
 
 
 {# {{ dump(tabelaPowiazan) }}#}
 {# {{ tabelaPowiazan[0] }}#}
 
-
-{{ _self.tworz_tabele(tabelaPowiazan) }}
+{% set iter = 1 %}
+{{ _self.tworz_tabele(tabelaPowiazan, iter) }}
 
 
 {#     {% for entity in tabelaPowiazan %}#}
@@ -262,7 +248,6 @@
 <!-- Datatables -->
 <script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       
     
 <script language="javascript">
@@ -271,12 +256,65 @@
 
     $( document ).ready(function() {
 
+    	   // Attrs
+        $.fn.attrs = function(attrs) {
+            var t = $(this);
+            if (attrs) {
+                // Set attributes
+                t.each(function(i, e) {
+                    var j = $(e);
+                    for (var attr in attrs) {
+                        j.attr(attr, attrs[attr]);
+                    }
+                });
+                return t;
+            } else {
+                // Get attributes
+                var a = {},
+                    r = t.get(0);
+                if (r) {
+                    r = r.attributes;
+                    for (var i in r) {
+                        var p = r[i];
+                        if (typeof p.nodeValue !== 'undefined') a[p.nodeName] = p.nodeValue;
+                    }
+                }
+                return a;
+            }
+        };
 
-        //collapse and expand sections
-
+        
+        //zwijanie pojedynczych elementow
         $('.breakrow').click(function(){
             $(this).nextUntil('tr.breakrow').slideToggle(200);
         });
+
+        //zwijanie całych tabel
+        $("tr[id^='tab_skladnikow_']").click(function(){
+
+            // wyciagniecie nr iteracji !uwaga tylko z zakresu 0-9
+            var iter = $(this).attr('id');
+            var res = iter.substring(15, 16);
+
+          	if($(this).attr('show') == 'true'){
+          		$(this).nextUntil().show(200);
+          		$(this).attr("show", "false");
+            }else{
+            	$('.roller_'+res).hide(200);
+            	$(this).attr("show", "true");
+            }
+	 
+        });
+
+        $("tr[id^='atab_skladnikow_']").click(function(){
+            alert('wqww');
+        	 $(this).nextUntil().show(200);
+        });       
+
+        $('#atab_skladnikow_3').click(function(){
+       	 $(this).nextUntil().show(200);
+       });    
+        
     });
 
 
