@@ -298,6 +298,7 @@ class KompletacjeController extends Controller {
 	 */
 	public function createAction(Request $request) {
 		$entity = new ExtGramfoodkompow ();
+		$entity->setData(date('Y-m-d H:i:s'));
 		$form = $this->createCreateForm ( $entity );
 		$form->handleRequest ( $request );
 		
