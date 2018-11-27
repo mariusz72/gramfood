@@ -302,7 +302,8 @@ $(document).ready(function() {
              var out_text ='<div class="btn-group">'+
                 	'<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" type="button" aria-expanded="false">'+data+'   &nbsp;&nbsp;    <span class="caret"></span></button>'+
                 	'<ul role="menu" class="dropdown-menu">'+    
-                	'   <li><a onclick="window.open(\'{{ path('gramfood_zestawienia_raportZKPL_url') }}/'+data+'/'+full[5]+'/'+full[6]+'\',\'print_'+data+'\',\'menubar=1, toolbar=1, scrollbars=1, width=900px,height=1000px\')" href="javascript:void(0);">Pokaż raport</a></li>'+
+                	'   <li><a onclick="window.open(\'{{ path('gramfood_zestawienia_raportZKPL_url', { 'typ': 1 }) }}/'+data+'/'+full[5]+'/'+full[6]+'\',\'print_'+data+'\',\'menubar=1, toolbar=1, scrollbars=1, width=900px,height=1000px\')" href="javascript:void(0);">Pokaż raport</a></li>'+
+                	'   <li><a onclick="window.open(\'{{ path('gramfood_zestawienia_raportZKPL_url', { 'typ': 2 }) }}/'+data+'/'+full[5]+'/'+full[6]+'\',\'print_'+data+'\',\'menubar=1, toolbar=1, scrollbars=1, width=900px,height=1000px\')" href="javascript:void(0);">Pokaż raport szczegółowy</a></li>'+
                 	'   <li><a href="{{ path('gramfood_magazyn_kompletacje_lista') }}/'+data+'">Pokaż szczegóły</a></li>'+
                 	'</ul>'+                	
                     '</div>';

@@ -62,16 +62,16 @@
     </p>
     </td>
     <td>
-    	<p style="position: absolute;width: 560px;margin-top: -20px;font-size: smaller;" align="left"><i>wersja rozszerzona</i> </p>  
         <p>Zestawienia składników produktu:</p>
         <h3>{{ produktPw[0].nazw }}</h3>
         <p style="position: absolute;width: 560px;" align="right"><i><b>{{ produktPw[0].il }}</b> {{ produktPw[0].jm }}</i> </p>   
+
     </td>
     <td width="150px">
     Data raportu: <br>
     26.06.2018 <br><br>
     Data ważności: <br>
-    {{ produktPw[0].dwaz }}
+    {{ produktPw[0].dwaz }}    
     </td>
   </tr>
   <tr>
@@ -119,49 +119,54 @@
                         {% if entity2 is defined %}
                         <tr>
 
-                      {% if entity2[0] is defined%}
-                            <td width="20px"></td>                          
-                            <td colspan=5>              
-                 {#            {{ dump(entity2[0][1][0]) }}#}
-                 		{% if entity2[0][1] is defined%}
-                                    {# kolejna iteracja tabeli w petli #}
-                                     {% set iter = iter + 1 %}	
-                                   {{ _self.tworz_tabele(entity2, iter) }}
-{#                                      {{ dump(entity2[0]) }} #}
-                        {% else %}
-                                 {% for entity3 in entity2[0] %}
-                                   {# kolejna iteracja tabeli w petli #}
-                                    {% set iter = iter + 1 %}                                 
-                                   {{ _self.tworz_tabele(entity2, iter) }}
-                                 {% endfor %} 
-                        {% endif %} 
-                                 
-                             </td>
-                               
-                            {% elseif entity2.id is defined %}
-                            
-                            <td width="20px"><i class="fa fa-chevron-right"></i></td>                          
-                            <td>
-                                {{ entity2.alias }}
-                            </td>
-                            <td width="250px">
-                              Data: {{ entity2.data }} <br> 
-                              Data Waż: {{ entity2.dwaz }}<br>
-                                SN: {{ entity2.sn }}
-                            </td>
-                            <td style="text-align: right;" width="70px">
-                                {{ entity2.il }}
-                            </td>  
-                            <td width="30px">
-                                {{ entity2.jm }}
-                            </td> 
-                            <td width="250px" style="text-align: right;">
-                                {{ entity2.nrr }}
-                            </td>                            
-                            
-                      {% endif %}            
+                      {% if entity2[0][1] is defined%}
+                                <td width="20px"></td>                          
+                                <td colspan=5>              
+                     {#            {{ dump(entity2[0][1][0]) }}#}
+                             		{% if entity2[0][1] is defined%}
+                             		 {% set iter = iter + 1 %}	
+                                           
+                                                {# kolejna iteracja tabeli w petli #}
+                                                
+                                               	 {#% if iter < 2  %#}  
+                                               {{ _self.tworz_tabele(entity2, iter) }}
+                                                 {#% endif %#}
+            {#                                      {{ dump(entity2[0]) }} #}
+                                           
+                                    {% else %}
+                                             {% for entity3 in entity2[0] %}
+                                               {# kolejna iteracja tabeli w petli #}
+                                                {% set iter = iter + 1 %}                                 
+                                               {{ _self.tworz_tabele(entity2, iter) }}
+                                             {% endfor %} 
+                                    {% endif %} 
+                                     
+                                 </td>
+                                   
+                        {% elseif entity2.id is defined %}
+                                
+                                <td width="20px"><i class="fa fa-chevron-right"></i></td>                          
+                                <td>
+                                    {{ entity2.alias }}
+                                </td>
+                                <td width="350px">
+                                  Data: {{ entity2.data }} <br> 
+                                  Data Waż: {{ entity2.dwaz }}<br>
+                                    SN: {{ entity2.sn }}
+                                </td>
+{#                                 <td style="text-align: right;" width="70px">#}
+{#                                     {{ entity2.il }}#}
+{#                                 </td>  #}
+{#                                 <td width="30px">#}
+{#                                     {{ entity2.jm }}#}
+{#                                 </td> #}
+                                <td width="250px" style="text-align: right;">
+                                    {{ entity2.nrr }}
+                                </td>                            
+                                
+                          {% endif %}            
                
-                        {% endif %}
+                    {% endif %}
 {#                {% endif %} #}
         {% set lp = lp+1 %}
             {% endfor %}
@@ -304,7 +309,7 @@
 	 
         });
 
-        //rozwiniecie pierwszej warstwy
+        //zwijanie całych tabel
         $("tr[id^='tab_skladnikow_1']").each(function(){
 
             // wyciagniecie nr iteracji !uwaga tylko z zakresu 0-9
@@ -319,11 +324,12 @@
             	$(this).attr("show", "true");
             }
 	 
-        });        
+        });
+        
 
-        $("tr[id^='atab_skladnikow_']").click(function(){
-            alert('wqww');
-        	 $(this).nextUntil().show(200);
+        $("#table_2").each(function(){
+        	 //$(this).nextUntil().show(200);
+        	 $(this).hide();
         });       
 
         $('#atab_skladnikow_3').click(function(){

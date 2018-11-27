@@ -231,14 +231,20 @@ class ZestawieniaController extends Controller {
 	/**
 	 * Lists all WZ entities.
 	 */
-	public function raportZKPLAction($idkpl, $idrw, $idpw) {
+	public function raportZKPLAction($idkpl, $idrw, $idpw, $typ) {
 
 		$tablicaPowiazan2 = $this->tworzTablice($idpw, 1, $idkpl);
+		
+		if($typ == 1){
+		    $file_twig = 'GramfoodMagazynBundle:Zestawienia:raportZKPLshort.html.twig';
+		}else {
+		    $file_twig = 'GramfoodMagazynBundle:Zestawienia:raportZKPL.html.twig';
+		};
 		
 		$em = $this->getDoctrine ()->getManager ();
 		$produktPw = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('idf' => $idpw));
 		
-		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:raportZKPL.html.twig', array (
+		return $this->render ( $file_twig, array (
 				'tabelaPowiazan' => $tablicaPowiazan2,
 				'produktPw' => $produktPw
 		) );
