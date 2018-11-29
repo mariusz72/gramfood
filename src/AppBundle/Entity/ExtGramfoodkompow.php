@@ -60,10 +60,11 @@ class ExtGramfoodkompow {
 	 * @var string @ORM\Column(name="JM", type="string", length=20, nullable=false)
 	 */
 	private $jm;
-	
+
+	#var string @ORM\Column(name="Data", type="string", length=50, nullable=false)
 	/**
 	 *
-	 * @var string @ORM\Column(name="Data", type="string", length=50, nullable=false)
+	 * @var \DateTime @ORM\Column(name="Data", type="datetime", nullable=false)
 	 */
 	private $data;
 	
