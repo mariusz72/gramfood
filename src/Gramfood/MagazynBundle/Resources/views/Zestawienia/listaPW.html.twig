@@ -92,7 +92,8 @@ tr.shown td.details-control {
                 <td>text</td>
                 <td>text</td>       
                 <td>text</td>  
-                <td>text</td>         
+                <td>text</td>      
+                <td>text</td>   
             </tr>
         </tfoot>   
 </table>
@@ -173,22 +174,22 @@ var dataSet = [
     [
         "",
         "{{ entity.id }}",
-        "{{ entity.typ }}",
-        "{{ entity.nrr }}",
-        "{{ entity.idf }}",
-        "{{ entity.idwz }}",
-        "{{ entity.idpz }}",
-        "{{ entity.data }}",
-        "{{ entity.alias }}",
-        "{{ entity.kod }}",
+        "{{ entity.typ|e('html_attr')  }}",
+        "{{ entity.nrr|e('html_attr')  }}",
+        "{{ entity.idf|e('html_attr')  }}",
+        "{{ entity.idwz|e('html_attr')  }}",
+        "{{ entity.idpz|e('html_attr')  }}",
+        "{{ entity.data|e('html_attr')  }}",
+        "{{ entity.alias|e('html_attr')  }}",
+        "{{ entity.kod|e('html_attr') }}",
         "{{ entity.nazw|e('html_attr') }}",
         "{{ entity.il }}",
         "{{ entity.sumk|number_format(2) }}",
         "",        
-        "{{ entity.jm }}",
-        "{{ entity.kat }}",
+        "{{ entity.jm|e('html_attr')  }}",
+        "{{ entity.kat|e('html_attr')  }}",
         "{{ entity.sn|e('html_attr') }}",
-        "{{ entity.dwaz }}"
+        "{{ entity.dwaz|e('html_attr')  }}"
     ],
     {% endfor %}
 
