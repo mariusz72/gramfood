@@ -13,7 +13,30 @@ use AppBundle\Form\ExtGramfoodkompowType;
 
 class ZestawieniaController extends Controller {
 	
+    private $oddata = '0';
+    
 	/**
+     * @return string
+     */
+    public function getOddata()
+    {
+        return $this->oddata;
+    }
+
+    /**
+     * @param mixed $oddata
+     */
+    public function setOddata()
+    {
+        if($this->container->hasParameter('oddata')){
+            $this->oddata = $this->container->getParameter('oddata');
+        }else{
+            $this->oddata = '0';
+        };
+        return $this;
+    }
+
+    /**
 	 * Lists all WZ entities.
 	 */	
 	public function listaWZAction() {
@@ -21,12 +44,24 @@ class ZestawieniaController extends Controller {
 
 			$em = $this->getDoctrine ()->getManager ();
 
-			$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy ( 
-					array (	'typ' => array('VAT', 'WZ'), 'akt' => 'T', 'anul' => 'N'),
-					array (	'id' => 'ASC'));
-		
+	//		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy ( 
+	//		    array (	'typ' => array('VAT', 'WZ'), 'akt' => 'T', 'anul' => 'N'),
+	//				array (	'id' => 'ASC')
+	//		    );
+
+			$query = $em->createQuery('
+                SELECT s
+                FROM AppBundle:Gramfoodklembowspec s
+                WHERE s.typ in ( \'VAT\', \'WZ\') 
+                    AND s.data > \''.$this->setOddata()->getOddata().'\'
+                    AND s.akt = \'T\'
+                    AND s.anul = \'N\'
+            ') ;
+			
+			$entities =  $query->getResult();
+			
 			return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaWZ.html.twig', array (
-					'entities' => $entities
+			    'entities' => $entities
 			) );
 	
 	}
@@ -75,9 +110,13 @@ class ZestawieniaController extends Controller {
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'typ' => 'PW', 'akt' => 'T', 'anul' => 'N'),
-				array (	'id' => 'ASC'));
+	//	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+	//			array (	'typ' => 'PW', 'akt' => 'T', 'anul' => 'N'),
+	//			array (	'id' => 'ASC'));
+		
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )
+		->setOddata($this->setOddata()->getOddata())
+		->listaPwSql();
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPW.html.twig', array (
 				'entities' => $entities
@@ -93,9 +132,13 @@ class ZestawieniaController extends Controller {
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-		    array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
-				array (	'id' => 'ASC'));
+	//	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+	//	    array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
+	//			array (	'id' => 'ASC'));
+		
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )
+		               ->setOddata($this->setOddata()->getOddata())
+		               ->listaPzSql();
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPZ.html.twig', array (
 				'entities' => $entities

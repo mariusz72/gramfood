@@ -11,6 +11,29 @@ use AppBundle\Entity\ExtGramfoodkompow;
 use AppBundle\Form\ExtGramfoodkompowType;
 
 class KompletacjeController extends Controller {
+    
+    private $oddata = '0';
+    
+    /**
+     * @return string
+     */
+    public function getOddata()
+    {
+        return $this->oddata;
+    }
+    
+    /**
+     * @param mixed $oddata
+     */
+    public function setOddata()
+    {
+        if($this->container->hasParameter('oddata')){
+            $this->oddata = $this->container->getParameter('oddata');
+        }else{
+            $this->oddata = '0';
+        };
+        return $this;
+    }
 	
 	/**
 	 * Lists all Gramfoodklembowdok entities.
@@ -262,7 +285,7 @@ class KompletacjeController extends Controller {
 	//	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
 	//			array (	'kod' => $kod, 'typ' => 'ZAT'),	array (	'id' => 'ASC'));
 		
-		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findByTypOr ($kod);
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->setOddata($this->setOddata()->getOddata())->findByTypOr ($kod);
 		
 		if (!$entities) {
 			$entities = null;

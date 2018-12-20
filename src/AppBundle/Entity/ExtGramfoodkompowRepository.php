@@ -13,6 +13,77 @@ use Doctrine\ORM\Query\Expr\Join;
  */
 class ExtGramfoodkompowRepository extends EntityRepository {
 
+    private $oddata = null;
+    /**
+     * @return mixed
+     */
+    public function getOddata()
+    {
+        return $this->oddata;
+    }
+
+    /**
+     * @param mixed $oddata
+     */
+    public function setOddata($oddata)
+    {
+        $this->oddata = $oddata;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function listaPzSql()
+    {
+        //$em = $this->entityManager->createQueryBuilder();
+        $em = $this->getEntityManager()->createQueryBuilder();
+        // $em = $this->getDoctrine()->entityManager->createQueryBuilder();
+        $em
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
+        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
+        ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
+          //  array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
+        ->where('s.typ = \'PZ\' OR s.typ = \'ZAT\' OR s.typ = \'VRR\' ')
+        ->andWhere('s.akt = \'T\'')
+        ->andWhere('s.anul = \'N\'')
+        ->andWhere('s.data > \''.$this->getOddata().'\'')
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz');
+        //   ->setMaxResults(3)
+       // ->orderBy('s.id', 'ASC');
+        
+        return $em->getQuery()->getResult();
+ 
+    }
+    
+    /**
+     * @return string
+     */
+    public function listaPwSql()
+    {
+        //$em = $this->entityManager->createQueryBuilder();
+        $em = $this->getEntityManager()->createQueryBuilder();
+        // $em = $this->getDoctrine()->entityManager->createQueryBuilder();
+        $em
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
+        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
+        ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
+        //  array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
+        ->where('s.typ = \'PW\' ')
+        ->andWhere('s.akt = \'T\'')
+        ->andWhere('s.anul = \'N\'')
+        ->andWhere('s.data > \''.$this->getOddata().'\'')
+        ->orderBy('s.id', 'ASC')
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz');
+        //   ->setMaxResults(3)
+        // ->orderBy('s.id', 'ASC');
+        
+        return $em->getQuery()->getResult();
+        
+    }
+    
      /**
      * @return string
      */
@@ -148,12 +219,28 @@ class ExtGramfoodkompowRepository extends EntityRepository {
     {
         $em = $this->getEntityManager()->createQueryBuilder();
         $em
-        ->addSelect('s')
+ //       ->addSelect('s')
+ //       ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+ //       ->where('s.kod = :kod ')
+ //       ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\'')
+ //       ->andWhere('s.data > \''.$this->getOddata().'\'')
+ //       ->setParameter('kod', $kod)
+ //       ->orderBy('s.id', 'ASC');
+        
+        
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
+        ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
+        //  array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
         ->where('s.kod = :kod ')
-        ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\'')
+        ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\' ')
+        ->andWhere('s.data > \''.$this->getOddata().'\'')
         ->setParameter('kod', $kod)
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz')
         ->orderBy('s.id', 'ASC');
+        
+        
         
         return $em->getQuery()->getResult();
         

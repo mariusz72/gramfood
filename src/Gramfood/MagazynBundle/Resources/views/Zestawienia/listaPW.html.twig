@@ -90,7 +90,8 @@ tr.shown td.details-control {
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-                <td>text</td>        
+                <td>text</td>       
+                <td>text</td>  
                 <td>text</td>         
             </tr>
         </tfoot>   
@@ -178,10 +179,12 @@ var dataSet = [
         "{{ entity.idwz }}",
         "{{ entity.idpz }}",
         "{{ entity.data }}",
-        "{{ entity.Alias }}",
+        "{{ entity.alias }}",
         "{{ entity.kod }}",
         "{{ entity.nazw|e('html_attr') }}",
         "{{ entity.il }}",
+        "{{ entity.sumk|number_format(2) }}",
+        "",        
         "{{ entity.jm }}",
         "{{ entity.kat }}",
         "{{ entity.sn|e('html_attr') }}",
@@ -263,6 +266,12 @@ $(document).ready(function() {
             { title: "Kod" },
             { title: "Nazwa" },
             { title: "Ilość" },
+            { title: "Wydano", "visible": false },
+            { title: "Pozostało", 
+            	"render": function ( data, type, row ) {
+                    return '' + parseInt((parseFloat(row[11]) - parseFloat(row[12])).toFixed(2)*100)/100 + '';
+                },
+            },            
             { title: "JM" },
             { title: "Kat", "visible": false, },
             { title: "SN" }
