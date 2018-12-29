@@ -289,6 +289,11 @@ class KompletacjeController extends Controller {
 		
 		if (!$entities) {
 			$entities = null;
+		}else{
+		    foreach ($entities as $key => $item) {
+		        $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+		        $entities[$key]['sn'] = $lista_spec[0]->getSn();
+		    }
 		}
 		
 		return $this->render ( 'GramfoodMagazynBundle:Default:searchPZ.html.twig', array (

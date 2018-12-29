@@ -244,7 +244,11 @@ $(document).ready(function() {
             	 },
             { title: "Stan wg. IB",
             	"width": "100px",
-            	 },
+            	"render": function ( data, type, row ) {
+                	var poz = parseInt(parseFloat(data).toFixed(2)*100)/100;
+                    return '' + poz + '';
+                },            	
+            },
             { title: "Ostatni",
             		 "width": "50px",
             		  },

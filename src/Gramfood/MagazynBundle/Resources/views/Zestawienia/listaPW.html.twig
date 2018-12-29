@@ -24,7 +24,6 @@
     
     <style>
     
-    
 td.details-control {
  
     background: url('{{ asset('bundles/gramfood/images/details_open.png') }} ') no-repeat center center;
@@ -92,8 +91,8 @@ tr.shown td.details-control {
                 <td>text</td>
                 <td>text</td>       
                 <td>text</td>  
-                <td>text</td>      
                 <td>text</td>   
+                <td>text</td>  
             </tr>
         </tfoot>   
 </table>
@@ -264,16 +263,35 @@ $(document).ready(function() {
             { title: "IdPZ", "visible": false },
             { title: "Data" },
             { title: "Alias" },
-            { title: "Kod" },
+            { title: "Kod", "width": "20px"},
             { title: "Nazwa" },
-            { title: "Ilość" },
-            { title: "Wydano", "visible": false },
-            { title: "Pozostało", 
+            { title: "Ilość", "width": "20px", },
+            { title: "Pozostało", "width": "20px",
             	"render": function ( data, type, row ) {
-                    return '' + parseInt((parseFloat(row[11]) - parseFloat(row[12])).toFixed(2)*100)/100 + '';
+                	var poz = parseInt((parseFloat(row[11]) - parseFloat(row[12])).toFixed(2)*100)/100;
+                    return '' + poz + '';
                 },
+            },
+            { title: "%",
+            	"render": function ( data, type, row ) {
+                	var proc = parseInt(parseFloat(row[12])*100 / parseFloat(row[11]));
+                	
+                    if(proc > 0 &&  proc < 101) {
+	                    var inf = '<div class="progress-bar bg-green" role="progressbar" data-transitiongoal="'+proc+'" style="width: '+proc+'%; height: 20px !important;">'+proc+'</div>';
+                    }else if (proc > 100){
+                    	var inf = '<div class="progress-bar bg-red" role="progressbar" data-transitiongoal="100" style="width: 100%; height: 20px !important;"></div>';                        
+                    } else {
+                    	var inf = '';
+                    }
+
+                	
+                    return '' +
+                    '<div class="progress progress_sm" style="width: 100%; height: 20px !important;">'+ 
+					inf +
+                    '</div>';
+                },                               
             },            
-            { title: "JM" },
+            { title: "JM", "width": "20px"},
             { title: "Kat", "visible": false, },
             { title: "SN" }
         ],

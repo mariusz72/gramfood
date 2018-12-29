@@ -118,6 +118,11 @@ class ZestawieniaController extends Controller {
 		->setOddata($this->setOddata()->getOddata())
 		->listaPwSql();
 		
+		foreach ($entities as $key => $item) {
+		    $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+		    $entities[$key]['sn'] = $lista_spec[0]->getSn();
+		}
+		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPW.html.twig', array (
 				'entities' => $entities
 		) );
@@ -139,6 +144,13 @@ class ZestawieniaController extends Controller {
 		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )
 		               ->setOddata($this->setOddata()->getOddata())
 		               ->listaPzSql();
+	// dopisanie nr seryjnego - obejscie problemu grupowania po typie 'text'	  
+		               foreach ($entities as $key => $item) {
+		                   $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+		               //    file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r($lista_spec[0]->getSn() , true));
+		                     $entities[$key]['sn'] = $lista_spec[0]->getSn();
+		               }
+		               
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPZ.html.twig', array (
 				'entities' => $entities

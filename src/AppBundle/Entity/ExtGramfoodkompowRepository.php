@@ -40,7 +40,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         $em = $this->getEntityManager()->createQueryBuilder();
         // $em = $this->getDoctrine()->entityManager->createQueryBuilder();
         $em
-        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, SUM(e.il) as sumk')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
         //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
@@ -49,7 +49,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->andWhere('s.akt = \'T\'')
         ->andWhere('s.anul = \'N\'')
         ->andWhere('s.data > \''.$this->getOddata().'\'')
-        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz');
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz');
         //   ->setMaxResults(3)
        // ->orderBy('s.id', 'ASC');
         
@@ -66,7 +66,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         $em = $this->getEntityManager()->createQueryBuilder();
         // $em = $this->getDoctrine()->entityManager->createQueryBuilder();
         $em
-        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, SUM(e.il) as sumk')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
         //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
@@ -76,7 +76,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->andWhere('s.anul = \'N\'')
         ->andWhere('s.data > \''.$this->getOddata().'\'')
         ->orderBy('s.id', 'ASC')
-        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz');
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz');
         //   ->setMaxResults(3)
         // ->orderBy('s.id', 'ASC');
         
@@ -228,7 +228,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
  //       ->orderBy('s.id', 'ASC');
         
         
-        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, SUM(e.il) as sumk')
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, SUM(e.il) as sumk')
         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
         //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
@@ -237,7 +237,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\' ')
         ->andWhere('s.data > \''.$this->getOddata().'\'')
         ->setParameter('kod', $kod)
-        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz')
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz')
         ->orderBy('s.id', 'ASC');
         
         
