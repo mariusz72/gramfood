@@ -200,6 +200,7 @@ function format ( d ) {
     // `d` is the original data object for the row
 
     var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaProdukt_z_PW', { 'pw': '<path>' }) }}",d[4]) ;
+    var pathPz = setURL("{{ path('gramfood_magazyn_kompletacje_listaPZ', { 'id': '<path>' }) }}",d[1]) ;
     
     return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
            '<tr>'+
@@ -212,6 +213,7 @@ function format ( d ) {
             '</button>'+
             '<ul role="menu" class="dropdown-menu">'+
             '    <li><a href="'+path+'">Pokaż Składniki</a></li>'+
+            '    <li><a href="'+pathPz+'">Pokaż Kompletacje</a></li>'+
 //             '    <li><a href="#">Generuj certyfikat</a></li>'+
 //             '    <li><a href="#">Generuj kod EAN-128</a></li>'+
             '</ul>'+
