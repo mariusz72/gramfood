@@ -209,6 +209,36 @@ class KompletacjeController extends Controller {
 				//	'aa' => $aa
 		) );
 	}
+	
+	/**
+	 * Finds and displays a Gramfoodklembowspec entity.
+	 */
+	public function listaWZzSnAction($id, Request $request) {
+	    $em = $this->getDoctrine ()->getManager ();
+	    
+	    $sn = $request->request->get('sn');
+	    
+	    // file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r( $sn , true));
+	    
+	    $query = $em->createQuery('
+                SELECT s
+                FROM AppBundle:Gramfoodklembowspec s
+                WHERE s.typ in ( \'VAT\', \'WZ\')
+                    AND s.data > \''.$this->setOddata()->getOddata().'\'
+                    AND s.akt = \'T\'
+                    AND s.anul = \'N\'
+                    AND s.sn like \''. $sn.'\'
+            ') ;
+	    
+	    $entity =  $query->getResult();
+	    
+	    return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaWZ.html.twig', array (
+	        'entities' => $entity,
+	        'nrpartii' => $sn
+	    ) );
+	    
+	    
+	}
 
 	/**
 	 * wyswiatlenie skøadników kompletacji RW Rozchód Wewnetrzny.

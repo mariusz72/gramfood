@@ -62,25 +62,51 @@ class ExtGramfoodkompowRepository extends EntityRepository {
      */
     public function listaPwSql()
     {
-        //$em = $this->entityManager->createQueryBuilder();
+        
+//         $em = $this->getEntityManager()->createQueryBuilder();
+//         $em
+//         ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, MAX(SUBSTRING(s.sn,1,100)) as sn, s.dwaz, SUM(e.il) as sumk, SUM(s2.il) as sumwz')
+//         ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+//         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
+//         ->leftJoin('AppBundle\Entity\Gramfoodklembowspec', 's2', Join::WITH, '(s.sn like s2.sn and s2.typ in (\'VAT\', \'WZ\'))  ')
+//         ->where('s.typ = \'PW\' ')
+//         ->andWhere('s.akt = \'T\'')
+//         ->andWhere('s.anul = \'N\'')
+//         ->andWhere('s.data > \''.$this->getOddata().'\'')
+//         ->orderBy('s.id', 'ASC')
+//         ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz');
+
         $em = $this->getEntityManager()->createQueryBuilder();
-        // $em = $this->getDoctrine()->entityManager->createQueryBuilder();
         $em
-        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, SUM(e.il) as sumk')
-        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
-        //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
-        ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
-        //  array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
-        ->where('s.typ = \'PW\' ')
-        ->andWhere('s.akt = \'T\'')
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, s.sumk, s.sumwz')
+        ->from('AppBundle:Viewgramfoodklembowspecil', 's')
+        ->where('s.akt = \'T\'')
         ->andWhere('s.anul = \'N\'')
         ->andWhere('s.data > \''.$this->getOddata().'\'')
-        ->orderBy('s.id', 'ASC')
-        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz');
-        //   ->setMaxResults(3)
-        // ->orderBy('s.id', 'ASC');
+        ->orderBy('s.id', 'ASC');
+
         
-        return $em->getQuery()->getResult();
+//      $em = $this->getEntityManager();
+//      $query = $em->createQuery(
+//           'SELECT s2.il as sumwz, e.il as sumk, s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.sn, s.jm, s.kat, s.dwaz
+//             FROM AppBundle:Gramfoodklembowspec s
+//                  LEFT JOIN
+//                (
+//                  SELECT sum(s.il) as il, s.sn
+//                   FROM AppBundle:Gramfoodklembowspec s WHERE s.typ in (\'VAT\', \'WZ\')
+//                 group by (s.sn)
+//                ) s2 ON (s.sn like s2.sn)
+//                 LEFT JOIN
+//               (
+//                 SELECT sum(e.il) as il , e.SNpz, e.IDpz FROM AppBundle:Gramfoodklembowdok e WHERE 1=1 GROUP BY e.SNpz, e.IDpz
+//               ) e ON (s.ID = e.IDpz )
+//                 WHERE s.Data > 20180101 and s.typ in (\'PW\')
+//            ');
+//      return $query->getResult();
+      //  file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r(  $query->getSQL() , true));
+  
+     
+       return $em->getQuery()->getResult();
         
     }
     

@@ -118,10 +118,15 @@ class ZestawieniaController extends Controller {
 		->setOddata($this->setOddata()->getOddata())
 		->listaPwSql();
 		
-		foreach ($entities as $key => $item) {
-		    $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
-		    $entities[$key]['sn'] = $lista_spec[0]->getSn();
-		}
+	//	$entities = $em->getRepository ( 'AppBundle:Viewgramfoodklembowspecil' )->findBy (array ('data' => '>20180814'));
+	
+		// wyszukanie sn i dodanie do entity
+	//	foreach ($entities as $key => $item) {
+	//	    $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+	//	    $entities[$key]['sn'] = $lista_spec[0]->getSn();
+	//	}
+		
+	//	file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r($entities , true));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPW.html.twig', array (
 				'entities' => $entities

@@ -38,6 +38,11 @@ gramfood_magazyn_kompletacje_showPZ:
 gramfood_magazyn_kompletacje_listaPZ:
     path:     /kompletacje/listaPZ/{id}
     defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:listaPZ" }  
+
+gramfood_magazyn_listaWZzSn:
+    path:     /kompletacje/listaWZzSn/{id}
+    defaults: { _controller: "GramfoodMagazynBundle:Kompletacje:listaWZzSn" } 
+    requirements: { _method: post|get }
     
 gramfood_magazyn_kompletacje_RwId:
     path:     /kompletacjeRwId
