@@ -170,9 +170,13 @@ class ZestawieniaController extends Controller {
 		
 		$em = $this->getDoctrine ()->getManager ();
 		
-		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-		    array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
-				array (	'id' => 'ASC'));
+// 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+// 		    array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
+// 				array (	'id' => 'ASC'));
+
+		$entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )
+		->setOddata($this->setOddata()->getOddata())
+		->listaPzKodSql($kod);
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPZ.html.twig', array (
 				'entities' => $entities

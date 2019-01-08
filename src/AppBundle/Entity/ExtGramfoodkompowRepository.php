@@ -65,6 +65,26 @@ class ExtGramfoodkompowRepository extends EntityRepository {
     /**
      * @return string
      */
+    public function listaPzKodSql($kod)
+    {
+        $em = $this->getEntityManager()->createQueryBuilder();
+        $em
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, s.sumk, s.sumwz')
+        ->from('AppBundle:Viewgramfoodklembowspecil', 's')
+        ->where('s.typ = \'PZ\' OR s.typ = \'ZAT\' OR s.typ = \'VRR\' ')
+        ->andWhere('s.akt = \'T\'')
+        ->andWhere('s.anul = \'N\'')
+        ->andWhere('s.kod = \''.$kod.'\'')
+        ->andWhere('s.data > \''.$this->getOddata().'\'')
+        ->orderBy('s.id', 'ASC');
+        
+        return $em->getQuery()->getResult();
+        
+    }
+    
+    /**
+     * @return string
+     */
     public function listaPwSql()
     {
         
