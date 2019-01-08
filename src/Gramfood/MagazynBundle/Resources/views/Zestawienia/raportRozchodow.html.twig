@@ -74,6 +74,10 @@
   <div class="col-sm-6 text-right"><i><b>{{ produktPz[0].il }}</b> {{ produktPz[0].jm }}</i></div>
 </div>
 -->
+  <div class="col-sm-6 text-left d-print-none">
+  </div>
+  <div class="col-sm-6 text-right"><i><b>{{ produktPz[0].il }}</b> {{ produktPz[0].jm }}</i></div>
+  </div>    
 
     </td>
     <td width="150px">
@@ -89,15 +93,78 @@
     <td>kod: <b>{{ produktPz[0].kod }}</b></td>
   </tr>  
 </table>
-<br>
 
     <div class="x_content">
-
-        {% block body -%}
-
- {{ dump(listaPw) }}  
-
-        {% endblock %}
+{% block body -%}
+    <h2>WZ <small>(Sprzedaż) </small></h2>  
+    {% if listaWz[0] is defined %}
+    <table class="lista_tab table" border=0>
+        <tr>
+            <th width="20px"></th>
+            <th style="text-align: center;" >Nazwa</th>
+            <th style="text-align: center;" width="100px">Alias</th>
+            <th style="text-align: center;" width="150px">Nr</th>
+            <th style="text-align: right;"  width="20px">Ilość</th>
+            <th align="left" width="20px">JM</th>
+            <th style="text-align: right;"  width="20px">Kod</th>
+            <th style="text-align: center;" width="80px">Data</th>
+            <th style="text-align: right;" width="150px">SN</th>
+        </tr>
+        {% for  item in listaWz %}
+        <tr >
+            <td width="20px">{{ loop.index }}.</td>
+            <td>{{ item.nazw }}</td>
+            <td >{{ item.alias }}</td>
+            <td align="center"">{{ item.nrr }}</td>
+            <td align="right">{{ item.il }}</td>
+            <td align="left" >{{ item.jm }}</td>
+            <td align="right">{{ item.kod }}</td>
+            <td align="center">{{ item.data }}</td>
+            <td align="right">{{ item.sn }}</td>
+        </tr>    
+        {% endfor %}    
+    </table>
+    {% else %}
+    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px; background-color: #E0ECF8;">
+	BRAK 
+    </p>
+    {%  endif %}
+    
+<h2>RW <small>(Rozchód wewnętrzny) </small></h2>  
+    {% if listaPw[0] is defined %}
+<table class="lista_tab table" border=0>
+    <tr>
+            <th width="20px"></th>
+            <th style="text-align: center;">Nazwa</th>
+            <th style="text-align: center;" width="100px">Alias</th>
+            <th style="text-align: center;" width="150px">Nr</th>
+            <th style="text-align: right;"  width="20px">Ilość</th>
+            <th align="left" width="20px">JM</th>
+            <th style="text-align: right;"  width="20px">Kod</th>
+            <th style="text-align: center;" width="80px">Data</th>
+            <th style="text-align: right;" width="150px">SN</th>
+    </tr>
+    {% for  item in listaPw %}
+        <tr >
+            <td width="20px">{{ loop.index }}.</td>
+            <td >{{ item.nazw }}</td>
+            <td >{{ item.alias }}</td>
+            <td align="center">{{ item.nrr }}</td>
+            <td align="right" >{{ item.il }}</td>
+            <td align="left" >{{ item.jm }}</td>
+            <td align="right">{{ item.kod }}</td>
+            <td align="center" >{{ item.data }}</td>
+            <td align="right" >{{ item.sn }}</td>
+        </tr>  
+    {% endfor %}    
+</table>
+    {% else %}
+    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px; background-color: #E0ECF8;">
+	BRAK 
+    </p>
+    {%  endif %}
+    
+{% endblock %}
 
     </div>
 

@@ -320,31 +320,29 @@ class ZestawieniaController extends Controller {
 	 */
 	public function listaRozchodowAction($id) {
 	    
-	    $tablicaPw = array();
+
 	    $em = $this->getDoctrine ()->getManager ();
 	    
 	    $produktPz = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
 	        array (	'id' => $id, 'akt' => 'T', 'anul' => 'N'),
 	        array (	'id' => 'ASC'));
 	    
-// 	    $entities_kpl = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findBy (
-// 	        array (	'idpz' => $id));
+	    $query = $em->createQuery('
+                SELECT s
+                FROM AppBundle:Gramfoodklembowspec s
+                WHERE s.typ in ( \'VAT\', \'WZ\')
+                    AND s.data > \''.$this->setOddata()->getOddata().'\'
+                    AND s.akt = \'T\'
+                    AND s.anul = \'N\'
+                    AND s.sn like \''. $produktPz[0]->getSn().'\'
+            ') ;
 	    
-// 	    foreach ($entities_kpl as $key => $item) {
-// 	        $kpl = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
-// 	            array (	'id' => $item->getIdkpl()));
-	        
-// 	        $entitiesPw = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-// 	            array (	'idf' => $kpl[0]->getBank(), 'akt' => 'T', 'anul' => 'N'),
-// 	            array (	'id' => 'ASC'));
-	   
-// 	        $tablicaPw[$key] = $entitiesPw;
-// 	    }
+	    $tablicaWz =  $query->getResult();
 	    
 	    
 	    $query = $em->createQuery('
 
- 	    SELECT e.idrw, e.idkpl, e.idpz, s.idf, s.id, s.nazw, e.il, s.sn
+ 	    SELECT e.idrw, e.idkpl, e.idpz, s.idf, s.id, s.nazw, e.il, s.sn, s.jm, s.kod, s.data, s.alias, s.nrr
  	    FROM AppBundle:ExtGramfoodkompow e
  	    LEFT JOIN AppBundle:Gramfoodklembowdok d WITH (d.id = e.idkpl)
  	    LEFT JOIN AppBundle:Gramfoodklembowspec s WITH (s.idf = d.bank and s.typ = \'PW\' and s.akt = \'T\' and s.anul = \'N\')
@@ -354,16 +352,11 @@ class ZestawieniaController extends Controller {
 	    
 	    $tablicaPw =  $query->getResult();
 	    
-// 	    SELECT e.IDrw, e.IDkpl, e.IDpz, s.IDf, s.ID, s.Nazw, e.il, s.sn
-// 	    FROM [gramfood].[dbo].[ext_gramfoodkompow] e
-// 	    LEFT JOIN [gramfood].[dbo].[gramfoodklembowdok] d ON (d.id = e.IDkpl)
-// 	    LEFT JOIN [gramfood].[dbo].[gramfoodklembowspec] s ON (s.idf = d.Bank and s.typ = 'PW' and s.Akt = 'T' and s.Anul = 'N')
-// 	    WHERE (e.IDpz = 'PZ.180116.141808.AE7698')
-
 	    
 	    return $this->render ( 'GramfoodMagazynBundle:Zestawienia:raportRozchodow.html.twig', array (
 	        'produktPz' => $produktPz,
-	        'listaPw' => $tablicaPw
+	        'listaPw' => $tablicaPw,
+	        'listaWz' => $tablicaWz
 	    ) );
 	    
 	}
