@@ -28,4 +28,8 @@ gramfood_zestawienia_raportZKPL_url:
 
 gramfood_zestawienia_raportZKPL:
     path:     /zestawienia/raportZKAPL/{typ}/{idkpl}/{idrw}/{idpw}
-    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:raportZKPL }                
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:raportZKPL }      
+
+gramfood_zestawienia_listaRozchodow:
+    path:     /zestawienia/listaRozchodow/{id}
+    defaults: { _controller: GramfoodMagazynBundle:Zestawienia:listaRozchodow }           

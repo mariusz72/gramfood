@@ -93,7 +93,7 @@ tr.shown td.details-control {
                 <td>text</td>  
                 <td>text</td>   
                 <td>text</td>  
-                                <td>text</td>  
+                <td>text</td>  
                 <td>text</td>   
                 <td>text</td>  
             </tr>
@@ -187,7 +187,7 @@ var dataSet = [
         "{{ entity.kod|e('html_attr') }}",
         "{{ entity.nazw|e('html_attr') }}",
         "{{ entity.il }}",
-        "{{ pozostalo|number_format(2) }}",
+        "{{ pozostalo|number_format(2,'.','') }}",
         "{{ entity.sumk }}",        
         "{{ entity.jm|e('html_attr')  }}",
         "{{ entity.kat|e('html_attr')  }}",
@@ -291,12 +291,13 @@ $(document).ready(function() {
             },
             { title: "%",
             	"render": function ( data, type, row ) {
-                	var proc = parseInt(parseFloat(row[13]+row[18])*100 / parseFloat(row[11]));
+                	//var proc = parseInt(parseFloat(row[13]+row[18])*100 / parseFloat(row[11]));
+                	var proc = parseFloat( row[12] )*100 / parseFloat(row[11]);
                 	if(isNaN(proc)) {proc = 0;};
-                	var proc = parseFloat(100 - proc);
+                	//var proc = parseFloat(100 - proc);
                 	               	
                     if(proc > 0 &&  proc < 101) {
-	                    var inf = '<div class="progress-bar bg-green" role="progressbar" data-transitiongoal="'+proc+'" style="width: '+proc+'%; height: 20px !important;">'+proc+'</div>';
+	                    var inf = '<div class="progress-bar bg-green" role="progressbar" data-transitiongoal="'+proc+'" style="width: '+proc+'%; height: 20px !important;">'+parseInt(proc)+'</div>';
                     }else if (proc > 100 || proc < 0){
                     	var inf = '<div class="progress-bar bg-red" role="progressbar" data-transitiongoal="100" style="width: 100%; height: 20px !important;"></div>';                        
                     } else {

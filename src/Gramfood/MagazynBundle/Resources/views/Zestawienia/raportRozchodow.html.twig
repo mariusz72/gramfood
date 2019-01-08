@@ -1,0 +1,129 @@
+{% extends 'gramfood/basePrint.html.twig' %}
+
+{% block page_title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+<!-- Datatables -->
+<link href="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}"   rel="stylesheet">
+<link href="{{ asset('bundles/gentelella-master/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    
+
+<style>
+    .top_tab, .top_tab th, .top_tab td {
+        border: 1px solid black;
+    }
+    .top_tab td {
+        padding: 5px;
+        text-align: center;   
+    }
+    
+    .lista_tab td {
+        padding: 3px !important;
+    }
+    
+    .datarow {
+    	display:none;
+    }
+    
+    .breakrow {
+    	 background-color: aliceblue;
+    }
+    
+     .lista_tab th { 
+          background-color: #E0ECF8;
+     }     
+     
+.tabinside tr td{border-top:1px solid #cccddd;border-left:0px solid #ffffff; border-top-style: dotted;}
+.tabinside tr td:first-child{border-left:0;}
+.tabinside tr:first-child td{border-top:0;}     
+    
+</style>    
+  
+    
+{% endblock stylesheets %}
+
+{% block page_content %}
+
+
+
+
+
+
+<table class="top_tab" style="width:99%">
+  <tr>
+    <td width="150px">
+   <p align="left"> WMS app 
+    <br><br>
+    GRAM food<br>
+    05-205 Klembów<br>
+    5361912883<br>
+    </p>
+    </td>
+    <td>
+    	<p style="position: absolute;width: 560px;margin-top: -20px;font-size: smaller;" align="left"><i></i> </p>  
+        <p>Zestawienia rozchodów produktu:</p>
+        <h3>{{ produktPz[0].nazw }}</h3>
+      
+<!--  div class="row">
+  <div class="col-sm-6 text-left d-print-none">
+  <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+  <button class="btn btn-default" ><i class="fa fa-download"></i> Generate PDF</button>
+  </div>
+  <div class="col-sm-6 text-right"><i><b>{{ produktPz[0].il }}</b> {{ produktPz[0].jm }}</i></div>
+</div>
+-->
+
+    </td>
+    <td width="150px">
+    Data raportu: <br>
+    {{ "now"|date("d/m/Y") }} <br><br>
+    Data ważności: <br>
+    {{ produktPz[0].dwaz }}
+    </td>
+  </tr>
+  <tr>
+    <td>SN: <b>{{ produktPz[0].sn }}</b></td>
+    <td>PZ: <b>{{ produktPz[0].nrr }}</b></td>
+    <td>kod: <b>{{ produktPz[0].kod }}</b></td>
+  </tr>  
+</table>
+<br>
+
+    <div class="x_content">
+
+        {% block body -%}
+
+ {{ dump(listaPw) }}  
+
+        {% endblock %}
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+
+<!-- Datatables -->
+<script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script  src="{{ asset('bundles/gentelella-master/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+      
+    
+<script language="javascript">
+
+
+
+
+</script>
+
+{% endblock %}
+    

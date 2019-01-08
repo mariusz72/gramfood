@@ -150,11 +150,10 @@ class ZestawieniaController extends Controller {
 		               ->setOddata($this->setOddata()->getOddata())
 		               ->listaPzSql();
 	// dopisanie nr seryjnego - obejscie problemu grupowania po typie 'text'	  
-		               foreach ($entities as $key => $item) {
-		                   $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
-		               //    file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r($lista_spec[0]->getSn() , true));
-		                     $entities[$key]['sn'] = $lista_spec[0]->getSn();
-		               }
+// 		               foreach ($entities as $key => $item) {
+// 		                   $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+// 		                     $entities[$key]['sn'] = $lista_spec[0]->getSn();
+// 		               }
 		               
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaPZ.html.twig', array (
@@ -310,6 +309,59 @@ class ZestawieniaController extends Controller {
 		) );
 		
 		
+	}
+	
+	/**
+	 * Lista rozchodow dla Idpz
+	 */
+	public function listaRozchodowAction($id) {
+	    
+	    $tablicaPw = array();
+	    $em = $this->getDoctrine ()->getManager ();
+	    
+	    $produktPz = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+	        array (	'id' => $id, 'akt' => 'T', 'anul' => 'N'),
+	        array (	'id' => 'ASC'));
+	    
+// 	    $entities_kpl = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )->findBy (
+// 	        array (	'idpz' => $id));
+	    
+// 	    foreach ($entities_kpl as $key => $item) {
+// 	        $kpl = $em->getRepository ( 'AppBundle:Gramfoodklembowdok' )->findBy (
+// 	            array (	'id' => $item->getIdkpl()));
+	        
+// 	        $entitiesPw = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+// 	            array (	'idf' => $kpl[0]->getBank(), 'akt' => 'T', 'anul' => 'N'),
+// 	            array (	'id' => 'ASC'));
+	   
+// 	        $tablicaPw[$key] = $entitiesPw;
+// 	    }
+	    
+	    
+	    $query = $em->createQuery('
+
+ 	    SELECT e.idrw, e.idkpl, e.idpz, s.idf, s.id, s.nazw, e.il, s.sn
+ 	    FROM AppBundle:ExtGramfoodkompow e
+ 	    LEFT JOIN AppBundle:Gramfoodklembowdok d WITH (d.id = e.idkpl)
+ 	    LEFT JOIN AppBundle:Gramfoodklembowspec s WITH (s.idf = d.bank and s.typ = \'PW\' and s.akt = \'T\' and s.anul = \'N\')
+ 	    WHERE (e.idpz = \''.$id.'\' and s.data > \''.$this->setOddata()->getOddata().'\')
+
+            ') ;
+	    
+	    $tablicaPw =  $query->getResult();
+	    
+// 	    SELECT e.IDrw, e.IDkpl, e.IDpz, s.IDf, s.ID, s.Nazw, e.il, s.sn
+// 	    FROM [gramfood].[dbo].[ext_gramfoodkompow] e
+// 	    LEFT JOIN [gramfood].[dbo].[gramfoodklembowdok] d ON (d.id = e.IDkpl)
+// 	    LEFT JOIN [gramfood].[dbo].[gramfoodklembowspec] s ON (s.idf = d.Bank and s.typ = 'PW' and s.Akt = 'T' and s.Anul = 'N')
+// 	    WHERE (e.IDpz = 'PZ.180116.141808.AE7698')
+
+	    
+	    return $this->render ( 'GramfoodMagazynBundle:Zestawienia:raportRozchodow.html.twig', array (
+	        'produktPz' => $produktPz,
+	        'listaPw' => $tablicaPw
+	    ) );
+	    
 	}
 
 }

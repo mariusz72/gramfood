@@ -1,0 +1,18 @@
+/* create view table viewgramfoodklembowspecil in database gramfood */
+/* ferst make 'use gramfood;' */
+/* ================================================================ */
+CREATE VIEW [viewgramfoodklembowspecil] as 
+SELECT s2.il as sumwz, e.il as sumk, s.*
+FROM [gramfood].[dbo].[gramfoodklembowspec] s
+LEFT JOIN 
+(
+SELECT sum(s.il) as il, s.sn
+ FROM [gramfood].[dbo].[gramfoodklembowspec] s WHERE s.typ in ('VAT', 'WZ')
+ group by (s.sn)
+) s2 ON (s.sn like s2.sn)
+LEFT JOIN 
+(
+SELECT sum(e.il) as il , e.SNpz, e.IDpz FROM [gramfood].[dbo].[ext_gramfoodkompow] e WHERE 1=1 GROUP BY e.SNpz, e.IDpz 
+) e ON (s.ID = e.IDpz ) 
+WHERE (s.typ in ('PW') or s.typ in ('PZ', 'ZAT', 'VRR'))
+

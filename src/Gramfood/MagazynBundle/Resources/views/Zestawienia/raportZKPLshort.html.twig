@@ -64,12 +64,16 @@
     <td>
         <p>Zestawienia składników produktu:</p>
         <h3>{{ produktPw[0].nazw }}</h3>
-        <p style="position: absolute;width: 560px;" align="right"><i><b>{{ produktPw[0].il }}</b> {{ produktPw[0].jm }}</i> </p>   
+
+  <div class="col-sm-6 text-left d-print-none">
+  </div>
+  <div class="col-sm-6 text-right"><i><b>{{ produktPw[0].il }}</b> {{ produktPw[0].jm }}</i></div>
+  </div>       
 
     </td>
     <td width="150px">
     Data raportu: <br>
-    26.06.2018 <br><br>
+    {{ "now"|date("d/m/Y") }} <br><br>
     Data ważności: <br>
     {{ produktPw[0].dwaz }}    
     </td>

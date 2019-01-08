@@ -88,10 +88,13 @@ tr.shown td.details-control {
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-                <td>text</td>        
+                <td>text</td>       
+                <td>text</td>  
                 <td>text</td>   
-                <td>text</td>      
-                <td>text</td>      
+                <td>text</td>  
+                <td>text</td>  
+                <td>text</td>   
+                <td>text</td>    
             </tr>
         </tfoot>   
 </table>
@@ -169,25 +172,27 @@ tr.shown td.details-control {
 var dataSet = [
 
     {% for entity in entities %}
+    {% set pozostalo = (entity.il - (entity.sumk + entity.sumwz)) %}
     [
         "",
         "{{ entity.id }}",
-        "{{ entity.typ }}",
-        "{{ entity.nrr }}",
-        "{{ entity.idf }}",
-        "{{ entity.idwz }}",
-        "{{ entity.idpz }}",
-        "{{ entity.data }}",
-        "{{ entity.alias }}",
-        "{{ entity.kod }}",
+        "{{ entity.typ|e('html_attr')  }}",
+        "{{ entity.nrr|e('html_attr')  }}",
+        "{{ entity.idf|e('html_attr')  }}",
+        "{{ entity.idwz|e('html_attr')  }}",
+        "{{ entity.idpz|e('html_attr')  }}",
+        "{{ entity.data|e('html_attr')  }}",
+        "{{ entity.alias|e('html_attr')  }}",
+        "{{ entity.kod|e('html_attr') }}",
         "{{ entity.nazw|e('html_attr') }}",
         "{{ entity.il }}",
-        "{{ entity.sumk|number_format(2) }}",
-        "",
-        "{{ entity.jm }}",
-        "{{ entity.kat }}",
+        "{{ pozostalo|number_format(2,'.','') }}",
+        "{{ entity.sumk }}",        
+        "{{ entity.jm|e('html_attr')  }}",
+        "{{ entity.kat|e('html_attr')  }}",
         "{{ entity.sn|e('html_attr') }}",
-        "{{ entity.dwaz }}"
+        "{{ entity.dwaz|e('html_attr')  }}",
+        "{{ entity.sumwz }}"
     ],
     {% endfor %}
 
@@ -197,10 +202,15 @@ var dataSet = [
 function format ( d ) {
 
 	var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaPZ', { 'id': '<path>' }) }}",d[1]) ;
+    var pathWz = setURL("{{ path('gramfood_magazyn_listaWZzSn', { 'id': '<path>' }) }}",d[1]) ;
+    var pathRozchody = setURL("{{ path('gramfood_zestawienia_listaRozchodow', { 'id': '<path>' }) }}",d[1]) ;
+
+	if( parseFloat(d[18]) ) {var sum_wz = parseFloat(d[18]);} else {var sum_wz = 0;};
+	if( parseFloat(d[13]) ) {var sum_rw = parseFloat(d[13]);} else {var sum_rw = 0;};
 
     return '<table width="100%" cellpadding="5" cellspacing="0" border="0" style="padding-left: 50px; border-collapse: separate;">'+
         '<tr>'+
-            '<th width="150px">ID</th><td>'+
+     	   '<th width="150px">ID</th><td  width="300px">'+
             
             '<div class="btn-group">'+
             '<button data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle" type="button" aria-expanded="false">'+
@@ -209,21 +219,28 @@ function format ( d ) {
             '</button>'+
             '<ul role="menu" class="dropdown-menu">'+
             '    <li><a href="'+path+'">Pokaż Kompletacje</a></li>'+
+            '    <li><a onclick="document.getElementById(\'showRap'+d[1]+'\').submit();">Pokaż Sprzedaż</a></li>'+    
+            '   <li><a onclick="window.open(\''+pathRozchody+'\',\'print_'+d[1]+'\',\'menubar=1, toolbar=1, scrollbars=1, width=900px,height=1000px\')" href="javascript:void(0);">Pokaż Raport Rozchodów</a></li>'+
             '</ul>'+
             '</div>'+            
 
             '</td>'+
         '</tr>'+
         '<tr>'+            
-            '<th>Typ</th><td> '+d[2]+'</td>'+
+       		 '<th>Typ</th><td> '+d[2]+'</td>'+'<th  width="150px">Suma WZ</th><td> '+sum_wz+'</td>'+
         '</tr>'+
         '<tr>'+          
-            '<th>IDf</th><td> '+d[4]+'</td>'+
+       		 '<th>IDf</th><td> '+d[4]+'</td>'+'<th>Suma RW</th><td> '+sum_rw+'</td>'+
         '</tr>'+
          '<tr>'+
-            '<th>Data ważności</th><td> '+d[15]+'</td>'+
+            '<th>Data ważności</th><td> '+d[17]+'</td>'+
         '</tr>'+
-    '</table>';
+        '</table>'+
+
+        '<form action="'+pathWz+'" id="showRap'+d[1]+'" method="post">'+
+        '<input name="form[_token]" id="form__token" type="hidden" value="c2ccc82cd293610b035a6c8f2069e5fe8387b86f">'+
+        '<input name="sn" id="sn" type="hidden" value="'+d[16]+'">'+    
+        '</form>';
 }
 
 
@@ -261,31 +278,44 @@ $(document).ready(function() {
             { title: "Kod" , "width": "20px"},
             { title: "Nazwa" },
             { title: "Ilość" , "width": "20px"},
-            { title: "Pozostało", "width": "20px", 
+            { title: "Pozostało", "width": "20px",
             	"render": function ( data, type, row ) {
-                    return '' + parseInt((parseFloat(row[11]) - parseFloat(row[12])).toFixed(2)*100)/100 + '';
+                	var poz = row[12];
+                    return '' + poz + '';
                 },
             },
             { title: "%",
             	"render": function ( data, type, row ) {
-                	var proc = parseInt(parseFloat(row[12])*100 / parseFloat(row[11]));
-                	
+                	//var proc = parseInt(parseFloat(row[13]+row[18])*100 / parseFloat(row[11]));
+                	var proc = parseFloat( row[12] )*100 / parseFloat(row[11]);
+                	if(isNaN(proc)) {proc = 0;};
+                	//var proc = parseFloat(100 - proc);
+                	               	
                     if(proc > 0 &&  proc < 101) {
-	                    var inf = '<div class="progress-bar bg-green" role="progressbar" data-transitiongoal="'+proc+'" style="width: '+proc+'%; height: 20px !important;">'+proc+'</div>';
-                    }else if (proc > 100){
+	                    var inf = '<div class="progress-bar bg-green" role="progressbar" data-transitiongoal="'+proc+'" style="width: '+proc+'%; height: 20px !important;">'+parseInt(proc)+'</div>';
+                    }else if (proc > 100 || proc < 0){
                     	var inf = '<div class="progress-bar bg-red" role="progressbar" data-transitiongoal="100" style="width: 100%; height: 20px !important;"></div>';                        
                     } else {
                     	var inf = '';
                     }
+
+                	
                     return '' +
                     '<div class="progress progress_sm" style="width: 100%; height: 20px !important;">'+ 
-					inf +
+                    inf +
                     '</div>';
                 },                               
-            },             
+            },            
             { title: "JM" },
             { title: "Kat", "visible": false, },
-            { title: "SN" }
+            { title: "SN" },
+            { title: "DataWaz", "visible": false, },
+            { title: "SumWZ", "visible": false, },
+            { title: "SumRW", "visible": false, 
+            	"render": function ( data, type, row ) {
+                    return row[13];
+                },
+            }
         ],
 
         });
