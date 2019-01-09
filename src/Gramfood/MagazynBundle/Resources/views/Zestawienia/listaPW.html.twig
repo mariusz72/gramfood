@@ -207,6 +207,7 @@ function format ( d ) {
     var path = setURL("{{ path('gramfood_magazyn_kompletacje_listaProdukt_z_PW', { 'pw': '<path>' }) }}",d[4]) ;
     var pathPz = setURL("{{ path('gramfood_magazyn_kompletacje_listaPZ', { 'id': '<path>' }) }}",d[1]) ;
     var pathWz = setURL("{{ path('gramfood_magazyn_listaWZzSn', { 'id': '<path>' }) }}",d[1]) ;
+    var pathRozchody = setURL("{{ path('gramfood_zestawienia_listaRozchodow', { 'id': '<path>' }) }}",d[1]) ;
     
     	if( parseFloat(d[18]) ) {var sum_wz = parseFloat(d[18]);} else {var sum_wz = 0;};
     	if( parseFloat(d[13]) ) {var sum_rw = parseFloat(d[13]);} else {var sum_rw = 0;};
@@ -224,6 +225,7 @@ function format ( d ) {
             '    <li><a href="'+path+'">Pokaż Składniki</a></li>'+
             '    <li><a href="'+pathPz+'">Pokaż Kompletacje</a></li>'+
             '    <li><a onclick="document.getElementById(\'showRap'+d[1]+'\').submit();">Pokaż Sprzedaż</a></li>'+
+            '   <li><a onclick="window.open(\''+pathRozchody+'\',\'print_'+d[1]+'\',\'menubar=1, toolbar=1, scrollbars=1, width=900px,height=1000px\')" href="javascript:void(0);">Pokaż Raport Rozchodów</a></li>'+
 //             '    <li><a href="#">Generuj certyfikat</a></li>'+
 //             '    <li><a href="#">Generuj kod EAN-128</a></li>'+
             '</ul>'+
