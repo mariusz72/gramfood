@@ -213,6 +213,27 @@ class KompletacjeController extends Controller {
 	/**
 	 * Finds and displays a Gramfoodklembowspec entity.
 	 */
+	public function listaRWAction($id, Request $request) {
+	    $em = $this->getDoctrine ()->getManager ();
+	    
+	    $nrr = $request->request->get('nrr');
+
+	    $entity_ext = $em->getRepository('AppBundle:Gramfoodklembowdok')->findBy (array ('rejpro' =>  $nrr));
+	    $ids = array();
+	    foreach($entity_ext as $w) {
+	        $ids[] = $w->getId();
+	    }
+	    
+	    $aa = $em->getRepository('AppBundle:ExtGramfoodkompow')->findToExt_zPZ($ids);
+	    
+	    return $this->render ( 'GramfoodMagazynBundle:Default:lista.html.twig', array (
+	        'entities' =>  $aa
+	    ) );
+	}
+	
+	/**
+	 * Finds and displays a Gramfoodklembowspec entity.
+	 */
 	public function listaWZzSnAction($id, Request $request) {
 	    $em = $this->getDoctrine ()->getManager ();
 	    

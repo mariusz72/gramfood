@@ -135,6 +135,31 @@ class ExtGramfoodkompowRepository extends EntityRepository {
        return $em->getQuery()->getResult();
         
     }
+
+    
+    
+    /**
+     * @return string
+     */
+    public function listaRwSql()
+    {
+        
+        $em = $this->getEntityManager()->createQueryBuilder();
+        $em
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, d.id as idkpl')
+        ->from('AppBundle:Gramfoodklembowspec', 's')
+        ->leftJoin('AppBundle\Entity\Gramfoodklembowdok', 'd', Join::WITH, 'd.rejpro = s.nrr')
+        ->where('s.typ = \'RW\' ')
+        ->andWhere('s.akt = \'T\'')
+        ->andWhere('s.anul = \'N\'')
+        ->andWhere('s.data > \''.$this->getOddata().'\'')
+        ->orderBy('s.id', 'ASC');
+        
+        //file_put_contents('c:\Users\PC\Documents\111_RW.txt', print_r( $em->getQuery()->getResult() , true));
+        
+        return $em->getQuery()->getResult();
+        
+    }
     
      /**
      * @return string

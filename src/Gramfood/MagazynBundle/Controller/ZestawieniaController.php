@@ -137,6 +137,38 @@ class ZestawieniaController extends Controller {
 	/**
 	 * Lists all WZ entities.
 	 */
+	public function listaRWAction() {
+	    
+	    
+	    $em = $this->getDoctrine ()->getManager ();
+	    
+	    //	$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
+	    //			array (	'typ' => 'PW', 'akt' => 'T', 'anul' => 'N'),
+	    //			array (	'id' => 'ASC'));
+	    
+	    $entities = $em->getRepository ( 'AppBundle:ExtGramfoodkompow' )
+	    ->setOddata($this->setOddata()->getOddata())
+	    ->listaRwSql();
+	    
+	    //	$entities = $em->getRepository ( 'AppBundle:Viewgramfoodklembowspecil' )->findBy (array ('data' => '>20180814'));
+	    
+	    // wyszukanie sn i dodanie do entity
+	    //	foreach ($entities as $key => $item) {
+	    //	    $lista_spec = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (array ('id' => $item['id']));
+	    //	    $entities[$key]['sn'] = $lista_spec[0]->getSn();
+	    //	}
+	    
+	    //	file_put_contents('c:\Users\PC\Documents\111_tablicaPowiazan.txt', print_r($entities , true));
+	    
+	    return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaRW.html.twig', array (
+	        'entities' => $entities
+	    ) );
+	    
+	}
+	
+	/**
+	 * Lists all WZ entities.
+	 */
 	public function listaPZAction() {
 		
 		
