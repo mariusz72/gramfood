@@ -21,7 +21,7 @@
                  <td width="50px">{{ entity.nrr }}</td>
                  <td width="50px">{{ entity.data }}</td>
                  <td width="20px">{{ entity.il }}</td>
-                 <td width="20px">{{ entity.il - entity.sumk|number_format(2) }}</td>
+                 <td width="20px">{{ (entity.il - (entity.sumk + entity.sumwz))|number_format(2) }}</td>
                  <td width="100px">{{ entity.sn }}</td>   
                         <td width="200px" style="text-align: right;"><a href="#" onClick="wstawPZ('{{ entity.id }}','{{ entity.sn }}','{{ entity.il }}')" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Wstaw pozycje </a> 
                         </td>

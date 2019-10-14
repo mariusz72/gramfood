@@ -303,10 +303,15 @@ class ExtGramfoodkompowRepository extends EntityRepository {
  //       ->andWhere('s.data > \''.$this->getOddata().'\'')
  //       ->setParameter('kod', $kod)
  //       ->orderBy('s.id', 'ASC');
+   
+        
+//        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.sn, s.dwaz, s.sumk, s.sumwz')
+//       ->from('AppBundle:Viewgramfoodklembowspecil', 's')
+
         
         
-        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, SUM(e.il) as sumk')
-        ->from('AppBundle\Entity\Gramfoodklembowspec', 's')
+        ->addSelect('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, \'ss\' as sn, s.dwaz, s.sumk as sumk, s.sumwz')
+        ->from('AppBundle:Viewgramfoodklembowspecil', 's')
         //     ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', \Doctrine\ORM\Query\Expr\Join::WITH, 'd.id = e.idkpl')
         ->leftJoin('AppBundle\Entity\ExtGramfoodkompow', 'e', Join::WITH, 's.id = e.idpz')
         //  array (	'typ' => array('ZAT', 'PZ', 'VRR'), 'akt' => 'T', 'anul' => 'N'),
@@ -314,7 +319,7 @@ class ExtGramfoodkompowRepository extends EntityRepository {
         ->andWhere('s.typ = \'ZAT\' OR s.typ = \'PW\' OR s.typ = \'PZ\' OR s.typ = \'VRR\' ')
         ->andWhere('s.data > \''.$this->getOddata().'\'')
         ->setParameter('kod', $kod)
-        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz')
+        ->groupBy('s.id, s.typ, s.nrr, s.idf, s.idwz, s.idpz, s.data, s.alias, s.kod, s.nazw, s.il, s.jm, s.kat, s.dwaz, s.sumk, s.sumwz')
         ->orderBy('s.id', 'ASC');
         
         

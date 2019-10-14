@@ -172,6 +172,9 @@ class KompletacjeController extends Controller {
 		$entity = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
 				array (	'id' => $id, 'typ' => 'ZAT'),	array (	'id' => 'ASC'));
 		
+		//file_put_contents('c:/xampp/111_PZtrasmit.txt', print_r( $entity , true));
+		
+		
 		if (! $entity) {
 			throw $this->createNotFoundException ( 'Unable to find Gramfoodklembowspec entity.' );
 		}
