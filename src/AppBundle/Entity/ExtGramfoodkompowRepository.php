@@ -364,20 +364,24 @@ class ExtGramfoodkompowRepository extends EntityRepository {
 //     	->setParameter('idkpl', $idkpl)
 //     	->orderBy('s.id', 'ASC');
         
-    	if(preg_match("/^S\./i", $idrw )){
-    		$s_id = 's.idwz' ;
-    	}else{
-    		$s_id = 's.idf';
-    	};
-
+        // stara wersja 
+    	//if(preg_match("/^S\./i", $idrw )){
+    	//	$s_id = 's.idwz' ;
+    	//}else{
+    	//	$s_id = 's.idf';
+    	//};
+    	//to do zapytania
+        //d.bankn = '.$s_id.'
     	
+            
     	$em = $this->getEntityManager();
     	$query = $em->createQuery(
     			'SELECT s
 			    FROM AppBundle:Gramfoodklembowspec s, AppBundle:Gramfoodklembowdok d
 			    WHERE 
 					d.id = :idkpl AND
- 				    d.bankn = '.$s_id.'
+ 				    
+                    (d.bankn = s.idwz OR d.bankn = s.idf)
     			ORDER BY s.id ASC'
     			)->setParameter('idkpl', $idkpl);
     			
