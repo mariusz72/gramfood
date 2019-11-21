@@ -181,14 +181,14 @@ var dataSet = [
         "{{ entity.idwz }}",
         "{{ entity.idpz }}",
         "{{ entity.data }}",
-        "{{ entity.Alias }}",
-        "{{ entity.kod }}",
-        "{{ entity.nazw }}",
+        "{{ entity.Alias|e('html_attr')  }}",
+        "{{ entity.kod|e('html_attr')  }}",
+        "{{ entity.nazw|e('html_attr')  }}",
         "{{ entity.il }}",
-        "{{ entity.jm }}",
-        "{{ entity.kat }}",
-        "{{ entity.sn }}",
-        "{{ entity.dwaz }}"        
+        "{{ entity.jm|e('html_attr')  }}",
+        "{{ entity.kat|e('html_attr')  }}",
+        "{{ entity.sn|e('html_attr') }}",
+        "{{ entity.dwaz|e('html_attr')  }}"        
     ],
     {% endfor %}
 
