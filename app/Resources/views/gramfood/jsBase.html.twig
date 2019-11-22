@@ -189,6 +189,10 @@ function ustawNazweModal()
 
     $('#'+ name).modal('show'); 
     
+    if($il == 'undefined' || $il == null){
+    	$il = '';
+    }
+    
     var modal = $('#'+ name).each(function(e) {
     var request = $.ajax({
                         cache:  false,

@@ -43,7 +43,7 @@
                     <div>
                             <a href="#" onClick="show_PZ('{{ entity.idpz }}')" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
 {#                             <a href="#" onClick="location.href='{{ path('gramfood_magazyn_kompletacje_showPZ', { 'id': entity.idpz }) }}'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> #}
-                            <a href="#" id="{{ entity.id }}" onClick="edytuj_extpow('{{ entity.id }}', '{{ id }}', '{{ nazwa }}', '{{ idkpl }}')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="#" id="{{ entity.id }}" onClick="edytuj_extpow('{{ entity.id }}', '{{ id }}', '{{ nazwa }}', '{{  entity.idkpl }}')" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                                                 
 {#                         <button name="form[submit]" id="form_submit" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>#}
                         <button name="form_button" id="{{ entity.id }}" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>

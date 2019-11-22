@@ -107,9 +107,9 @@ $(document).ready(function() {
 
               // jesli edycja
                  {% if  idrw is defined %}
-                     wyswietl_nrpartii('{{ idrw }}', '{{ rw[0].nazw }}');
+                     wyswietl_nrpartii('{{ idrw }}', '{{ rw[0].nazw }}', '{{ idkpl }}');
                  {% else %}
-                     wyswietl_nrpartii('{{ id }}', '{{ rw[0].nazw }}');
+                     wyswietl_nrpartii('{{ id }}', '{{ rw[0].nazw }}', '{{ idkpl }}');
                   {% endif %}
                 
             },

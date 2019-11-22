@@ -454,6 +454,7 @@ class KompletacjeController extends Controller {
 		$id = $request->query->get('id');
 		$idrw = $request->query->get('idrw');
 		$modal = $request->query->get('modal');
+		$idkpl = $request->query->get('idkpl');
 		
 		if (! $entity) {
 			throw $this->createNotFoundException ( 'Unable to find ExtGramfoodkompow entity.' );
