@@ -3,6 +3,7 @@
              <tr>
                  <th>Kod</th>
                  <th>idPZ/PW</th>
+                 <th>data wpr.</th>
                  <th>użytkownik</th>
                  <th>sn</th>
                  <th>Ilość</th>
@@ -31,6 +32,7 @@
                  
                      <button name="idpz_button" onClick="location.href='{{ ahref }}'" type="button" class="btn btn-default btn-xs">{{ entity.idpz }}</button>
                  </td>
+                 <td ><i><small title='{{ entity.data|date("Y-m-d H:i") }}'>{{ entity.data|date("Y-m-d") }}</small></i></td>
                  <td >{{ entity.uzyt }}</td>
                  <td >{{ entity.snpz }}</td>
                  <td width="20px">{{ entity.il }}</td>

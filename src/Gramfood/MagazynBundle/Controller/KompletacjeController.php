@@ -170,7 +170,7 @@ class KompletacjeController extends Controller {
 		$modal = $request->query->get('modal');
 		
 		$entity = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'id' => $id, 'typ' => 'ZAT'),	array (	'id' => 'ASC'));
+				array (	'id' => $id),	array (	'id' => 'ASC'));
 		
 		//file_put_contents('c:/xampp/111_PZtrasmit.txt', print_r( $entity , true));
 		

@@ -67,6 +67,8 @@
                                             {{ form_widget(form.uzyt, {'value' : app.user.username}) }}
                                             <input id="appbundle_extgramfoodkompow_maxil" type="hidden" value="">
                                             
+                                            {{ form_widget(form.data, {'value' : ''}) }}
+                                            
                                         
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
@@ -90,6 +92,10 @@ $(document).ready(function() {
 		
     var frm = $('#formext');
     frm.submit(function (e) {
+
+	var asd = (new Date().toISOString());
+	$("#appbundle_extgramfoodkompow_data").val(asd);
+
     	e.preventDefault();
     	$("#loading-div-background").show();
         closeModal('#Modal1');

@@ -47,23 +47,23 @@ th {
         </tr>	
 		<tr>
 			<th>Typ</th>
-			<td>{{ entity.typ }}</td>
+			<td>{{ entity.typ|e('html_attr') }}</td>
 		</tr>
 		<tr>
 			<th>NrR</th>
-			<td>{{ entity.nrr }}</td>
+			<td>{{ entity.nrr|e('html_attr') }}</td>
 		</tr>
 		<tr>
 			<th>IDf</th>
-			<td>{{ entity.idf }}</td>
+			<td>{{ entity.idf|e('html_attr') }}</td>
 		</tr>
 		<tr>
 			<th>Data</th>
-			<td>{{ entity.data }}</td>
+			<td>{{ entity.data|e('html_attr') }}</td>
 		</tr>
         <tr>
             <th>Data wazn.</th>
-            <td>{{ entity.dwaz }}</td>
+            <td>{{ entity.dwaz|e('html_attr') }}</td>
         </tr>		
 		<tr>
 			<th>Kod</th>
@@ -71,7 +71,7 @@ th {
 		</tr>
 		<tr>
 			<th>Nazwa</th>
-			<td>{{ entity.nazw }}</td>
+			<td>{{ entity.nazw|e('html_attr') }}</td>
 		</tr>
         <tr>
             <th>JM</th>
@@ -83,7 +83,7 @@ th {
         </tr>    
         <tr>
             <th>SN</th>
-            <td>{{ entity.sn }}</td>
+            <td>{{ entity.sn|e('html_attr') }}</td>
         </tr>    
         <tr>
             <th>User</th>

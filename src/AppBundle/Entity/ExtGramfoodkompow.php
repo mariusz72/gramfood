@@ -64,7 +64,7 @@ class ExtGramfoodkompow {
 	#var string @ORM\Column(name="Data", type="string", length=50, nullable=false)
 	/**
 	 *
-	 * @var \DateTime @ORM\Column(name="Data", type="datetime", nullable=false)
+	 * @var string @ORM\Column(name="Data", type="string", length=50, nullable=false)
 	 */
 	private $data;
 	
@@ -73,6 +73,8 @@ class ExtGramfoodkompow {
 	 * @var string @ORM\Column(name="Uzyt", type="string", length=50, nullable=false)
 	 */
 	private $uzyt;
+	
+
 	
 	/**
      * @return string

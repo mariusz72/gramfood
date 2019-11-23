@@ -20,7 +20,7 @@ class ExtGramfoodkompowType extends AbstractType {
 		->add ( 'snpz' )
 		->add ( 'il' )
 		->add ( 'jm' )
-// 		->add ( 'data', 'hidden' )
+		->add ( 'data', 'hidden')
 		->add ( 'uzyt', 'hidden' )
 		->add('save', 'submit', array('label' => 'Zapisz zmiany'));
 	}
