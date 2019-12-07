@@ -52,7 +52,7 @@ class ZestawieniaController extends Controller {
 			$query = $em->createQuery('
                 SELECT s
                 FROM AppBundle:Gramfoodklembowspec s
-                WHERE s.typ in ( \'VAT\', \'WZ\') 
+                WHERE s.typ in ( \'VAT\', \'WZ\', \'KSM\', \'KSP\') 
                     AND s.data > \''.$this->setOddata()->getOddata().'\'
                     AND s.akt = \'T\'
                     AND s.anul = \'N\'
@@ -75,7 +75,7 @@ class ZestawieniaController extends Controller {
 		$em = $this->getDoctrine ()->getManager ();
 		
 		$entities = $em->getRepository ( 'AppBundle:Gramfoodklembowspec' )->findBy (
-				array (	'typ' => array('VAT', 'WZ'), 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
+		    array (	'typ' => array('VAT', 'WZ', 'KSM', 'KSP'), 'kod' => $kod, 'akt' => 'T', 'anul' => 'N'),
 				array (	'id' => 'ASC'));
 		
 		return $this->render ( 'GramfoodMagazynBundle:Zestawienia:listaWZ.html.twig', array (
@@ -362,7 +362,7 @@ class ZestawieniaController extends Controller {
 	    $query = $em->createQuery('
                 SELECT s
                 FROM AppBundle:Gramfoodklembowspec s
-                WHERE s.typ in ( \'VAT\', \'WZ\')
+                WHERE s.typ in ( \'VAT\', \'WZ\', \'KSM\', \'KSP\')
                     AND s.data > \''.$this->setOddata()->getOddata().'\'
                     AND s.akt = \'T\'
                     AND s.anul = \'N\'

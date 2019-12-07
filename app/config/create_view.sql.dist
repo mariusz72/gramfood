@@ -7,7 +7,7 @@ FROM [gramfood].[dbo].[gramfoodklembowspec] s
 LEFT JOIN 
 (
 SELECT sum(s.il) as il, s.sn
- FROM [gramfood].[dbo].[gramfoodklembowspec] s WHERE s.typ in ('VAT', 'WZ')
+ FROM [gramfood].[dbo].[gramfoodklembowspec] s WHERE s.typ in ('VAT', 'WZ', 'KSM', 'KSP')
  group by (s.sn)
 ) s2 ON (s.sn like s2.sn)
 LEFT JOIN 

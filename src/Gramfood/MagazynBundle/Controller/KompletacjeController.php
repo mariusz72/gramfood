@@ -247,7 +247,7 @@ class KompletacjeController extends Controller {
 	    $query = $em->createQuery('
                 SELECT s
                 FROM AppBundle:Gramfoodklembowspec s
-                WHERE s.typ in ( \'VAT\', \'WZ\')
+                WHERE s.typ in ( \'VAT\', \'WZ\', \'KSM\', \'KSP\')
                     AND s.data > \''.$this->setOddata()->getOddata().'\'
                     AND s.akt = \'T\'
                     AND s.anul = \'N\'
