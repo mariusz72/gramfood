@@ -1,6 +1,7 @@
 /* create view table viewgramfoodklembowspecil in database gramfood */
 /* ferst make 'use gramfood;' */
 /* ================================================================ */
+
 CREATE VIEW [viewgramfoodklembowspecil] as 
 SELECT s2.il as sumwz, e.il as sumk, s.*
 FROM [gramfood].[dbo].[gramfoodklembowspec] s
